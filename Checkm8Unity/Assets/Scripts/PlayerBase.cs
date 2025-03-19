@@ -6,8 +6,8 @@ public abstract class PlayerBase : MonoBehaviour
     [SerializeField] protected GameObject projectilePrefab;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float shootSpeed;
-    protected float timeToFire;
 
+    protected float timeToFire;
     protected Vector2 moveValue;
     protected Rigidbody rb;
 
@@ -18,7 +18,7 @@ public abstract class PlayerBase : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.AddForce(new Vector3(moveValue.x * moveSpeed,0,moveValue.y * moveSpeed));
+        rb.AddForce(new Vector3(moveValue.x * moveSpeed, 0, moveValue.y * moveSpeed));
 
 
 
