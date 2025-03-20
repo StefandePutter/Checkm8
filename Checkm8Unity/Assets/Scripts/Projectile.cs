@@ -5,14 +5,26 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float speed;
     private Rigidbody rb;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void OnEnable()
+    {
+        rb.angularVelocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.AddForce(new Vector3(0, 0, speed));
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    private void OnBecameInvisible()
+    {
+        
+        gameObject.SetActive(false);
     }
 }

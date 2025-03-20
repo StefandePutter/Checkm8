@@ -1,12 +1,13 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(InputManager), typeof(Rigidbody))]
 public abstract class PlayerBase : MonoBehaviour
 {
     [SerializeField] protected GameObject projectilePrefab;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float shootSpeed;
-
+    
+    protected InputManager inputManager;
     protected float timeToFire;
     protected Vector2 moveValue;
     protected Rigidbody rb;
@@ -14,11 +15,12 @@ public abstract class PlayerBase : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        inputManager = GetComponent<InputManager>();
     }
 
     void FixedUpdate()
     {
-        rb.AddForce(new Vector3(moveValue.x * moveSpeed, 0, moveValue.y * moveSpeed));
+        rb.AddForce(new Vector3(inputManager.MoveValue.x * moveSpeed, 0, inputManager.MoveValue.y * moveSpeed));
 
 
 
@@ -27,11 +29,6 @@ public abstract class PlayerBase : MonoBehaviour
             Shoot();
             timeToFire = Time.time + shootSpeed;
         }
-    }
-
-    private void OnMove(InputValue input)
-    {
-        moveValue = input.Get<Vector2>();
     }
 
     protected abstract void Shoot();
