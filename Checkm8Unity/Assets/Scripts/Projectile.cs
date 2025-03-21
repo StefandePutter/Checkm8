@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    private Rigidbody rb;
+    [SerializeField] private float _speed;
+    private Rigidbody _rb;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
     {
-        rb.angularVelocity = Vector3.zero;
-        rb.linearVelocity = Vector3.zero;
-        rb.AddForce(new Vector3(0, 0, speed));
+        _rb.angularVelocity = Vector3.zero;
+        _rb.linearVelocity = Vector3.zero;
+        _rb.AddForce(new Vector3(0, 0, _speed));
     }
 
     private void OnTriggerEnter(Collider other)

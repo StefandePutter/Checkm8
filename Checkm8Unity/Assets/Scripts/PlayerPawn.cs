@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class PlayerPawn : PlayerBase
@@ -14,5 +13,11 @@ public class PlayerPawn : PlayerBase
         }
 
         StartCoroutine(ObjectPool.DisableAfterSec(bullet, 0.3f));
+    }
+
+    public override void Horse()
+    {
+        _gameManager.BecomeHorse();
+        base.Horse();
     }
 }

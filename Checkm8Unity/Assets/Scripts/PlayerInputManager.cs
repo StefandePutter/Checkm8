@@ -1,20 +1,25 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputManager : MonoBehaviour
+public class PlayerInputManager : MonoBehaviour
 {
     
-    private bool lockedAbilities;
-    private bool lockedMovement;
-    private bool lastMovedRight;
+    public bool lockedAbilities;
+    public bool lockedMovement;
 
-    private Vector2 moveValue;
+    public bool lastMovedRight;
+
+    private Vector2 _moveValue;
     [HideInInspector]
     public Vector2 MoveValue
     {
         get 
         {
-            return moveValue; 
+            if (lockedMovement)
+            {
+                return Vector2.zero;
+            }
+            return _moveValue; 
         }
     }
 
@@ -32,7 +37,6 @@ public class InputManager : MonoBehaviour
         controller.Player.Horse.Enable();
         controller.Player.Horse.started += ShowJumpIndicator; // show indicator
         controller.Player.Horse.canceled += Jump; // show indicator
-        controller.Player.Horse.canceled += HideJumpIndicator; // hide indicator
 
 
         // bischop
@@ -41,21 +45,24 @@ public class InputManager : MonoBehaviour
 
     private void Move(InputAction.CallbackContext input)
     {
-        if (lockedMovement)
+        _moveValue = input.ReadValue<Vector2>();
+        if (_moveValue.x > 0 && !lastMovedRight)
+        {
+            lastMovedRight = true;
+        }
+        else if (_moveValue.x < 0 && lastMovedRight)
+        {
+            lastMovedRight = false;
+        }
+    }
+    void ShowJumpIndicator(InputAction.CallbackContext input)
+    {
+        if (lockedAbilities)
         {
             return;
         }
-        moveValue = input.ReadValue<Vector2>();
-        if (moveValue.x == 1)
-        {
-            Debug.Log("Right");
-            lastMovedRight = true;
-        } 
-        else if (moveValue.x == -1)
-        {
-            Debug.Log("left");
-            lastMovedRight = false;
-        }
+        GameManager.s_player.GetComponent<PlayerBase>().Horse();
+        Debug.Log("showing jump indicator");
     }
 
     void Jump(InputAction.CallbackContext input)
@@ -64,23 +71,6 @@ public class InputManager : MonoBehaviour
         {
             return;
         }
-        Debug.Log("jumping " + (lastMovedRight ? "right" : "left") + " up");
-    }
-
-    void ShowJumpIndicator(InputAction.CallbackContext input)
-    {
-        if (lockedAbilities)
-        {
-            return;
-        }
-        Debug.Log("showing jump indicator");
-    }
-    void HideJumpIndicator(InputAction.CallbackContext input)
-    {
-        if (lockedAbilities)
-        {
-            return;
-        }
-        Debug.Log("hiding jump indicator");
+        StartCoroutine(GameManager.s_player.GetComponent<PlayerHorse>().Jump());
     }
 }
