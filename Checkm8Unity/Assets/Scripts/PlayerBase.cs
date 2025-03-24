@@ -1,37 +1,44 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody))]
 public abstract class PlayerBase : MonoBehaviour
 {
-    [SerializeField] protected GameObject projectilePrefab;
-    [SerializeField] protected float moveSpeed;
-    [SerializeField] protected float shootSpeed;
-    protected float timeToFire;
+    protected GameManager _gameManager;
+    [SerializeField] protected float _moveSpeed;
+    [SerializeField] protected float _shootSpeed;
 
-    protected Vector2 moveValue;
-    protected Rigidbody rb;
+    protected Collider _playerCollider;
+    protected PlayerInputManager _inputManager;
+    protected float _timeToFire;
+    protected Rigidbody _rb;
 
-    void Start()
+    void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        _playerCollider = GetComponent<Collider>();
+        _gameManager = FindFirstObjectByType<GameManager>();
+        _rb = GetComponent<Rigidbody>();
+        _inputManager = _gameManager.GetComponent<PlayerInputManager>();
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        rb.AddForce(new Vector3(moveValue.x * moveSpeed,0,moveValue.y * moveSpeed));
+        _rb.AddForce(new Vector3(_inputManager.MoveValue.x * _moveSpeed, 0, _inputManager.MoveValue.y * _moveSpeed));
 
-
-
-        if (timeToFire <= Time.time)
+        if (_timeToFire <= Time.time)
         {
             Shoot();
-            timeToFire = Time.time + shootSpeed;
+            _timeToFire = Time.time + _shootSpeed;
         }
     }
 
-    private void OnMove(InputValue input)
+    public virtual void Pawn()
     {
-        moveValue = input.Get<Vector2>();
+        _gameManager.BecomePawn();
+    }
+
+    public virtual void Horse()
+    {
+        return;
     }
 
     protected abstract void Shoot();
