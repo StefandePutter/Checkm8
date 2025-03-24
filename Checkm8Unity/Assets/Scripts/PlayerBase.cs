@@ -41,5 +41,10 @@ public abstract class PlayerBase : MonoBehaviour
         return;
     }
 
+    public void TakeDamage(float amount=1)
+    {
+        Debug.Log(name + " took " + amount +" damage");
+    }
+
     protected abstract void Shoot();
 }

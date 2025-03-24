@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8613954517085347029}
   - component: {fileID: 6371928572798318103}
   - component: {fileID: -3369890623900420831}
-  m_Layer: 6
-  m_Name: PlayerBullet
+  m_Layer: 7
+  m_Name: EnemyBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 5922557881996241529}
   - component: {fileID: 6930472832299128823}
   - component: {fileID: 431617816925866106}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Bullet
   m_Icon: {fileID: 0}

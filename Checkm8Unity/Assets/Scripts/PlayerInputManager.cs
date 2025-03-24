@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 public class PlayerInputManager : MonoBehaviour
 {
     
+    private Controller controller;
+
     public bool lockedAbilities;
     public bool lockedMovement;
 
@@ -23,9 +26,9 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        Controller controller = new Controller();
+        controller = new Controller();
 
         // movement
         controller.Player.Move.Enable();
@@ -41,6 +44,12 @@ public class PlayerInputManager : MonoBehaviour
 
         // bischop
 
+    }
+
+    private void OnDisable()
+    {
+        controller.Player.Move.Disable();
+        controller.Player.Horse.Disable();
     }
 
     private void Move(InputAction.CallbackContext input)
@@ -73,4 +82,6 @@ public class PlayerInputManager : MonoBehaviour
         }
         StartCoroutine(GameManager.s_player.GetComponent<PlayerHorse>().Jump());
     }
+
+    
 }

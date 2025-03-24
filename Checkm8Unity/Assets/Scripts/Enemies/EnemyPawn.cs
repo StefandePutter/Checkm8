@@ -1,23 +1,21 @@
 using UnityEngine;
 
-public class PlayerPawn : PlayerBase
+public class EnemyPawn : EnemyBase, IDamageable
 {
     protected override void Shoot()
     {
-        GameObject bullet = _gameManager.s_playerBulletsPool.GetPooledObject();
+        GameObject bullet = _gameManager.s_enemyBulletsPool.GetPooledObject();
         if (bullet != null)
         {
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation;
             bullet.SetActive(true);
         }
-
         StartCoroutine(ObjectPool.DisableAfterSec(bullet, 0.3f));
     }
 
-    public override void Horse()
+    public void TakeDamage()
     {
-        _gameManager.BecomeHorse();
-        base.Horse();
+        Debug.Log(name + " took damage");
     }
 }

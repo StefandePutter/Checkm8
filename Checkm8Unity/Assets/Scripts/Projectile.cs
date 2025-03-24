@@ -14,12 +14,16 @@ public class Projectile : MonoBehaviour
     {
         _rb.angularVelocity = Vector3.zero;
         _rb.linearVelocity = Vector3.zero;
-        _rb.AddForce(new Vector3(0, 0, _speed));
+        _rb.AddRelativeForce(new Vector3(0, 0, _speed));
     }
 
     private void OnTriggerEnter(Collider other)
     {
         gameObject.SetActive(false);
+        if (other.TryGetComponent<IDamageable>(out IDamageable component))
+        {
+            component.TakeDamage(1);
+        }
     }
 
     private void OnBecameInvisible()

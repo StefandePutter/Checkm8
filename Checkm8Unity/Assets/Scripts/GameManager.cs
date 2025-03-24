@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _horsePrefab;
 
     static public GameObject s_player;
+    public ObjectPool s_playerBulletsPool;
+    public ObjectPool s_enemyBulletsPool;
     [HideInInspector] public PlayerInputManager inputManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
