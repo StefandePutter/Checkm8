@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -52,8 +53,16 @@ public class GameManager : MonoBehaviour
 
     public void Damage()
     {
-        Destroy(_UiHealth[_UiHealth.Count].gameObject);
-        _UiHealth.RemoveAt(_UiHealth.Count);
+        int i = _UiHealth.Count - 1;
+
+        Destroy(_UiHealth[i].gameObject);
+        _UiHealth.RemoveAt(i);
+        Debug.Log(i);
+        if (i == 0)
+        {
+            // game over
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     public void BecomePawn()
