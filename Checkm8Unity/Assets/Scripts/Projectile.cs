@@ -2,18 +2,33 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    private Rigidbody rb;
+    [SerializeField] private float _speed;
+    private Rigidbody _rb;
 
-    void Start()
+    void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.AddForce(new Vector3(0, 0, speed));
-        Destroy(gameObject, 0.3f);
+        _rb = GetComponent<Rigidbody>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnEnable()
     {
-        Destroy(gameObject);
+        _rb.angularVelocity = Vector3.zero;
+        _rb.linearVelocity = Vector3.zero;
+        _rb.AddRelativeForce(new Vector3(0, 0, _speed));
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        gameObject.SetActive(false);
+        if (other.TryGetComponent<IDamageable>(out IDamageable component))
+        {
+            component.TakeDamage(1);
+        }
+    }
+
+    private void OnBecameInvisible()
+    {
+        
+        gameObject.SetActive(false);
     }
 }
