@@ -30,15 +30,7 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Bullet"))
-        {
-            Debug.Log(name + " Took Damage");
-        }
-    }
-
-    public void TakeDamage(float amount = 1)
+    public virtual void TakeDamage(float amount = 1)
     {
         Debug.Log(name + " took " + amount + " damage");
     }

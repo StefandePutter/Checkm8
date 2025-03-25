@@ -14,8 +14,8 @@ public class EnemyPawn : EnemyBase, IDamageable
         StartCoroutine(ObjectPool.DisableAfterSec(bullet, 0.3f));
     }
 
-    public void TakeDamage()
+    public override void TakeDamage(float amount)
     {
-        Debug.Log(name + " took damage");
+        Destroy(gameObject);
     }
 }
