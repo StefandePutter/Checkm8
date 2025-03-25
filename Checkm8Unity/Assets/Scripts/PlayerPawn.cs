@@ -4,7 +4,7 @@ public class PlayerPawn : PlayerBase
 {
     protected override void Shoot()
     {
-        GameObject bullet = _gameManager.s_playerBulletsPool.GetPooledObject();
+        GameObject bullet = _gameManager.playerBulletsPool.GetPooledObject();
         if (bullet != null)
         {
             bullet.transform.position = transform.position;
@@ -17,7 +17,12 @@ public class PlayerPawn : PlayerBase
 
     public override void Horse()
     {
-        _gameManager.BecomeHorse();
+        if (_currentHorseCooldown > 0)
+        {
+            Debug.Log("yeah");
+            return;
+        }
         base.Horse();
+        _gameManager.BecomeHorse();
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,12 +8,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _horsePrefab;
     [SerializeField] private List<GameObject> _enemyPrefabs;
     [SerializeField] private float _spawnTime;
+    [SerializeField] private List<GameObject> _UiHealth;
     private int[] _spawnPosX = new int[11] { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
     private Camera _camera;
 
+    private int _Health;
+
     static public GameObject s_player;
-    public ObjectPool s_playerBulletsPool;
-    public ObjectPool s_enemyBulletsPool;
+    public Image UiHorse;
+    public Image UiBischop;
+    public Image UiTower;
+    public Image UiQueen;
+    public ObjectPool playerBulletsPool;
+    public ObjectPool enemyBulletsPool;
     [HideInInspector] public PlayerInputManager inputManager;
 
     void Start()
@@ -40,6 +48,12 @@ public class GameManager : MonoBehaviour
         }
 
         _spawnTime -= Time.deltaTime;
+    }
+
+    public void Damage()
+    {
+        Destroy(_UiHealth[_UiHealth.Count].gameObject);
+        _UiHealth.RemoveAt(_UiHealth.Count);
     }
 
     public void BecomePawn()

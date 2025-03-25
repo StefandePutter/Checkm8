@@ -4,7 +4,7 @@ public class EnemyPawn : EnemyBase, IDamageable
 {
     protected override void Shoot()
     {
-        GameObject bullet = _gameManager.s_enemyBulletsPool.GetPooledObject();
+        GameObject bullet = _gameManager.enemyBulletsPool.GetPooledObject();
         if (bullet != null)
         {
             bullet.transform.position = transform.position;

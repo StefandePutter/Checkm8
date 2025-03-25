@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
 
 public class PlayerInputManager : MonoBehaviour
 {
@@ -16,7 +15,7 @@ public class PlayerInputManager : MonoBehaviour
     [HideInInspector]
     public Vector2 MoveValue
     {
-        get 
+        get
         {
             if (lockedMovement)
             {
@@ -80,7 +79,10 @@ public class PlayerInputManager : MonoBehaviour
         {
             return;
         }
-        StartCoroutine(GameManager.s_player.GetComponent<PlayerHorse>().Jump());
+        if (GameManager.s_player.TryGetComponent<PlayerHorse>(out PlayerHorse script))
+        {
+            StartCoroutine(script.Jump());
+        }
     }
 
     

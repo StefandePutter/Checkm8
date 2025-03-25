@@ -152,4 +152,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 250
-  _shootSpeed: 0.8
+  _shootSpeed: 0.6

@@ -40,8 +40,6 @@ public abstract class EnemyBase : MonoBehaviour
         amountOfBlocksDown *= 2;
         amountOfBlocksRight *= 2;
 
-
-
         yield return null;
     }
 

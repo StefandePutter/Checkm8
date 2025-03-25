@@ -26,6 +26,15 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        gameObject.SetActive(false);
+        if (collision.collider.TryGetComponent<IDamageable>(out IDamageable component))
+        {
+            component.TakeDamage(1);
+        }
+    }
+
     private void OnBecameInvisible()
     {
         
