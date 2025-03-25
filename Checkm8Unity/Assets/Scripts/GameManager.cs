@@ -1,26 +1,45 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _pawnPrefab;
     [SerializeField] private GameObject _horsePrefab;
+    [SerializeField] private List<GameObject> _enemyPrefabs;
+    [SerializeField] private float _spawnTime;
+    private int[] _spawnPosX = new int[11] { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
+    private Camera _camera;
 
     static public GameObject s_player;
     public ObjectPool s_playerBulletsPool;
     public ObjectPool s_enemyBulletsPool;
     [HideInInspector] public PlayerInputManager inputManager;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         s_player = Instantiate(_pawnPrefab);
         inputManager = GetComponent<PlayerInputManager>();
+        _camera = Camera.main;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (_spawnTime <= 0)
+        {
+            Vector3 spawnPos = new Vector3();
+            spawnPos.z = Mathf.Floor(_camera.transform.position.z) + 25;
+            if (spawnPos.z % 2 != 0)
+            {
+                spawnPos.z++;
+            }
+            spawnPos.x = _spawnPosX[Random.Range(0, _spawnPosX.Length)];
+
+            GameObject enemy = Instantiate(_enemyPrefabs[0], spawnPos, transform.rotation);
+
+            _spawnTime = 1f;
+        }
+
+        _spawnTime -= Time.deltaTime;
     }
 
     public void BecomePawn()
