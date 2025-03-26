@@ -11,11 +11,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> _enemyPrefabs;
     [SerializeField] private float _spawnTime;
     [SerializeField] private TextMeshProUGUI _timePlayerUi;
-    [SerializeField] private float _timePlayer;
+    private float _timePlayer;
     [SerializeField] private TextMeshProUGUI _timeEnemyUi;
+    private float _timeEnemy;
     [SerializeField] private List<GameObject> _UiHealth;
     
     private int[] _spawnPosX = new int[11] { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
+    private bool _bossBattle;
     private Camera _camera;
 
     private int _Health;
@@ -31,11 +33,13 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        s_player = Instantiate(_pawnPrefab);
-        inputManager = GetComponent<PlayerInputManager>();
         _camera = Camera.main;
+        s_player = Instantiate(_pawnPrefab);
+        s_player.transform.SetParent(_camera.transform);
+        inputManager = GetComponent<PlayerInputManager>();
 
         _timePlayer = 300f;
+        _timeEnemy = 300f;
     }
 
     void Update()
@@ -55,8 +59,20 @@ public class GameManager : MonoBehaviour
             _spawnTime = 1f;
         }
 
-        //_timePlayerUi.text = Mathf.Floor(_timePlayer / 60).ToString() + ":" + ;
-        
+        _timePlayerUi.text = Mathf.Floor(_timePlayer / 60).ToString("00") + ":" + (_timePlayer%60).ToString("00");
+        _timeEnemyUi.text = Mathf.Floor(_timeEnemy / 60).ToString("00") + ":" + (_timeEnemy%60).ToString("00");
+
+        _timePlayer -= Time.deltaTime;
+        if (_bossBattle)
+        {
+            _timeEnemy -= Time.deltaTime;
+        }
+
+        if (_timePlayer <= 0)
+        {
+            GameOver();
+        }
+
         _spawnTime -= Time.deltaTime;
     }
 
@@ -64,14 +80,19 @@ public class GameManager : MonoBehaviour
     {
         int i = _UiHealth.Count - 1;
 
-        Destroy(_UiHealth[i].gameObject);
+        Destroy(_UiHealth[i]);
         _UiHealth.RemoveAt(i);
         Debug.Log(i);
         if (i == 0)
         {
             // game over
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            GameOver();
         }
+    }
+
+    private void GameOver()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void BecomePawn()
@@ -84,9 +105,9 @@ public class GameManager : MonoBehaviour
         ChangePlayer(_horsePrefab);
     }
     
-    public void AddScore(float score)
+    public void AddPlayerTime(float time)
     {
-        _timePlayer += score;
+        _timePlayer += time;
     }
 
     private void ChangePlayer(GameObject prefab)

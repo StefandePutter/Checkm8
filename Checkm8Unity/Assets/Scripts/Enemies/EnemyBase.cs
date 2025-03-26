@@ -34,7 +34,7 @@ public abstract class EnemyBase : MonoBehaviour
     public virtual void TakeDamage(float amount = 1)
     {
         Debug.Log(name + " took " + amount + " damage");
-        _gameManager.AddScore(_score);
+        _gameManager.AddPlayerTime(_score);
         Destroy(gameObject);
     }
 

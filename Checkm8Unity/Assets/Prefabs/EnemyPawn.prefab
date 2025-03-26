@@ -151,3 +151,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 200
   _shootSpeed: 1
+  _score: 1
