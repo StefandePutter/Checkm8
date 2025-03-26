@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -8,7 +10,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _horsePrefab;
     [SerializeField] private List<GameObject> _enemyPrefabs;
     [SerializeField] private float _spawnTime;
+    [SerializeField] private TextMeshProUGUI _timePlayerUi;
+    [SerializeField] private float _timePlayer;
+    [SerializeField] private TextMeshProUGUI _timeEnemyUi;
     [SerializeField] private List<GameObject> _UiHealth;
+    
     private int[] _spawnPosX = new int[11] { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
     private Camera _camera;
 
@@ -28,6 +34,8 @@ public class GameManager : MonoBehaviour
         s_player = Instantiate(_pawnPrefab);
         inputManager = GetComponent<PlayerInputManager>();
         _camera = Camera.main;
+
+        _timePlayer = 300f;
     }
 
     void Update()
@@ -47,13 +55,23 @@ public class GameManager : MonoBehaviour
             _spawnTime = 1f;
         }
 
+        //_timePlayerUi.text = Mathf.Floor(_timePlayer / 60).ToString() + ":" + ;
+        
         _spawnTime -= Time.deltaTime;
     }
 
     public void Damage()
     {
-        Destroy(_UiHealth[_UiHealth.Count].gameObject);
-        _UiHealth.RemoveAt(_UiHealth.Count);
+        int i = _UiHealth.Count - 1;
+
+        Destroy(_UiHealth[i].gameObject);
+        _UiHealth.RemoveAt(i);
+        Debug.Log(i);
+        if (i == 0)
+        {
+            // game over
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     public void BecomePawn()
@@ -64,6 +82,11 @@ public class GameManager : MonoBehaviour
     public void BecomeHorse()
     {
         ChangePlayer(_horsePrefab);
+    }
+    
+    public void AddScore(float score)
+    {
+        _timePlayer += score;
     }
 
     private void ChangePlayer(GameObject prefab)

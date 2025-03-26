@@ -16,6 +16,6 @@ public class EnemyPawn : EnemyBase, IDamageable
 
     public override void TakeDamage(float amount)
     {
-        Destroy(gameObject);
+        base.TakeDamage(amount);
     }
 }
