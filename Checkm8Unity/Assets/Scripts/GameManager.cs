@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
             _spawnTime = 1f;
         }
 
-        _timePlayerUi.text = Mathf.Floor(_timePlayer / 60).ToString();
+        //_timePlayerUi.text = Mathf.Floor(_timePlayer / 60).ToString() + ":" + ;
         
         _spawnTime -= Time.deltaTime;
     }
