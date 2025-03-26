@@ -6,6 +6,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected GameManager _gameManager;
     [SerializeField] protected float _moveSpeed;
     [SerializeField] protected float _shootSpeed;
+    [SerializeField] protected float _score;
 
     protected float _timeToFire;
     protected Rigidbody _rb;
@@ -33,6 +34,8 @@ public abstract class EnemyBase : MonoBehaviour
     public virtual void TakeDamage(float amount = 1)
     {
         Debug.Log(name + " took " + amount + " damage");
+        _gameManager.AddScore(_score);
+        Destroy(gameObject);
     }
 
     protected IEnumerator MoveAmountOfBlocks(int amountOfBlocksDown, int amountOfBlocksRight)
