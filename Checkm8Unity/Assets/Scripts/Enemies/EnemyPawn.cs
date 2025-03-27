@@ -37,9 +37,4 @@ public class EnemyPawn : EnemyBase, IDamageable
         }
         StartCoroutine(ObjectPool.DisableAfterSec(bullet, 0.3f));
     }
-
-    public override void TakeDamage(float amount)
-    {
-        base.TakeDamage(amount);
-    }
 }
