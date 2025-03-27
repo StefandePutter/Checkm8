@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class EnemyBischop : EnemyBase, IDamageable
 {
-    protected override void FixedUpdate()
+    protected void Update()
     {
-        base.FixedUpdate();
+        //base.FixedUpdate();
 
         if (!_moving)
         {
