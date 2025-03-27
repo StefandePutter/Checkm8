@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _pawnPrefab;
     [SerializeField] private GameObject _horsePrefab;
+    [SerializeField] private GameObject _bischopPrefab;
     [SerializeField] private List<GameObject> _enemyPrefabs;
     [SerializeField] private float _spawnTime;
     [SerializeField] private TextMeshProUGUI _timePlayerUi;
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
             }
             spawnPos.x = _spawnPosX[Random.Range(0, _spawnPosX.Length)];
 
-            GameObject enemy = Instantiate(_enemyPrefabs[0], spawnPos, transform.rotation);
+            GameObject enemy = Instantiate(_enemyPrefabs[1], spawnPos, transform.rotation);
 
             _spawnTime = 1f;
         }
@@ -104,7 +105,11 @@ public class GameManager : MonoBehaviour
     {
         ChangePlayer(_horsePrefab);
     }
-    
+    public void BecomeBischop()
+    {
+        ChangePlayer(_bischopPrefab);
+    }
+
     public void AddPlayerTime(float time)
     {
         _timePlayer += time;

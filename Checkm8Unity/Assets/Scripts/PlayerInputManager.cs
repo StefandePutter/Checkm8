@@ -42,13 +42,15 @@ public class PlayerInputManager : MonoBehaviour
 
 
         // bischop
-
+        controller.Player.Bischop.Enable();
+        controller.Player.Bischop.performed += Bischop;
     }
 
     private void OnDisable()
     {
         controller.Player.Move.Disable();
         controller.Player.Horse.Disable();
+        controller.Player.Bischop.Disable();
     }
 
     private void Move(InputAction.CallbackContext input)
@@ -85,5 +87,14 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
-    
+    void Bischop(InputAction.CallbackContext input)
+    {
+        Debug.Log("player bischop");
+
+        if (lockedAbilities)
+        {
+            return;
+        }
+        GameManager.s_player.GetComponent<PlayerBase>().Bischop();
+    }
 }

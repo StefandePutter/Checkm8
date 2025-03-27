@@ -62,10 +62,22 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
 
     public virtual void Horse()
     {
+        if (_currentHorseCooldown > 0)
+        {
+            Debug.Log("yeah");
+            return;
+        }
+        
+        _gameManager.BecomeHorse();
         // _currentHorseCooldown = _horseCooldown;
         // PlayerBase._currentBischopCooldown = _BischopCooldown;
         // PlayerBase._currentTowerCooldown = _TowerCooldown;
         // PlayerBase._currentQueenCooldown = _QueenCooldown;
+    }
+
+    public virtual void Bischop()
+    {
+        
     }
 
     public void TakeDamage(float amount=1)

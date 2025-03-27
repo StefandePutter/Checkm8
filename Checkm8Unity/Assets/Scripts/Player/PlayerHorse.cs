@@ -18,6 +18,7 @@ public class PlayerHorse : PlayerBase
         _ghost = Instantiate(_ghostPrefab, transform);
 
         float xPos = -2;
+        //_UiArrows.transform.position = new Vector3(transform.position.x+1,transform.position.y,transform.position.z);
         if (_inputManager.lastMovedRight)
         {
             _UiArrows.transform.Rotate(new Vector3(0, 0, 180));
@@ -63,8 +64,16 @@ public class PlayerHorse : PlayerBase
 
         // first go forward
         Vector3 target;
+        target = new Vector3(transform.position.x, transform.position.y+4, transform.position.z);
+        while (transform.position.y != target.y)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * _jumpSpeed);
+            yield return null;
+        }
+        Debug.Log("reached");
+
         target = new Vector3(transform.position.x, transform.position.y, jumpPos.z);
-        while(transform.position.z != jumpPos.z)
+        while(transform.position.z != target.z)
         {
             transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * _jumpSpeed);
             yield return null;
@@ -72,9 +81,16 @@ public class PlayerHorse : PlayerBase
 
         // then sideways
         target = new Vector3(jumpPos.x,transform.position.y,transform.position.z);
-        while(transform.position.x !=  jumpPos.x)
+        while(transform.position.x != target.x)
         {
             transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * _jumpSpeed);
+            yield return null;
+        }
+
+        target = new Vector3(transform.position.x, transform.position.y - 4, transform.position.z);
+        while (transform.position.y != target.y)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * _jumpSpeed*3);
             yield return null;
         }
 

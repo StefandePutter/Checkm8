@@ -7,6 +7,7 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected float _moveSpeed;
     [SerializeField] protected float _shootSpeed;
     [SerializeField] protected float _score;
+    [SerializeField] private float _waitTime = 0.5f;
 
     protected bool _moving;
 
@@ -53,7 +54,30 @@ public abstract class EnemyBase : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(_waitTime);
+
+        _moving = false;
+    }
+
+    protected IEnumerator MoveAmountDiagonal(int xPos)
+    {
+        _moving = true;
+
+        float zPos = xPos - transform.position.x;
+        if (zPos < 0)
+        {
+            zPos *= -1;
+        }
+
+        Vector3 target = new Vector3(xPos, transform.position.y, transform.position.z - zPos);
+        while (transform.position.z != target.z)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * _moveSpeed);
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(_waitTime);
 
         _moving = false;
     }
