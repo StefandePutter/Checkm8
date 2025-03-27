@@ -8,6 +8,8 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected float _shootSpeed;
     [SerializeField] protected float _score;
 
+    protected bool _moving;
+
     protected float _timeToFire;
     protected Rigidbody _rb;
 
@@ -18,7 +20,7 @@ public abstract class EnemyBase : MonoBehaviour
     }
 
     private void Start()
-    {
+    {     
         _rb.AddForce(Vector3.back * _moveSpeed);
     }
 
@@ -38,12 +40,22 @@ public abstract class EnemyBase : MonoBehaviour
         Destroy(gameObject);
     }
 
-    protected IEnumerator MoveAmountOfBlocks(int amountOfBlocksDown, int amountOfBlocksRight)
+    protected IEnumerator MoveAmountDown(int amount)
     {
-        amountOfBlocksDown *= 2;
-        amountOfBlocksRight *= 2;
+        _moving = true;
+        amount *= 2;
 
-        yield return null;
+        Vector3 target = new Vector3(transform.position.x, transform.position.y, transform.position.z-amount);
+        while (transform.position.z != target.z)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * _moveSpeed);
+            
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.3f);
+
+        _moving = false;
     }
 
     protected abstract void Shoot();

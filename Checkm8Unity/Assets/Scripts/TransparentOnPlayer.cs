@@ -21,7 +21,6 @@ public class TransparentOnPlayer : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log(other.name);
         if (other.CompareTag("Player"))
         {
             GetComponent<MeshRenderer>().material = _material;
