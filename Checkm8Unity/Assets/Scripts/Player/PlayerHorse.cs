@@ -84,7 +84,13 @@ public class PlayerHorse : PlayerBase
         _playerCollider.enabled = true;
 
         // change back into a pawn
+        _currentHorseCooldown = _horseCooldown;
         Pawn();
+    }
+
+    public override void Horse()
+    {
+        return;
     }
 
     protected override void Shoot()

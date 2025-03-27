@@ -2,6 +2,18 @@ using UnityEngine;
 
 public class EnemyPawn : EnemyBase, IDamageable
 {
+    private Coroutine moveCoroutine;
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+        if (!_moving)
+        {
+            StartCoroutine(MoveAmountDown(1));
+        }
+    }
+
     protected override void Shoot()
     {
         GameObject bullet = _gameManager.enemyBulletsPool.GetPooledObject();
