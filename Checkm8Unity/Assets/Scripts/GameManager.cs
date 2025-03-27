@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
             }
             spawnPos.x = _spawnPosX[Random.Range(0, _spawnPosX.Length)];
 
-            GameObject enemy = Instantiate(_enemyPrefabs[1], spawnPos, transform.rotation);
+            GameObject enemy = Instantiate(_enemyPrefabs[Random.Range(0,2)], spawnPos, transform.rotation);
 
             _spawnTime = 1f;
         }
