@@ -72,7 +72,7 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
 
     public virtual void Bischop()
     {
-        
+
     }
 
     public virtual void Ability()

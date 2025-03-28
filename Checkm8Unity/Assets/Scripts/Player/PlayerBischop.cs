@@ -18,4 +18,16 @@ public class PlayerBischop : PlayerBase
             rotation *= -1;
         }
     }
+
+    public override void Bischop()
+    {
+        PlayerBase._currentBischopCooldown = _BischopCooldown;
+
+        Pawn();
+    }
+
+    public override void Horse()
+    {
+        base.Horse();
+    }
 }

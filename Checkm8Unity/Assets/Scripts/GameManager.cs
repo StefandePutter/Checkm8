@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
             int enemyIndex = Random.Range(0, 3);
             GameObject enemy = Instantiate(_enemyPrefabs[enemyIndex], spawnPos, transform.rotation);
 
-            _spawnTime = 3f;
+            _spawnTime = _reloadTime;
         }
 
         // display time

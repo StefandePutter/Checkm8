@@ -25,7 +25,7 @@ public class PlayerPawn : PlayerBase
         }
 
         _gameManager.BecomeBischop();
-        _currentBischopCooldown = _BischopCooldown;
+        // _currentBischopCooldown = _BischopCooldown;
         base.Bischop();
     }
 
