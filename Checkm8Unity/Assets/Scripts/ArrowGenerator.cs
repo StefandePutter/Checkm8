@@ -5,23 +5,23 @@ using UnityEngine;
 [RequireComponent(typeof(MeshRenderer))]
 public class ArrowGenerator : MonoBehaviour
 {
-    public float stemLength;
-    public float stemWidth;
-    public float tipLength;
-    public float tipWidth;
+    private float _stemLength;
+    private float _stemWidth;
+    private float _tipLength;
+    private float _tipWidth;
 
-    [System.NonSerialized]
-    public List<Vector3> verticesList;
-    [System.NonSerialized]
-    public List<int> trianglesList;
+    //[System.NonSerialized]
+    private List<Vector3> _verticesList;
+    //[System.NonSerialized]
+    private List<int> _trianglesList;
 
-    Mesh mesh;
+    private Mesh _mesh;
 
     void Start()
     {
         //make sure Mesh Renderer has a material
-        mesh = new Mesh();
-        this.GetComponent<MeshFilter>().mesh = mesh;
+        _mesh = new Mesh();
+        this.GetComponent<MeshFilter>().mesh = _mesh;
     }
 
     void Update()
@@ -34,43 +34,43 @@ public class ArrowGenerator : MonoBehaviour
     void GenerateArrow()
     {
         //setup
-        verticesList = new List<Vector3>();
-        trianglesList = new List<int>();
+        _verticesList = new List<Vector3>();
+        _trianglesList = new List<int>();
 
         //stem setup
         Vector3 stemOrigin = Vector3.zero;
-        float stemHalfWidth = stemWidth / 2f;
+        float stemHalfWidth = _stemWidth / 2f;
         //Stem points
-        verticesList.Add(stemOrigin + (stemHalfWidth * Vector3.down));
-        verticesList.Add(stemOrigin + (stemHalfWidth * Vector3.up));
-        verticesList.Add(verticesList[0] + (stemLength * Vector3.right));
-        verticesList.Add(verticesList[1] + (stemLength * Vector3.right));
+        _verticesList.Add(stemOrigin + (stemHalfWidth * Vector3.down));
+        _verticesList.Add(stemOrigin + (stemHalfWidth * Vector3.up));
+        _verticesList.Add(_verticesList[0] + (_stemLength * Vector3.right));
+        _verticesList.Add(_verticesList[1] + (_stemLength * Vector3.right));
 
         //Stem triangles
-        trianglesList.Add(0);
-        trianglesList.Add(1);
-        trianglesList.Add(3);
+        _trianglesList.Add(0);
+        _trianglesList.Add(1);
+        _trianglesList.Add(3);
 
-        trianglesList.Add(0);
-        trianglesList.Add(3);
-        trianglesList.Add(2);
+        _trianglesList.Add(0);
+        _trianglesList.Add(3);
+        _trianglesList.Add(2);
 
         //tip setup
-        Vector3 tipOrigin = stemLength * Vector3.right;
-        float tipHalfWidth = tipWidth / 2;
+        Vector3 tipOrigin = _stemLength * Vector3.right;
+        float tipHalfWidth = _tipWidth / 2;
 
         //tip points
-        verticesList.Add(tipOrigin + (tipHalfWidth * Vector3.up));
-        verticesList.Add(tipOrigin + (tipHalfWidth * Vector3.down));
-        verticesList.Add(tipOrigin + (tipLength * Vector3.right));
+        _verticesList.Add(tipOrigin + (tipHalfWidth * Vector3.up));
+        _verticesList.Add(tipOrigin + (tipHalfWidth * Vector3.down));
+        _verticesList.Add(tipOrigin + (_tipLength * Vector3.right));
 
         //tip triangle
-        trianglesList.Add(4);
-        trianglesList.Add(6);
-        trianglesList.Add(5);
+        _trianglesList.Add(4);
+        _trianglesList.Add(6);
+        _trianglesList.Add(5);
 
         //assign lists to mesh.
-        mesh.vertices = verticesList.ToArray();
-        mesh.triangles = trianglesList.ToArray();
+        _mesh.vertices = _verticesList.ToArray();
+        _mesh.triangles = _trianglesList.ToArray();
     }
 }

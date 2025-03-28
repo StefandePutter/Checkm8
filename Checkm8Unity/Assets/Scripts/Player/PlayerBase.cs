@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public abstract class PlayerBase : MonoBehaviour, IDamageable
@@ -19,19 +17,17 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
     protected float _timeToFire;
     protected Rigidbody _rb;
 
-    //static protected Dictionary<string, int> cooldowns = new Dictionary<string, int>() { {"Horse", 0}, { "bischop", 0 }, { "Tower", 0 }, { "Queen", 0 } };
-
     static protected float _currentHorseCooldown;
     static protected float _currentBischopCooldown;
     static protected float _currentTowerCooldown;
     static protected float _currentQueenCooldown;
 
-    void Awake()
+    protected virtual void Start()
     {
         _playerCollider = GetComponent<Collider>();
-        _gameManager = FindFirstObjectByType<GameManager>();
+        _gameManager = GameManager.s_Instance;
         _rb = GetComponent<Rigidbody>();
-        _inputManager = _gameManager.GetComponent<PlayerInputManager>();
+        _inputManager = _gameManager.InputManager;
     }
 
     protected virtual void FixedUpdate()
@@ -64,7 +60,6 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
     {
         if (_currentHorseCooldown > 0)
         {
-            Debug.Log("yeah");
             return;
         }
         

@@ -4,12 +4,12 @@ using UnityEngine.InputSystem;
 public class PlayerInputManager : MonoBehaviour
 {
     
-    private Controller controller;
+    private Controller _controller;
 
-    public bool lockedAbilities;
-    public bool lockedMovement;
+    public bool LockedAbilities;
+    public bool LockedMovement;
 
-    public bool lastMovedRight;
+    public bool LastMovedRight;
 
     private Vector2 _moveValue;
     [HideInInspector]
@@ -17,7 +17,7 @@ public class PlayerInputManager : MonoBehaviour
     {
         get
         {
-            if (lockedMovement)
+            if (LockedMovement)
             {
                 return Vector2.zero;
             }
@@ -27,65 +27,64 @@ public class PlayerInputManager : MonoBehaviour
 
     private void OnEnable()
     {
-        controller = new Controller();
+        _controller = new Controller();
 
         // movement
-        controller.Player.Move.Enable();
-        controller.Player.Move.performed += Move;
-        controller.Player.Move.canceled += Move; // so it goes to 0
+        _controller.Player.Move.Enable();
+        _controller.Player.Move.performed += Move;
+        _controller.Player.Move.canceled += Move; // so it goes to 0
 
         // ability
-        controller.Player.Ability.Enable();
-        controller.Player.Ability.performed += Ability;
+        _controller.Player.Ability.Enable();
+        _controller.Player.Ability.performed += Ability;
 
         // horse jump
-        controller.Player.Horse.Enable();
-        controller.Player.Horse.started += ShowJumpIndicator; // show indicator
-        controller.Player.Horse.canceled += Jump; // show indicator
+        _controller.Player.Horse.Enable();
+        _controller.Player.Horse.started += ShowJumpIndicator; // show indicator
+        _controller.Player.Horse.canceled += Jump; // show indicator
 
 
         // bischop
-        controller.Player.Bischop.Enable();
-        controller.Player.Bischop.performed += Bischop;
+        _controller.Player.Bischop.Enable();
+        _controller.Player.Bischop.performed += Bischop;
     }
 
     private void OnDisable()
     {
-        controller.Player.Move.Disable();
-        controller.Player.Ability.Disable();
-        controller.Player.Horse.Disable();
-        controller.Player.Bischop.Disable();
+        _controller.Player.Move.Disable();
+        _controller.Player.Ability.Disable();
+        _controller.Player.Horse.Disable();
+        _controller.Player.Bischop.Disable();
     }
 
     private void Move(InputAction.CallbackContext input)
     {
         _moveValue = input.ReadValue<Vector2>();
-        if (_moveValue.x > 0 && !lastMovedRight)
+        if (_moveValue.x > 0 && !LastMovedRight)
         {
-            lastMovedRight = true;
+            LastMovedRight = true;
         }
-        else if (_moveValue.x < 0 && lastMovedRight)
+        else if (_moveValue.x < 0 && LastMovedRight)
         {
-            lastMovedRight = false;
+            LastMovedRight = false;
         }
     }
     void ShowJumpIndicator(InputAction.CallbackContext input)
     {
-        if (lockedAbilities)
+        if (LockedAbilities)
         {
             return;
         }
-        GameManager.s_player.GetComponent<PlayerBase>().Horse();
-        Debug.Log("showing jump indicator");
+        GameManager.s_Player.GetComponent<PlayerBase>().Horse();
     }
 
     void Jump(InputAction.CallbackContext input)
     {
-        if (lockedAbilities)
+        if (LockedAbilities)
         {
             return;
         }
-        if (GameManager.s_player.TryGetComponent<PlayerHorse>(out PlayerHorse script))
+        if (GameManager.s_Player.TryGetComponent<PlayerHorse>(out PlayerHorse script))
         {
             StartCoroutine(script.Jump());
         }
@@ -93,21 +92,19 @@ public class PlayerInputManager : MonoBehaviour
 
     void Ability(InputAction.CallbackContext input)
     {
-        if (lockedAbilities)
+        if (LockedAbilities)
         {
             return;
         }
-        GameManager.s_player.GetComponent<PlayerBase>().Ability();
+        GameManager.s_Player.GetComponent<PlayerBase>().Ability();
     }
 
     void Bischop(InputAction.CallbackContext input)
     {
-        Debug.Log("player bischop");
-
-        if (lockedAbilities)
+        if (LockedAbilities)
         {
             return;
         }
-        GameManager.s_player.GetComponent<PlayerBase>().Bischop();
+        GameManager.s_Player.GetComponent<PlayerBase>().Bischop();
     }
 }

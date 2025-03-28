@@ -96,8 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 3
-  _shootSpeed: 1
+  _shootSpeed: 0.5
   _score: 1
+  _waitTime: 0.5
 --- !u!1001 &6148307213758192469
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ public class PlayerPawn : PlayerBase
 {
     protected override void Shoot()
     {
-        GameObject bullet = _gameManager.playerBulletsPool.GetPooledObject();
+        GameObject bullet = _gameManager.PlayerBulletsPool.GetPooledObject();
         if (bullet != null)
         {
             bullet.transform.position = transform.position;

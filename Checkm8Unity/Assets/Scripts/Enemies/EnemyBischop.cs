@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class EnemyBischop : EnemyBase, IDamageable
+public class EnemyBischop : EnemyBase
 {
     protected void Update()
     {
         //base.FixedUpdate();
 
-        if (!_moving)
+        if (!_allowedToMove)
         {
             int[] spawnPosses = new int[11] { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
             int random = Random.Range(0, spawnPosses.Length);
@@ -22,7 +22,7 @@ public class EnemyBischop : EnemyBase, IDamageable
         int rotation = 45;
         for (int i =0; i < 2; i++)
         {
-            GameObject bullet = _gameManager.enemyBulletsPool.GetPooledObject();
+            GameObject bullet = _gameManager.EnemyBulletsPool.GetPooledObject();
             if (bullet != null)
             {
                 bullet.transform.position = transform.position;

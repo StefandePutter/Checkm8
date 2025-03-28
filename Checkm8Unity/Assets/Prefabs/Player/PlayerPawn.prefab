@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 250
-  _shootSpeed: 0.6
+  _shootSpeed: 0.5
 --- !u!65 &5365376705321207315
 BoxCollider:
   m_ObjectHideFlags: 0

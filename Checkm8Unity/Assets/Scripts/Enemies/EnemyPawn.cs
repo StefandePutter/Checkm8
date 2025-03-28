@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class EnemyPawn : EnemyBase, IDamageable
+public class EnemyPawn : EnemyBase
 {
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
 
-        if (!_moving)
+        if (!_allowedToMove)
         {
             // RaycastHit hit;
             // Does the ray intersect any objects excluding the player layer
@@ -29,7 +29,7 @@ public class EnemyPawn : EnemyBase, IDamageable
 
     protected override void Shoot()
     {
-        GameObject bullet = _gameManager.enemyBulletsPool.GetPooledObject();
+        GameObject bullet = _gameManager.EnemyBulletsPool.GetPooledObject();
         if (bullet != null)
         {
             bullet.transform.SetPositionAndRotation(transform.position, transform.rotation);

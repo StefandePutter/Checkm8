@@ -11,15 +11,16 @@ public class PlayerHorse : PlayerBase
     private GameObject _UiArrows;
     private bool _currentDirRight;
 
-    void Start()
+    protected override void Start()
     {
-        _currentDirRight = _inputManager.lastMovedRight;
+        base.Start();
+        _currentDirRight = _inputManager.LastMovedRight;
         _UiArrows = Instantiate(_arrowsPrefab, transform);
         _ghost = Instantiate(_ghostPrefab, transform);
 
         float xPos = -2;
         //_UiArrows.transform.position = new Vector3(transform.position.x+1,transform.position.y,transform.position.z);
-        if (_inputManager.lastMovedRight)
+        if (_inputManager.LastMovedRight)
         {
             _UiArrows.transform.Rotate(new Vector3(0, 0, 180));
             xPos *= -1;
@@ -31,13 +32,13 @@ public class PlayerHorse : PlayerBase
     {
         base.FixedUpdate();
 
-        if (_currentDirRight != _inputManager.lastMovedRight)
+        if (_currentDirRight != _inputManager.LastMovedRight)
         {
             if (_ghost != null)
             {
                 FlipArrows();
             }
-            _currentDirRight = _inputManager.lastMovedRight;
+            _currentDirRight = _inputManager.LastMovedRight;
         }
     }
 
@@ -53,8 +54,8 @@ public class PlayerHorse : PlayerBase
     {
         // disable collider and movement/abilities
         _playerCollider.enabled = false;
-        _inputManager.lockedMovement = true;
-        _inputManager.lockedAbilities = true;
+        _inputManager.LockedMovement = true;
+        _inputManager.LockedAbilities = true;
 
         // get pos to jump and disable ui
         Vector3 jumpPos = _ghost.transform.position;
@@ -70,7 +71,6 @@ public class PlayerHorse : PlayerBase
             transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * _jumpSpeed);
             yield return null;
         }
-        Debug.Log("reached");
 
         target = new Vector3(transform.position.x, transform.position.y, jumpPos.z);
         while(transform.position.z != target.z)
@@ -95,8 +95,8 @@ public class PlayerHorse : PlayerBase
         }
 
         // enable collider and movement/abilities again
-        _inputManager.lockedMovement = false;
-        _inputManager.lockedAbilities = false;
+        _inputManager.LockedMovement = false;
+        _inputManager.LockedAbilities = false;
         _playerCollider.enabled = true;
 
         // change back into a pawn

@@ -6,16 +6,21 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager s_Instance;
+
     [SerializeField] private GameObject _pawnPrefab;
     [SerializeField] private GameObject _horsePrefab;
     [SerializeField] private GameObject _bischopPrefab;
     [SerializeField] private List<GameObject> _enemyPrefabs;
-    [SerializeField] private float _spawnTime;
+    [SerializeField] private float _reloadTime;
+    private float _spawnTime;
     [SerializeField] private TextMeshProUGUI _timePlayerUi;
-    private float _timePlayer;
     [SerializeField] private TextMeshProUGUI _timeEnemyUi;
+    private float _timePlayer;
     private float _timeEnemy;
-    [SerializeField] private List<GameObject> _UiHealth;
+    [SerializeField] private List<GameObject> _uiHealth;
+
+    public Dictionary<int,Vector3> MovePlaces = new Dictionary<int, Vector3>(); // enemy id, target Pos
     
     private int[] _spawnPosX = new int[11] { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
     private bool _bossBattle;
@@ -23,21 +28,26 @@ public class GameManager : MonoBehaviour
 
     private int _Health;
 
-    static public GameObject s_player;
+    static public GameObject s_Player;
     public Image UiHorse;
     public Image UiBischop;
     public Image UiTower;
     public Image UiQueen;
-    public ObjectPool playerBulletsPool;
-    public ObjectPool enemyBulletsPool;
-    [HideInInspector] public PlayerInputManager inputManager;
+    public ObjectPool PlayerBulletsPool;
+    public ObjectPool EnemyBulletsPool;
+    [HideInInspector] public PlayerInputManager InputManager;
+
+    private void Awake()
+    {
+        s_Instance = this;
+    }
 
     void Start()
     {
         _camera = Camera.main;
-        s_player = Instantiate(_pawnPrefab);
-        s_player.transform.SetParent(_camera.transform);
-        inputManager = GetComponent<PlayerInputManager>();
+        s_Player = Instantiate(_pawnPrefab);
+        s_Player.transform.SetParent(_camera.transform);
+        InputManager = GetComponent<PlayerInputManager>();
 
         _timePlayer = 300f;
         _timeEnemy = 300f;
@@ -59,10 +69,10 @@ public class GameManager : MonoBehaviour
             spawnPos.x = _spawnPosX[Random.Range(0, _spawnPosX.Length)];
 
             // spawn random enemy
-            int enemyIndex = Random.Range(0, 2);
+            int enemyIndex = Random.Range(0, 3);
             GameObject enemy = Instantiate(_enemyPrefabs[enemyIndex], spawnPos, transform.rotation);
 
-            _spawnTime = 1f;
+            _spawnTime = 3f;
         }
 
         // display time
@@ -86,11 +96,11 @@ public class GameManager : MonoBehaviour
 
     public void Damage()
     {
-        int i = _UiHealth.Count - 1;
+        int i = _uiHealth.Count - 1;
 
-        Destroy(_UiHealth[i]);
-        _UiHealth.RemoveAt(i);
-        Debug.Log(i);
+        Destroy(_uiHealth[i]);
+        _uiHealth.RemoveAt(i);
+
         if (i == 0)
         {
             // game over
@@ -106,7 +116,7 @@ public class GameManager : MonoBehaviour
     public void BecomePawn()
     {
         ChangePlayer(_pawnPrefab);
-        s_player.transform.SetParent(_camera.transform);
+        s_Player.transform.SetParent(_camera.transform);
     }
 
     public void BecomeHorse()
@@ -116,7 +126,7 @@ public class GameManager : MonoBehaviour
     public void BecomeBischop()
     {
         ChangePlayer(_bischopPrefab);
-        s_player.transform.SetParent(_camera.transform);
+        s_Player.transform.SetParent(_camera.transform);
     }
 
     public void AddPlayerTime(float time)
@@ -127,13 +137,13 @@ public class GameManager : MonoBehaviour
     private void ChangePlayer(GameObject prefab)
     {
         // get transform values can't just copy transform it will be a pointer
-        Vector3 pos = s_player.transform.position;
-        Quaternion rotation = s_player.transform.rotation;
+        Vector3 pos = s_Player.transform.position;
+        Quaternion rotation = s_Player.transform.rotation;
         
         // destroy current player
-        Destroy(s_player);
+        Destroy(s_Player);
         
         // spawn new chess piece player
-        s_player = Instantiate(prefab, pos, rotation);
+        s_Player = Instantiate(prefab, pos, rotation);
     }
 }
