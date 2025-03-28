@@ -80,6 +80,11 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         
     }
 
+    public virtual void Ability()
+    {
+
+    }
+
     public void TakeDamage(float amount=1)
     {
         Debug.Log(name + " took " + amount +" damage");

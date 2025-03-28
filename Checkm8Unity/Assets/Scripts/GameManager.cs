@@ -47,19 +47,25 @@ public class GameManager : MonoBehaviour
     {
         if (_spawnTime <= 0)
         {
+            // spawnpoint dependent on cameraPos we floor it to make them spawn exactly on tiles
             Vector3 spawnPos = new Vector3();
             spawnPos.z = Mathf.Floor(_camera.transform.position.z) + 25;
             if (spawnPos.z % 2 != 0)
             {
                 spawnPos.z++;
             }
+
+            // get random spawnpoint x position of possible spawnpoints
             spawnPos.x = _spawnPosX[Random.Range(0, _spawnPosX.Length)];
 
-            GameObject enemy = Instantiate(_enemyPrefabs[1], spawnPos, transform.rotation);
+            // spawn random enemy
+            int enemyIndex = Random.Range(0, 2);
+            GameObject enemy = Instantiate(_enemyPrefabs[enemyIndex], spawnPos, transform.rotation);
 
             _spawnTime = 1f;
         }
 
+        // display time
         _timePlayerUi.text = Mathf.Floor(_timePlayer / 60).ToString("00") + ":" + (_timePlayer%60).ToString("00");
         _timeEnemyUi.text = Mathf.Floor(_timeEnemy / 60).ToString("00") + ":" + (_timeEnemy%60).ToString("00");
 
@@ -71,6 +77,7 @@ public class GameManager : MonoBehaviour
 
         if (_timePlayer <= 0)
         {
+            // game ends when your time runs out
             GameOver();
         }
 
@@ -99,6 +106,7 @@ public class GameManager : MonoBehaviour
     public void BecomePawn()
     {
         ChangePlayer(_pawnPrefab);
+        s_player.transform.SetParent(_camera.transform);
     }
 
     public void BecomeHorse()
@@ -108,6 +116,7 @@ public class GameManager : MonoBehaviour
     public void BecomeBischop()
     {
         ChangePlayer(_bischopPrefab);
+        s_player.transform.SetParent(_camera.transform);
     }
 
     public void AddPlayerTime(float time)

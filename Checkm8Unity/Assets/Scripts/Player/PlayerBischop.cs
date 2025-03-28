@@ -7,7 +7,7 @@ public class PlayerBischop : PlayerBase
         int rotation = 45;
         for (int i = 0; i < 2; i++)
         {
-            GameObject bullet = _gameManager.enemyBulletsPool.GetPooledObject();
+            GameObject bullet = _gameManager.playerBulletsPool.GetPooledObject();
             if (bullet != null)
             {
                 bullet.transform.position = transform.position;
@@ -18,6 +18,4 @@ public class PlayerBischop : PlayerBase
             rotation *= -1;
         }
     }
-
-    
 }

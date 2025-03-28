@@ -210,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4336282952110758632, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 4336282952110758632, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -392,7 +392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4336282952110758632, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: -0.13
       objectReference: {fileID: 0}
     - target: {fileID: 4336282952110758632, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -429,6 +429,120 @@ PrefabInstance:
     - target: {fileID: 5348881590576550676, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
       propertyPath: m_Name
       value: PlayerPawn
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
+--- !u!1001 &261218740
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 301e01c3ac5a6524798b6a2cecb31844, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.0086951
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 301e01c3ac5a6524798b6a2cecb31844, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.015991092
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 301e01c3ac5a6524798b6a2cecb31844, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.4897947
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 301e01c3ac5a6524798b6a2cecb31844, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 301e01c3ac5a6524798b6a2cecb31844, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 301e01c3ac5a6524798b6a2cecb31844, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 301e01c3ac5a6524798b6a2cecb31844, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 301e01c3ac5a6524798b6a2cecb31844, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 301e01c3ac5a6524798b6a2cecb31844, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 301e01c3ac5a6524798b6a2cecb31844, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 301e01c3ac5a6524798b6a2cecb31844, type: 3}
+      propertyPath: m_Name
+      value: Outlined_Pawn-White
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 301e01c3ac5a6524798b6a2cecb31844, type: 3}
+--- !u!1001 &884243698
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4336282952110758632, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.2402115
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336282952110758632, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000023841858
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336282952110758632, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.017974
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336282952110758632, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336282952110758632, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336282952110758632, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336282952110758632, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336282952110758632, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336282952110758632, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336282952110758632, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348881590576550676, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
+      propertyPath: m_Name
+      value: PlayerPawn (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -697,3 +811,5 @@ SceneRoots:
   - {fileID: 1692605954}
   - {fileID: 1856054610}
   - {fileID: 58467959}
+  - {fileID: 884243698}
+  - {fileID: 261218740}

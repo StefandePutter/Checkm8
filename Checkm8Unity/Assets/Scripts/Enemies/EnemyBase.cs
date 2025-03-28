@@ -8,6 +8,8 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected float _shootSpeed;
     [SerializeField] protected float _score;
     [SerializeField] private float _waitTime = 0.5f;
+    protected LayerMask _layerMask;
+
 
     protected bool _moving;
 
@@ -18,6 +20,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         _gameManager = FindFirstObjectByType<GameManager>();
         _rb = GetComponent<Rigidbody>();
+        _layerMask = LayerMask.GetMask("Enemy", "Environment");
     }
 
     private void Start()
@@ -46,9 +49,31 @@ public abstract class EnemyBase : MonoBehaviour
         _moving = true;
         amount *= 2;
 
-        Vector3 target = new Vector3(transform.position.x, transform.position.y, transform.position.z-amount);
-        while (transform.position.z != target.z)
+        float zPos = transform.position.z - amount;
+        while (transform.position.z != zPos)
         {
+            Vector3 target = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
+
+            RaycastHit hit;
+            if (Physics.Raycast(target, transform.TransformDirection(Vector3.up), out hit, 2, _layerMask, QueryTriggerInteraction.Ignore))
+            {
+                Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
+
+                Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
+                _moving = false;
+                yield break;
+            }
+            else
+            {
+                Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * 2, Color.green);
+
+                while (transform.position.z != target.z)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * _moveSpeed);
+                    yield return null;
+                }
+            }
+
             transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * _moveSpeed);
             
             yield return null;
@@ -64,15 +89,38 @@ public abstract class EnemyBase : MonoBehaviour
         _moving = true;
 
         float zPos = xPos - transform.position.x;
+        int multiplier = 1;
         if (zPos < 0)
         {
+            multiplier = -1;
             zPos *= -1;
         }
 
         Vector3 target = new Vector3(xPos, transform.position.y, transform.position.z - zPos);
-        while (transform.position.z != target.z)
+        while (transform.position.x != xPos)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * _moveSpeed);
+            target = new Vector3(transform.position.x+(2*multiplier), transform.position.y, transform.position.z - 2);
+            
+            RaycastHit hit; 
+            if (Physics.Raycast(target, transform.TransformDirection(Vector3.up), out hit, 2, _layerMask, QueryTriggerInteraction.Ignore))
+            {
+                Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
+
+                Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
+                _moving = false;
+                yield break;
+            } else
+            {
+                Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * 2, Color.green);
+
+                while (transform.position.x != target.x)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * _moveSpeed);
+                    yield return null;
+                }
+            }
+            
+
 
             yield return null;
         }
