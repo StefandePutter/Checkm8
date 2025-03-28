@@ -9,10 +9,10 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
     [SerializeField] protected float _moveSpeed;
     [SerializeField] protected float _shootSpeed;
 
-    private float _horseCooldown = 5f;
-    private float _BischopCooldown = 7.5f;
-    private float _TowerCooldown = 10f;
-    private float _QueenCooldown = 15f;
+    protected float _horseCooldown = 5f;
+    protected float _BischopCooldown = 7.5f;
+    protected float _TowerCooldown = 10f;
+    protected float _QueenCooldown = 15f;
 
     protected Collider _playerCollider;
     protected PlayerInputManager _inputManager;
@@ -62,10 +62,27 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
 
     public virtual void Horse()
     {
-        _currentHorseCooldown = _horseCooldown;
+        if (_currentHorseCooldown > 0)
+        {
+            Debug.Log("yeah");
+            return;
+        }
+        
+        _gameManager.BecomeHorse();
+        // _currentHorseCooldown = _horseCooldown;
         // PlayerBase._currentBischopCooldown = _BischopCooldown;
         // PlayerBase._currentTowerCooldown = _TowerCooldown;
         // PlayerBase._currentQueenCooldown = _QueenCooldown;
+    }
+
+    public virtual void Bischop()
+    {
+        
+    }
+
+    public virtual void Ability()
+    {
+
     }
 
     public void TakeDamage(float amount=1)

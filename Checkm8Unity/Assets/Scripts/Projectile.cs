@@ -17,14 +17,14 @@ public class Projectile : MonoBehaviour
         _rb.AddRelativeForce(new Vector3(0, 0, _speed));
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        gameObject.SetActive(false);
-        if (other.TryGetComponent<IDamageable>(out IDamageable component))
-        {
-            component.TakeDamage(1);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    gameObject.SetActive(false);
+    //    if (other.TryGetComponent<IDamageable>(out IDamageable component))
+    //    {
+    //        component.TakeDamage(1);
+    //    }
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {

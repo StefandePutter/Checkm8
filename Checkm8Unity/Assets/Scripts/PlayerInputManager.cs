@@ -34,6 +34,9 @@ public class PlayerInputManager : MonoBehaviour
         controller.Player.Move.performed += Move;
         controller.Player.Move.canceled += Move; // so it goes to 0
 
+        // ability
+        controller.Player.Ability.Enable();
+        controller.Player.Ability.performed += Ability;
 
         // horse jump
         controller.Player.Horse.Enable();
@@ -42,13 +45,16 @@ public class PlayerInputManager : MonoBehaviour
 
 
         // bischop
-
+        controller.Player.Bischop.Enable();
+        controller.Player.Bischop.performed += Bischop;
     }
 
     private void OnDisable()
     {
         controller.Player.Move.Disable();
+        controller.Player.Ability.Disable();
         controller.Player.Horse.Disable();
+        controller.Player.Bischop.Disable();
     }
 
     private void Move(InputAction.CallbackContext input)
@@ -85,5 +91,23 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
-    
+    void Ability(InputAction.CallbackContext input)
+    {
+        if (lockedAbilities)
+        {
+            return;
+        }
+        GameManager.s_player.GetComponent<PlayerBase>().Ability();
+    }
+
+    void Bischop(InputAction.CallbackContext input)
+    {
+        Debug.Log("player bischop");
+
+        if (lockedAbilities)
+        {
+            return;
+        }
+        GameManager.s_player.GetComponent<PlayerBase>().Bischop();
+    }
 }

@@ -12,17 +12,25 @@ public class PlayerPawn : PlayerBase
             bullet.SetActive(true);
         }
 
-        StartCoroutine(ObjectPool.DisableAfterSec(bullet, 0.3f));
+        StartCoroutine(ObjectPool.DisableAfterSec(bullet, 0.5f));
     }
 
-    public override void Horse()
+    public override void Bischop()
     {
-        if (_currentHorseCooldown > 0)
+        Debug.Log("player bischop");
+        if (_currentBischopCooldown > 0)
         {
             Debug.Log("yeah");
             return;
         }
+
+        _gameManager.BecomeBischop();
+        _currentBischopCooldown = _BischopCooldown;
+        base.Bischop();
+    }
+
+    public override void Horse()
+    {
         base.Horse();
-        _gameManager.BecomeHorse();
     }
 }

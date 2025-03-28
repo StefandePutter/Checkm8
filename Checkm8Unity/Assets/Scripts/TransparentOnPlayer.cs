@@ -21,26 +21,25 @@ public class TransparentOnPlayer : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log(other.name);
         if (other.CompareTag("Player"))
         {
             GetComponent<MeshRenderer>().material = _material;
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            GetComponent<MeshRenderer>().material = _transparantMaterial;
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.collider.CompareTag("Player"))
+    //    {
+    //        GetComponent<MeshRenderer>().material = _transparantMaterial;
+    //    }
+    //}
 
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            GetComponent<MeshRenderer>().material = _material; 
-        }
-    }
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.collider.CompareTag("Player"))
+    //    {
+    //        GetComponent<MeshRenderer>().material = _material; 
+    //    }
+    //}
 }
