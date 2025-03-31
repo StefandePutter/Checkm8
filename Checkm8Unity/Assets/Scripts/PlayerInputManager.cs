@@ -47,6 +47,14 @@ public class PlayerInputManager : MonoBehaviour
         // bischop
         _controller.Player.Bischop.Enable();
         _controller.Player.Bischop.performed += Bischop;
+
+        // Rook
+        _controller.Player.Rook.Enable();
+        _controller.Player.Rook.performed += Rook;
+
+        // Queen
+        _controller.Player.Queen.Enable();
+        _controller.Player.Queen.performed += Queen;
     }
 
     private void OnDisable()
@@ -55,6 +63,8 @@ public class PlayerInputManager : MonoBehaviour
         _controller.Player.Ability.Disable();
         _controller.Player.Horse.Disable();
         _controller.Player.Bischop.Disable();
+        _controller.Player.Rook.Disable();
+        _controller.Player.Queen.Disable();
     }
 
     private void Move(InputAction.CallbackContext input)
@@ -106,5 +116,23 @@ public class PlayerInputManager : MonoBehaviour
             return;
         }
         GameManager.s_Player.GetComponent<PlayerBase>().Bischop();
+    }
+
+    void Rook(InputAction.CallbackContext input)
+    {
+        if (LockedAbilities)
+        {
+            return;
+        }
+        GameManager.s_Player.GetComponent<PlayerBase>().Rook();
+    }
+
+    void Queen(InputAction.CallbackContext input)
+    {
+        if (LockedAbilities)
+        {
+            return;
+        }
+        GameManager.s_Player.GetComponent<PlayerBase>().Queen();
     }
 }

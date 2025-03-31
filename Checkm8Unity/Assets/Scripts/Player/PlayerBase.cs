@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -8,19 +9,19 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
     [SerializeField] protected float _shootSpeed;
 
     protected float _horseCooldown = 5f;
-    protected float _BischopCooldown = 7.5f;
-    protected float _TowerCooldown = 10f;
-    protected float _QueenCooldown = 15f;
+    protected float _bischopCooldown = 7.5f;
+    protected float _rookCooldown = 10f;
+    protected float _queenCooldown = 15f;
 
     protected Collider _playerCollider;
     protected PlayerInputManager _inputManager;
     protected float _timeToFire;
     protected Rigidbody _rb;
 
-    static protected float _currentHorseCooldown;
-    static protected float _currentBischopCooldown;
-    static protected float _currentTowerCooldown;
-    static protected float _currentQueenCooldown;
+    static protected float s_currentHorseCooldown;
+    static protected float s_currentBischopCooldown;
+    static protected float s_currentRookCooldown;
+    static protected float s_currentQueenCooldown;
 
     protected virtual void Start()
     {
@@ -32,23 +33,24 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
 
     protected virtual void FixedUpdate()
     {
+        if (_timeToFire <= 0)
+        {
+            _timeToFire = _shootSpeed;
+            Shoot();
+        }
+        _timeToFire -= Time.deltaTime;
+        
         _rb.AddForce(new Vector3(_inputManager.MoveValue.x * _moveSpeed, 0, _inputManager.MoveValue.y * _moveSpeed));
 
-        if (_timeToFire <= Time.time)
-        {
-            Shoot();
-            _timeToFire = Time.time + _shootSpeed;
-        }
+        _gameManager.UiHorse.fillAmount = s_currentHorseCooldown / _horseCooldown;
+        _gameManager.UiBischop.fillAmount = 1- s_currentBischopCooldown / _bischopCooldown;
+        _gameManager.UiTower.fillAmount = 1 - s_currentRookCooldown / _rookCooldown;
+        _gameManager.UiQueen.fillAmount = 1- s_currentQueenCooldown / _queenCooldown;
 
-        _gameManager.UiHorse.fillAmount = _currentHorseCooldown / _horseCooldown;
-        _gameManager.UiBischop.fillAmount = 1- _currentBischopCooldown / _BischopCooldown;
-        _gameManager.UiTower.fillAmount = 1 - _currentTowerCooldown / _TowerCooldown;
-        _gameManager.UiQueen.fillAmount = 1- _currentQueenCooldown / _QueenCooldown;
-
-        _currentHorseCooldown -= Time.deltaTime;
-        _currentBischopCooldown -= Time.deltaTime;
-        _currentTowerCooldown -= Time.deltaTime;
-        _currentQueenCooldown -= Time.deltaTime;
+        s_currentHorseCooldown -= Time.deltaTime;
+        s_currentBischopCooldown -= Time.deltaTime;
+        s_currentRookCooldown -= Time.deltaTime;
+        s_currentQueenCooldown -= Time.deltaTime;
     }
 
     public virtual void Pawn()
@@ -58,7 +60,7 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
 
     public virtual void Horse()
     {
-        if (_currentHorseCooldown > 0)
+        if (s_currentHorseCooldown > 0)
         {
             return;
         }
@@ -71,6 +73,16 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
     }
 
     public virtual void Bischop()
+    {
+
+    }
+
+    public virtual void Rook()
+    {
+
+    }
+
+    public virtual void Queen()
     {
 
     }

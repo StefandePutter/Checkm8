@@ -21,7 +21,7 @@ public class PlayerBischop : PlayerBase
 
     public override void Bischop()
     {
-        PlayerBase._currentBischopCooldown = _BischopCooldown;
+        s_currentBischopCooldown = _bischopCooldown;
 
         Pawn();
     }

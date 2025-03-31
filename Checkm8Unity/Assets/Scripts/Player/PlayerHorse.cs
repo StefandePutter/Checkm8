@@ -100,7 +100,7 @@ public class PlayerHorse : PlayerBase
         _playerCollider.enabled = true;
 
         // change back into a pawn
-        _currentHorseCooldown = _horseCooldown;
+        s_currentHorseCooldown = _horseCooldown;
         Pawn();
     }
 

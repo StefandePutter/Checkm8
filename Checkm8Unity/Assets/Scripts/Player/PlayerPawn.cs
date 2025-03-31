@@ -7,8 +7,7 @@ public class PlayerPawn : PlayerBase
         GameObject bullet = _gameManager.PlayerBulletsPool.GetPooledObject();
         if (bullet != null)
         {
-            bullet.transform.position = transform.position;
-            bullet.transform.rotation = transform.rotation;
+            bullet.transform.SetPositionAndRotation(transform.position + Vector3.up*0.2f, transform.rotation);
             bullet.SetActive(true);
         }
 
@@ -18,15 +17,33 @@ public class PlayerPawn : PlayerBase
     public override void Bischop()
     {
         Debug.Log("player bischop");
-        if (_currentBischopCooldown > 0)
+        if (s_currentBischopCooldown > 0)
         {
-            Debug.Log("yeah");
             return;
         }
 
         _gameManager.BecomeBischop();
         // _currentBischopCooldown = _BischopCooldown;
         base.Bischop();
+    }
+
+    public override void Rook()
+    {
+        Debug.Log("player Rook");
+        if (s_currentBischopCooldown > 0)
+        {
+            return;
+        }
+
+        _gameManager.BecomeRook();
+        base.Rook();
+    }
+
+    public override void Queen()
+    {
+        Debug.Log("player Queen");
+
+        base.Rook();
     }
 
     public override void Horse()

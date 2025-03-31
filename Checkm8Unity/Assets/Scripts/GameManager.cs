@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _pawnPrefab;
     [SerializeField] private GameObject _horsePrefab;
     [SerializeField] private GameObject _bischopPrefab;
+    [SerializeField] private GameObject _rookPrefab;
     [SerializeField] private List<GameObject> _enemyPrefabs;
     [SerializeField] private float _reloadTime;
     private float _spawnTime;
@@ -126,6 +127,12 @@ public class GameManager : MonoBehaviour
     public void BecomeBischop()
     {
         ChangePlayer(_bischopPrefab);
+        s_Player.transform.SetParent(_camera.transform);
+    }
+
+    public void BecomeRook()
+    {
+        ChangePlayer(_rookPrefab);
         s_Player.transform.SetParent(_camera.transform);
     }
 

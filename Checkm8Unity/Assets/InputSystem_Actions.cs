@@ -46,7 +46,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Tower"",
+                    ""name"": ""Rook"",
                     ""type"": ""Button"",
                     ""id"": ""852140f2-7766-474d-8707-702459ba45f3"",
                     ""expectedControlType"": """",
@@ -145,7 +145,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Tower"",
+                    ""action"": ""Rook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -779,7 +779,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Horse = m_Player.FindAction("Horse", throwIfNotFound: true);
-        m_Player_Tower = m_Player.FindAction("Tower", throwIfNotFound: true);
+        m_Player_Rook = m_Player.FindAction("Rook", throwIfNotFound: true);
         m_Player_Bischop = m_Player.FindAction("Bischop", throwIfNotFound: true);
         m_Player_Queen = m_Player.FindAction("Queen", throwIfNotFound: true);
         m_Player_Ability = m_Player.FindAction("Ability", throwIfNotFound: true);
@@ -864,7 +864,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Horse;
-    private readonly InputAction m_Player_Tower;
+    private readonly InputAction m_Player_Rook;
     private readonly InputAction m_Player_Bischop;
     private readonly InputAction m_Player_Queen;
     private readonly InputAction m_Player_Ability;
@@ -874,7 +874,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         public PlayerActions(@Controller wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Horse => m_Wrapper.m_Player_Horse;
-        public InputAction @Tower => m_Wrapper.m_Player_Tower;
+        public InputAction @Rook => m_Wrapper.m_Player_Rook;
         public InputAction @Bischop => m_Wrapper.m_Player_Bischop;
         public InputAction @Queen => m_Wrapper.m_Player_Queen;
         public InputAction @Ability => m_Wrapper.m_Player_Ability;
@@ -893,9 +893,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Horse.started += instance.OnHorse;
             @Horse.performed += instance.OnHorse;
             @Horse.canceled += instance.OnHorse;
-            @Tower.started += instance.OnTower;
-            @Tower.performed += instance.OnTower;
-            @Tower.canceled += instance.OnTower;
+            @Rook.started += instance.OnRook;
+            @Rook.performed += instance.OnRook;
+            @Rook.canceled += instance.OnRook;
             @Bischop.started += instance.OnBischop;
             @Bischop.performed += instance.OnBischop;
             @Bischop.canceled += instance.OnBischop;
@@ -915,9 +915,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Horse.started -= instance.OnHorse;
             @Horse.performed -= instance.OnHorse;
             @Horse.canceled -= instance.OnHorse;
-            @Tower.started -= instance.OnTower;
-            @Tower.performed -= instance.OnTower;
-            @Tower.canceled -= instance.OnTower;
+            @Rook.started -= instance.OnRook;
+            @Rook.performed -= instance.OnRook;
+            @Rook.canceled -= instance.OnRook;
             @Bischop.started -= instance.OnBischop;
             @Bischop.performed -= instance.OnBischop;
             @Bischop.canceled -= instance.OnBischop;
@@ -1111,7 +1111,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnHorse(InputAction.CallbackContext context);
-        void OnTower(InputAction.CallbackContext context);
+        void OnRook(InputAction.CallbackContext context);
         void OnBischop(InputAction.CallbackContext context);
         void OnQueen(InputAction.CallbackContext context);
         void OnAbility(InputAction.CallbackContext context);
