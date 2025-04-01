@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerBischop : PlayerBase
 {
+    [SerializeField] private GameObject _homingPrefab;
+
     protected override void Shoot()
     {
         int rotation = 45;
@@ -21,9 +23,17 @@ public class PlayerBischop : PlayerBase
 
     public override void Bischop()
     {
+        int rotation = 45;
+        for (int i = 0; i < 2; i++)
+        {
+            GameObject bullet = Instantiate(_homingPrefab, transform.position, transform.rotation);
+            bullet.transform.Rotate(Vector3.up * rotation);
+            rotation *= -1;
+        }
         s_currentBischopCooldown = _bischopCooldown;
 
-        Pawn();
+
+        //Pawn();
     }
 
     public override void Horse()

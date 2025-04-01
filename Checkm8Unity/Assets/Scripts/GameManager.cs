@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _bischopPrefab;
     [SerializeField] private GameObject _rookPrefab;
     [SerializeField] private List<GameObject> _enemyPrefabs;
-    [SerializeField] private float _reloadTime;
+    [SerializeField] private float _spawnTimer;
     private float _spawnTime;
     [SerializeField] private TextMeshProUGUI _timePlayerUi;
     [SerializeField] private TextMeshProUGUI _timeEnemyUi;
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
             int enemyIndex = Random.Range(0, 3);
             GameObject enemy = Instantiate(_enemyPrefabs[enemyIndex], spawnPos, transform.rotation);
 
-            _spawnTime = _reloadTime;
+            _spawnTime = _spawnTimer;
         }
 
         // display time

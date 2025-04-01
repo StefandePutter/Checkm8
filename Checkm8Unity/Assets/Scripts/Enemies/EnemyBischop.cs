@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class EnemyBischop : EnemyBase
 {
+    [SerializeField] private GameObject _homingPrefab;
+
     protected void Update()
     {
         //base.FixedUpdate();

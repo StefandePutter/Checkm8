@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3338945211389985788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 146766964098171127}
+  - component: {fileID: 3141480057100311131}
+  - component: {fileID: 8173472336165991722}
+  - component: {fileID: 570044510314386450}
+  - component: {fileID: 4508792025588026920}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &146766964098171127
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3338945211389985788}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -0.5200282, y: 1.2027634, z: 0.8467128}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &3141480057100311131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3338945211389985788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3ae9051cfca0ea4f92830fd6763fe19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pawnPrefab: {fileID: 5348881590576550676, guid: 3ee12f6f6e19ee8479d7b2971d08bde1, type: 3}
+  _horsePrefab: {fileID: 7150853793901024080, guid: e051dde2ef76e7b4c9da21c7d4190d9b, type: 3}
+  _bischopPrefab: {fileID: 5348881590576550676, guid: ea5350998c53d324887ca30977109f8e, type: 3}
+  _rookPrefab: {fileID: 5348881590576550676, guid: 81e47c9a796e20b46b1d6c0cf20bf716, type: 3}
+  _enemyPrefabs:
+  - {fileID: 7917067562791591246, guid: 61e105d79d2b66c43abf1c5eb66a2eea, type: 3}
+  - {fileID: 7917067562791591246, guid: f1e71867853120c45aa0a3623be43b37, type: 3}
+  - {fileID: 7917067562791591246, guid: 78f97ca2e9427e146aa11f2461333176, type: 3}
+  _spawnTimer: 2
+  _timePlayerUi: {fileID: 0}
+  _timeEnemyUi: {fileID: 0}
+  _uiHealth:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  UiHorse: {fileID: 0}
+  UiBischop: {fileID: 0}
+  UiTower: {fileID: 0}
+  UiQueen: {fileID: 0}
+  PlayerBulletsPool: {fileID: 8173472336165991722}
+  EnemyBulletsPool: {fileID: 570044510314386450}
+  InputManager: {fileID: 0}
+--- !u!114 &8173472336165991722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3338945211389985788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 389edc9e7174dae4180200b131b7cfd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  objectToPool: {fileID: 7286309895646677864, guid: 6ee51b53db22ca64fa4f39e82ed2b6f4, type: 3}
+  amountToPool: 5
+--- !u!114 &570044510314386450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3338945211389985788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 389edc9e7174dae4180200b131b7cfd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  objectToPool: {fileID: 7286309895646677864, guid: ecc626c4b7bf75a43a4ee56b307e6517, type: 3}
+  amountToPool: 20
+--- !u!114 &4508792025588026920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3338945211389985788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b1072f4e8a5c04b96b3a8e7eaf4d9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LockedAbilities: 0
+  LockedMovement: 0
+  LastMovedRight: 0
