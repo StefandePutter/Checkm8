@@ -26,9 +26,13 @@ public class HomingProjectiles : MonoBehaviour
 
         float rotateAmount = Vector3.Cross(direction, transform.up).z;
 
-        _rb.angularVelocity = Vector3.up * -rotateAmount * _rotateSpeed;
+        //_rb.angularVelocity = Vector3.up * -rotateAmount * _rotateSpeed;
 
-        _rb.linearVelocity = transform.up * _moveSpeed;
+        //_rb.linearVelocity = transform.up * _moveSpeed;
+
+        _rb.angularVelocity = Vector3.RotateTowards(_rb.angularVelocity,
+    _moveSpeed * direction,
+    _rotateSpeed * Time.deltaTime,10f);
     }
 
     private void OnCollisionEnter(Collision collision)
