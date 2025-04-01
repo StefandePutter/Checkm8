@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class EnemyBase : MonoBehaviour, IDamageable
 {
     private int _id;
+    private float _health;
     private static int s_id=0;
 
     protected GameManager _gameManager;
@@ -15,6 +16,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
 
     protected bool _allowedToMove;
+    protected bool _usedAbility;
 
     protected float _timeToFire;
     protected Rigidbody _rb;
@@ -26,7 +28,9 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         _gameManager = GameManager.s_Instance;
         _rb = GetComponent<Rigidbody>();
         _layerMask = LayerMask.GetMask("Enemy", "Environment");
-        
+
+        _health = 1;
+
         // giving them id for dictionary
         _id = s_id;
         s_id++;
@@ -56,11 +60,15 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     public virtual void TakeDamage(float amount = 1)
     {
         Debug.Log(name + " took " + amount + " damage");
+        _health = -amount;
 
-        _gameManager.AddPlayerTime(_score);
-        _gameManager.MovePlaces.Remove(_id);
+        if (_health <= 0)
+        {
+            _gameManager.AddPlayerTime(_score);
+            _gameManager.MovePlaces.Remove(_id);
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 
     protected IEnumerator MoveAmountDown(int amount)

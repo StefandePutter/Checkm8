@@ -3,10 +3,21 @@ using UnityEngine;
 public class EnemyBischop : EnemyBase
 {
     [SerializeField] private GameObject _homingPrefab;
+    private int _homingBullets;
+    private int _timesMoved;
 
     protected void Update()
     {
         //base.FixedUpdate();
+
+        if (!_usedAbility)
+        {
+            if (_timesMoved > 0)
+            {
+                _homingBullets=2;
+                _usedAbility = true;
+            }
+        }
 
         if (!_allowedToMove)
         {
@@ -16,6 +27,7 @@ public class EnemyBischop : EnemyBase
 
 
             StartCoroutine(MoveAmountDiagonal(spawnPos));
+            _timesMoved++;
         }
     }
 
@@ -24,13 +36,22 @@ public class EnemyBischop : EnemyBase
         int rotation = 45;
         for (int i =0; i < 2; i++)
         {
-            GameObject bullet = _gameManager.EnemyBulletsPool.GetPooledObject();
-            if (bullet != null)
+            if (_homingBullets == 0)
             {
-                bullet.transform.position = transform.position;
-                bullet.transform.rotation = transform.rotation;
+                GameObject bullet = _gameManager.EnemyBulletsPool.GetPooledObject();
+                if (bullet != null)
+                {
+                    bullet.transform.position = transform.position;
+                    bullet.transform.rotation = transform.rotation;
+                    bullet.transform.Rotate(Vector3.up * rotation);
+                    bullet.SetActive(true);
+                }
+            }
+            else
+            {
+                GameObject bullet = Instantiate(_homingPrefab, transform.position, transform.rotation);
                 bullet.transform.Rotate(Vector3.up * rotation);
-                bullet.SetActive(true);
+                _homingBullets--;
             }
             rotation *= -1;
         }

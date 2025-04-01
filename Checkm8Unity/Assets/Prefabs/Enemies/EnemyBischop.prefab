@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6763067762090344854}
   m_Layer: 8
   m_Name: EnemyBischop
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   _shootSpeed: 0.5
   _score: 2
   _waitTime: 0.5
+  _homingPrefab: {fileID: 7286309895646677864, guid: 9e7449dc6511dae478c7daf5d98c6532, type: 3}
 --- !u!1001 &8515990686074709095
 PrefabInstance:
   m_ObjectHideFlags: 0
