@@ -46,18 +46,18 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Rook"",
+                    ""name"": ""Bischop"",
                     ""type"": ""Button"",
-                    ""id"": ""852140f2-7766-474d-8707-702459ba45f3"",
+                    ""id"": ""27c5f898-bc57-4ee1-8800-db469aca5fe3"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Bischop"",
+                    ""name"": ""Rook"",
                     ""type"": ""Button"",
-                    ""id"": ""27c5f898-bc57-4ee1-8800-db469aca5fe3"",
+                    ""id"": ""852140f2-7766-474d-8707-702459ba45f3"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -141,7 +141,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8352b1d4-f88d-4110-b217-da4da79649dc"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -152,7 +152,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""36e52cba-0905-478e-a818-f4bfcb9f3b9a"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -779,8 +779,8 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Horse = m_Player.FindAction("Horse", throwIfNotFound: true);
-        m_Player_Rook = m_Player.FindAction("Rook", throwIfNotFound: true);
         m_Player_Bischop = m_Player.FindAction("Bischop", throwIfNotFound: true);
+        m_Player_Rook = m_Player.FindAction("Rook", throwIfNotFound: true);
         m_Player_Queen = m_Player.FindAction("Queen", throwIfNotFound: true);
         m_Player_Ability = m_Player.FindAction("Ability", throwIfNotFound: true);
         // UI
@@ -864,8 +864,8 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Horse;
-    private readonly InputAction m_Player_Rook;
     private readonly InputAction m_Player_Bischop;
+    private readonly InputAction m_Player_Rook;
     private readonly InputAction m_Player_Queen;
     private readonly InputAction m_Player_Ability;
     public struct PlayerActions
@@ -874,8 +874,8 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         public PlayerActions(@Controller wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Horse => m_Wrapper.m_Player_Horse;
-        public InputAction @Rook => m_Wrapper.m_Player_Rook;
         public InputAction @Bischop => m_Wrapper.m_Player_Bischop;
+        public InputAction @Rook => m_Wrapper.m_Player_Rook;
         public InputAction @Queen => m_Wrapper.m_Player_Queen;
         public InputAction @Ability => m_Wrapper.m_Player_Ability;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -893,12 +893,12 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Horse.started += instance.OnHorse;
             @Horse.performed += instance.OnHorse;
             @Horse.canceled += instance.OnHorse;
-            @Rook.started += instance.OnRook;
-            @Rook.performed += instance.OnRook;
-            @Rook.canceled += instance.OnRook;
             @Bischop.started += instance.OnBischop;
             @Bischop.performed += instance.OnBischop;
             @Bischop.canceled += instance.OnBischop;
+            @Rook.started += instance.OnRook;
+            @Rook.performed += instance.OnRook;
+            @Rook.canceled += instance.OnRook;
             @Queen.started += instance.OnQueen;
             @Queen.performed += instance.OnQueen;
             @Queen.canceled += instance.OnQueen;
@@ -915,12 +915,12 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Horse.started -= instance.OnHorse;
             @Horse.performed -= instance.OnHorse;
             @Horse.canceled -= instance.OnHorse;
-            @Rook.started -= instance.OnRook;
-            @Rook.performed -= instance.OnRook;
-            @Rook.canceled -= instance.OnRook;
             @Bischop.started -= instance.OnBischop;
             @Bischop.performed -= instance.OnBischop;
             @Bischop.canceled -= instance.OnBischop;
+            @Rook.started -= instance.OnRook;
+            @Rook.performed -= instance.OnRook;
+            @Rook.canceled -= instance.OnRook;
             @Queen.started -= instance.OnQueen;
             @Queen.performed -= instance.OnQueen;
             @Queen.canceled -= instance.OnQueen;
@@ -1111,8 +1111,8 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnHorse(InputAction.CallbackContext context);
-        void OnRook(InputAction.CallbackContext context);
         void OnBischop(InputAction.CallbackContext context);
+        void OnRook(InputAction.CallbackContext context);
         void OnQueen(InputAction.CallbackContext context);
         void OnAbility(InputAction.CallbackContext context);
     }

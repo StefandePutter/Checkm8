@@ -12,7 +12,7 @@ public class EnemyBischop : EnemyBase
 
         if (!_usedAbility)
         {
-            if (_timesMoved > 0)
+            if (_timesMoved > 0 && _allowedToMove)
             {
                 _homingBullets=2;
                 _usedAbility = true;
@@ -41,8 +41,7 @@ public class EnemyBischop : EnemyBase
                 GameObject bullet = _gameManager.EnemyBulletsPool.GetPooledObject();
                 if (bullet != null)
                 {
-                    bullet.transform.position = transform.position;
-                    bullet.transform.rotation = transform.rotation;
+                    bullet.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.2f, transform.rotation);
                     bullet.transform.Rotate(Vector3.up * rotation);
                     bullet.SetActive(true);
                 }

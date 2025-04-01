@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4521064194446851961}
   - component: {fileID: 6371928572798318103}
   - component: {fileID: -3369890623900420831}
-  - component: {fileID: -9072872728213786197}
+  - component: {fileID: 1292776069899447601}
   m_Layer: 7
   m_Name: HomingBulletEnemy
   m_TagString: Bullet
@@ -107,7 +107,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-9072872728213786197
+--- !u!114 &1292776069899447601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7286309895646677864}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c0534b76539d8448abc54abb83de3c, type: 3}
+  m_Script: {fileID: 11500000, guid: 64fbf5e814228384ea82744f9a526251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 7

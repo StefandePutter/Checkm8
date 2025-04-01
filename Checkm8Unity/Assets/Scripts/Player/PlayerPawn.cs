@@ -42,8 +42,13 @@ public class PlayerPawn : PlayerBase
     public override void Queen()
     {
         Debug.Log("player Queen");
+        if (s_currentQueenCooldown > 0)
+        {
+            return;
+        }
 
-        base.Rook();
+        _gameManager.BecomeQueen();
+        base.Queen();
     }
 
     public override void Horse()

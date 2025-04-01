@@ -33,7 +33,7 @@ public class EnemyPawn : EnemyBase
         GameObject bullet = _gameManager.EnemyBulletsPool.GetPooledObject();
         if (bullet != null)
         {
-            bullet.transform.SetPositionAndRotation(transform.position+Vector3.up*2, transform.rotation);
+            bullet.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.2f, transform.rotation);
             bullet.SetActive(true);
         }
         StartCoroutine(ObjectPool.DisableAfterSec(bullet, 0.3f));

@@ -20,12 +20,12 @@ public class HomingProjectiles : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (_lifetime < 3f)
-        //{
-        //    _lifetime += Time.deltaTime;
-        //    _rb.MovePosition(_rb.position + transform.forward * _moveSpeed * Time.deltaTime);
-        //    return;
-        //}
+        if (_lifetime < 0.1f)
+        {
+            _lifetime += Time.deltaTime;
+            _rb.MovePosition(_rb.position + transform.forward * _moveSpeed * Time.deltaTime);
+            return;
+        }
 
         if (_target == null)
         {
@@ -33,6 +33,7 @@ public class HomingProjectiles : MonoBehaviour
             if (_target == null)
             {
                 _rb.MovePosition(_rb.position + transform.forward * _moveSpeed * Time.deltaTime);
+                return;
             }
         }
 

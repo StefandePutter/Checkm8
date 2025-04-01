@@ -89,12 +89,12 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
 
     public virtual void Ability()
     {
-
+        // does nothing
     }
 
     public void TakeDamage(float amount=1)
     {
-        Debug.Log(name + " took " + amount +" damage");
+        // Debug.Log(name + " took " + amount +" damage");
 
         _gameManager.Damage();
     }

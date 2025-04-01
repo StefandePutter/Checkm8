@@ -27,8 +27,7 @@ public class PlayerBischop : PlayerBase
                 GameObject bullet = _gameManager.PlayerBulletsPool.GetPooledObject();
                 if (bullet != null)
                 {
-                    bullet.transform.position = transform.position;
-                    bullet.transform.rotation = transform.rotation;
+                    bullet.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.2f, transform.rotation);
                     bullet.transform.Rotate(Vector3.up * rotation);
                     bullet.SetActive(true);
                 }

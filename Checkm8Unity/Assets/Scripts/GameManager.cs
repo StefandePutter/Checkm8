@@ -7,11 +7,13 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager s_Instance;
+    static public GameObject s_Player;
 
     [SerializeField] private GameObject _pawnPrefab;
     [SerializeField] private GameObject _horsePrefab;
     [SerializeField] private GameObject _bischopPrefab;
     [SerializeField] private GameObject _rookPrefab;
+    [SerializeField] private GameObject _queenPrefab;
     [SerializeField] private List<GameObject> _enemyPrefabs;
     [SerializeField] private float _spawnTimer;
     private float _spawnTime;
@@ -21,15 +23,12 @@ public class GameManager : MonoBehaviour
     private float _timeEnemy;
     [SerializeField] private List<GameObject> _uiHealth;
 
-    public Dictionary<int,Vector3> MovePlaces = new Dictionary<int, Vector3>(); // enemy id, target Pos
     
     private int[] _spawnPosX = new int[11] { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
     private bool _bossBattle;
     private Camera _camera;
 
-    private int _Health;
-
-    static public GameObject s_Player;
+    public Dictionary<int,Vector3> MovePlaces = new Dictionary<int, Vector3>(); // enemy id, target Pos
     public Image UiHorse;
     public Image UiBischop;
     public Image UiTower;
@@ -60,7 +59,7 @@ public class GameManager : MonoBehaviour
         {
             // spawnpoint dependent on cameraPos we floor it to make them spawn exactly on tiles
             Vector3 spawnPos = new Vector3();
-            spawnPos.z = Mathf.Floor(_camera.transform.position.z) + 25;
+            spawnPos.z = Mathf.Floor(_camera.transform.position.z) + 23;
             if (spawnPos.z % 2 != 0)
             {
                 spawnPos.z++;
@@ -71,8 +70,7 @@ public class GameManager : MonoBehaviour
 
             // spawn random enemy
             int enemyIndex = Random.Range(0, _enemyPrefabs.Count);
-            Debug.Log(enemyIndex);
-            GameObject enemy = Instantiate(_enemyPrefabs[1], spawnPos, transform.rotation);
+            GameObject enemy = Instantiate(_enemyPrefabs[3], spawnPos, transform.rotation);
 
             _spawnTime = _spawnTimer;
         }
@@ -134,6 +132,12 @@ public class GameManager : MonoBehaviour
     public void BecomeRook()
     {
         ChangePlayer(_rookPrefab);
+        s_Player.transform.SetParent(_camera.transform);
+    }
+
+    public void BecomeQueen()
+    {
+        ChangePlayer(_queenPrefab);
         s_Player.transform.SetParent(_camera.transform);
     }
 
