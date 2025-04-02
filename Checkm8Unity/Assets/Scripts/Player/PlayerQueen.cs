@@ -17,4 +17,10 @@ public class PlayerQueen : PlayerBase
             rotation += 45;
         }
     }
+
+    public override void Horse()
+    {
+        s_currentQueenCooldown = _queenCooldown;
+        base.Horse();
+    }
 }

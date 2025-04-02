@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class EnemyBase : MonoBehaviour, IDamageable
 {
     private int _id;
-    private float _health;
+    [SerializeField] private float _health = 1;
     private static int s_id=0;
 
     protected GameManager _gameManager;
@@ -28,8 +28,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         _gameManager = GameManager.s_Instance;
         _rb = GetComponent<Rigidbody>();
         _layerMask = LayerMask.GetMask("Enemy", "Environment");
-
-        _health = 1;
 
         // giving them id for dictionary
         _id = s_id;

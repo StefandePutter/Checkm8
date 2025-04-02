@@ -69,8 +69,8 @@ public class GameManager : MonoBehaviour
             spawnPos.x = _spawnPosX[Random.Range(0, _spawnPosX.Length)];
 
             // spawn random enemy
-            int enemyIndex = Random.Range(0, _enemyPrefabs.Count);
-            GameObject enemy = Instantiate(_enemyPrefabs[3], spawnPos, transform.rotation);
+            int enemyIndex = Random.Range(0, _enemyPrefabs.Count-1);
+            GameObject enemy = Instantiate(_enemyPrefabs[enemyIndex], spawnPos, transform.rotation);
 
             _spawnTime = _spawnTimer;
         }
