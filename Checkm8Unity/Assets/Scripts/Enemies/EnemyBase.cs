@@ -24,7 +24,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     private Vector3 _leftPos;
 
-    private void Start()
+    protected virtual void Start()
     {
         _gameManager = GameManager.s_Instance;
         _rb = GetComponent<Rigidbody>();

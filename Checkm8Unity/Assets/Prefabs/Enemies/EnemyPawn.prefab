@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6201666423858477333}
   - component: {fileID: 3383335793036242336}
   - component: {fileID: 4118488733872742545}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: EnemyPawn
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -206,9 +206,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8247733434827310100, guid: 12941789681e9c7488e17a80e1fe8424, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -7606104271195783900, guid: 12941789681e9c7488e17a80e1fe8424, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -5612841896480101071, guid: 12941789681e9c7488e17a80e1fe8424, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -4926887409236218260, guid: 12941789681e9c7488e17a80e1fe8424, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -3133498875991405556, guid: 12941789681e9c7488e17a80e1fe8424, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -299301459658653248, guid: 12941789681e9c7488e17a80e1fe8424, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 635547659545568360, guid: 12941789681e9c7488e17a80e1fe8424, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 12941789681e9c7488e17a80e1fe8424, type: 3}
       propertyPath: m_Name
       value: Outline-Test-pawn01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 12941789681e9c7488e17a80e1fe8424, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697891702043856199, guid: 12941789681e9c7488e17a80e1fe8424, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
