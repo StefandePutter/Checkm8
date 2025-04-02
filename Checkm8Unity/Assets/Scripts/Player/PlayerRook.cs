@@ -51,6 +51,7 @@ public class PlayerRook : PlayerBase
 
     public override void Horse()
     {
+        s_currentRookCooldown = _rookCooldown;
         base.Horse();
     }
 }
