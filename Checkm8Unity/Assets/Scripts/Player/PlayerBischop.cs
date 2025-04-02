@@ -61,7 +61,11 @@ public class PlayerBischop : PlayerBase
         //    bullet.GetComponent<HomingProjectiles>().SetTarget(FindClosestByTag("Enemy"));
         //    rotation *= -1;
         //}
-        _homingBullets = 6;
+
+        if (!_usedAbility)
+        {
+            _homingBullets = 6;
+        }
 
         _usedAbility = true;
 
@@ -92,6 +96,7 @@ public class PlayerBischop : PlayerBase
 
     public override void Horse()
     {
+        s_currentBischopCooldown = _bischopCooldown;
         base.Horse();
     }
 }

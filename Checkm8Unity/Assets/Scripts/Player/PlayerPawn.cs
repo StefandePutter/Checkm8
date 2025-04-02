@@ -30,7 +30,7 @@ public class PlayerPawn : PlayerBase
     public override void Rook()
     {
         Debug.Log("player Rook");
-        if (s_currentBischopCooldown > 0)
+        if (s_currentRookCooldown > 0)
         {
             return;
         }

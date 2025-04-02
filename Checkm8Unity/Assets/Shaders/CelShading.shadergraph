@@ -206,7 +206,7 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "5db2a9e6feef42bc9e81d7017a4e1bd8"
+                    "m_Id": "2ebf33fa6b00434db9194d0243d86458"
                 },
                 "m_SlotId": 0
             }
@@ -934,7 +934,7 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "2ebf33fa6b00434db9194d0243d86458"
+                    "m_Id": "5db2a9e6feef42bc9e81d7017a4e1bd8"
                 },
                 "m_SlotId": 0
             }
@@ -1492,7 +1492,7 @@
     "m_Title": "Fresnel Calculations (n · v)",
     "m_Position": {
         "x": -2169.60009765625,
-        "y": -1324.800048828125
+        "y": -1324.7999267578125
     }
 }
 
@@ -2402,8 +2402,8 @@
     "m_ObjectId": "38583c71c2c3404caf6a2edd181a7caa",
     "m_Title": "Diffuse Calculations (n · l)",
     "m_Position": {
-        "x": -2849.60009765625,
-        "y": 319.2000732421875
+        "x": -2849.599853515625,
+        "y": 319.20001220703127
     }
 }
 
@@ -4018,9 +4018,9 @@
     "m_ShaderOutputName": "BaseColor",
     "m_StageCapability": 2,
     "m_Value": {
-        "x": 0.5,
-        "y": 0.5,
-        "z": 0.5
+        "x": 0.5018867254257202,
+        "y": 0.5018867254257202,
+        "z": 0.5018867254257202
     },
     "m_DefaultValue": {
         "x": 0.0,
@@ -5279,8 +5279,8 @@
     "m_ObjectId": "c8e6c5ba71894d009e2b8f5ac0d0fbee",
     "m_Title": "Specular Calculations (n · h)",
     "m_Position": {
-        "x": -3575.199951171875,
-        "y": -660.800048828125
+        "x": -3575.19970703125,
+        "y": -660.7999877929688
     }
 }
 

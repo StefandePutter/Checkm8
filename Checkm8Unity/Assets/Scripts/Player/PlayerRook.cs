@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerRook : PlayerBase
 {
     private bool _shootingLaser;
+    private bool _shootingRaser;
 
     [SerializeField] private GameObject _laserPrefab;
 
@@ -51,6 +52,7 @@ public class PlayerRook : PlayerBase
 
     public override void Horse()
     {
+        s_currentRookCooldown = _rookCooldown;
         base.Horse();
     }
 }
