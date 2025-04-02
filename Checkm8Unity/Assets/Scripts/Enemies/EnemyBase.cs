@@ -17,6 +17,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     protected bool _allowedToMove;
     protected bool _usedAbility;
+    protected bool _canFire;
 
     protected float _timeToFire;
     protected Rigidbody _rb;
@@ -37,10 +38,13 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         _rb.AddForce(Vector3.back * _moveSpeed);
     }
 
+    private void OnBecameVisible()
+    {
+        _canFire = true;
+    }
+
     private void OnBecameInvisible()
     {
-        Debug.Log("bye");
-
         _gameManager.MovePlaces.Remove(_id);
         
         Destroy(gameObject);
@@ -48,7 +52,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     protected virtual void FixedUpdate()
     {
-        if (_timeToFire <= Time.time)
+        if (_timeToFire <= Time.time && _canFire)
         {
             Shoot();
             _timeToFire = Time.time + _shootSpeed;

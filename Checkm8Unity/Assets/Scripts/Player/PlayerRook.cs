@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerRook : PlayerBase
 {
     private bool _shootingLaser;
+    private bool _shootingRaser;
 
     [SerializeField] private GameObject _laserPrefab;
 
