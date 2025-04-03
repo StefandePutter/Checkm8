@@ -39,6 +39,13 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     private void OnBecameVisible()
     {
         // only starts firing when on screen
+        // _canFire = true;
+        StartCoroutine(WaitForSeconds());
+    }
+
+    private IEnumerator WaitForSeconds()
+    {
+        yield return new WaitForSeconds(1f);
         _canFire = true;
     }
 

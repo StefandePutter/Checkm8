@@ -77,7 +77,7 @@ MonoBehaviour:
   _moveSpeed: 250
   _shootSpeed: 0.8
   _ghostPrefab: {fileID: 1862318369445783747, guid: 96bdb6253c692b441a21f32ebef2b0db, type: 3}
-  _arrowsPrefab: {fileID: 4946898154226347738, guid: ea79f219a8758b64aae52d0bb54948b7, type: 3}
+  _arrowsPrefab: {fileID: 6665984543835060109, guid: 52cb6f067b6ea404a9bdcc32de3e99d3, type: 3}
   _jumpSpeed: 10
 --- !u!65 &4986715139365849289
 BoxCollider:
