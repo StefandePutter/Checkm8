@@ -22,15 +22,13 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     protected float _timeToFire;
     protected Rigidbody _rb;
 
-    private Vector3 _leftPos;
-
     protected virtual void Start()
     {
         _gameManager = GameManager.s_Instance;
         _rb = GetComponent<Rigidbody>();
         _layerMask = LayerMask.GetMask("Enemy", "Environment");
 
-        // giving them id for dictionary
+        // giving them id for GameManager dictionary then increase the id
         _id = s_id;
         s_id++;
         _gameManager.MovePlaces.Add(_id,Vector3.up);
@@ -40,11 +38,13 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     private void OnBecameVisible()
     {
+        // only starts firing when on screen
         _canFire = true;
     }
 
     private void OnBecameInvisible()
     {
+        // remove enemy when out of screen
         _gameManager.MovePlaces.Remove(_id);
         
         Destroy(gameObject);
@@ -52,6 +52,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     protected virtual void FixedUpdate()
     {
+        // calls shoot function that will be made in child files
         if (_timeToFire <= Time.time && _canFire)
         {
             Shoot();
@@ -188,7 +189,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             multiplier = -1;
         }
 
-        //Vector3 target = new Vector3(xPos, transform.position.y, transform.position.z - zPos);
         Vector3 target;
         while (transform.position.x != xPos)
         {

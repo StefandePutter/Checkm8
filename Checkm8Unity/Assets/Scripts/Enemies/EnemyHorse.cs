@@ -8,22 +8,22 @@ public class EnemyHorse : EnemyBase
 
     protected override void Shoot()
     {
-        return;
+        //return;
     }
     void Update()
     {
+        if (!_canFire) { return; }
+
         Transform target = GameManager.s_Player.transform;
 
         bool hitPlayer = false;
 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, ((target.position + Vector3.up * 0.5f) - (transform.position + Vector3.up * 0.5f)), out hit, Mathf.Infinity, LayerMask.GetMask("Player", "Enemy", "Environment"), QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, ((target.position + Vector3.up * 0.5f) - (transform.position + Vector3.up * 0.5f)), out hit, 20, LayerMask.GetMask("Player", "Enemy", "Environment"), QueryTriggerInteraction.Ignore))
         {
             if (hit.transform == target)
             {
-                // In Range and i can see you!
-                Debug.Log("hit player");
-                // Charge();
+                // In Range and i can see player
                 StartCoroutine(Charge());
                 
                 hitPlayer = true;
