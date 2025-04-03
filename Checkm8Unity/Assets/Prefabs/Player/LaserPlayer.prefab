@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 882115420837767104}
   - component: {fileID: 8803899908238203568}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lazer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 6060901869099612386}
   - component: {fileID: 7359575037893661405}
   - component: {fileID: 6346210089533267670}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LaserPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd8bac8ee2304b4ea2717db97056990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 2
 --- !u!65 &6346210089533267670
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -167,7 +168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6840319524576265812}
   - component: {fileID: 6012100742329223622}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lazer (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4375321431865341891}
   - component: {fileID: 6096193811103770887}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lazer (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5896544303981641655}
   - component: {fileID: 545970695686297924}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lazer (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -7,7 +7,6 @@ public class EnemyHorse : EnemyBase
     [SerializeField] private float _chargeSpeed;
     [SerializeField] private GameObject _indicatorPrefab;
     private bool _rotateToPlayer;
-    private Transform _playerTransform;
     private Transform _target;
 
     protected override void Shoot()
@@ -26,24 +25,14 @@ public class EnemyHorse : EnemyBase
         {
             if (hit.transform == _target)
             {
-                // In Range and i can see player
+                // in Range and clear path to player
                 if (!_usedAbility)
                 {
-                    Debug.Log("hit");
                     _rotateToPlayer = true;
                     StartCoroutine(Charge());
                     _usedAbility = true;
                 }
                 
-            } else
-            {
-                //if (_usedAbility)
-                //{
-                //    Debug.Log();
-                //    _usedAbility = false;
-                //    StopCoroutine(Charge());
-                //}
-                //_rotateToPlayer = false;
             }
         }
 
@@ -59,21 +48,11 @@ public class EnemyHorse : EnemyBase
     {
         while (Vector3.Dot(transform.forward, (_target.position - transform.position).normalized) < 0.99f)
         {
-            Debug.Log(Vector3.Dot(transform.forward, (_target.position - transform.position).normalized));
-            Debug.Log("Not facing the object");
             yield return null;
         }
-        Debug.Log("Facing the object");
         GameObject arrows = Instantiate(_indicatorPrefab, transform);
 
         float newScale;
-        //while (arrows.transform.localScale.x < 1)
-        //{
-        //    newScale = Mathf.Lerp(0, 1, Time.deltaTime / 3);
-        //    arrows.transform.localScale = new Vector3(newScale, newScale, newScale);
-        //    yield return null;
-        //}
-
         float timer = 0.0f;
         while (timer <= 1.5)
         {
@@ -89,7 +68,6 @@ public class EnemyHorse : EnemyBase
         direction.y = 0;
         while (true)
         {
-            // transform.position = Vector3.MoveTowards(transform.position, transform.forward, Time.deltaTime * _chargeSpeed);
             transform.position += transform.forward * Time.deltaTime * _chargeSpeed;
             yield return null;
         }
@@ -99,7 +77,7 @@ public class EnemyHorse : EnemyBase
     {
         if (collision.collider.CompareTag("Player"))
         {
-            if (TryGetComponent<IDamageable>(out IDamageable component))
+            if (collision.collider.TryGetComponent<IDamageable>(out IDamageable component))
             {
                 component.TakeDamage();
             }

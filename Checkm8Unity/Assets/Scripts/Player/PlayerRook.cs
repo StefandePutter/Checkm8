@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class PlayerRook : PlayerBase
 {
-    private bool _shootingLaser;
-    private bool _shootingRaser;
+    private bool _isShootingLaser;
 
     [SerializeField] private GameObject _laserPrefab;
 
     protected override void Shoot()
     {
-        if (!_shootingLaser)
+        if (!_isShootingLaser)
         {
             GameObject bullet = _gameManager.PlayerBulletsPool.GetPooledObject();
             if (bullet != null)
@@ -23,7 +22,7 @@ public class PlayerRook : PlayerBase
 
     public override void Rook()
     {
-        _shootingLaser = true;
+        _isShootingLaser = true;
 
         StartCoroutine(Laser());
     }
@@ -34,8 +33,9 @@ public class PlayerRook : PlayerBase
         _inputManager.LockedAbilities = true;
 
         GameObject laser = Instantiate(_laserPrefab, transform);
+        laser.GetComponent<Laser>().damage = 3;
         // set the local pos
-        laser.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.5f, transform.rotation);
+        laser.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.2f, transform.rotation);
 
         yield return new WaitForSeconds(1f);
         _inputManager.LockedMovement = false;

@@ -96,7 +96,7 @@ public class PlayerHorse : PlayerBase
             yield return null;
         }
 
-        Instantiate(_shockwavePrefab, transform.position + Vector3.up * 0.1f, transform.rotation);
+        Instantiate(_shockwavePrefab, transform.position + Vector3.up * 0.2f, transform.rotation);
 
         // enable collider and movement/abilities again
         _inputManager.LockedMovement = false;

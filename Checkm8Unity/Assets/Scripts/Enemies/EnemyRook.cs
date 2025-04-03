@@ -1,30 +1,79 @@
+using System.Collections;
+using System.Threading;
 using UnityEngine;
 
 public class EnemyRook : EnemyBase
 {
+    [SerializeField] private GameObject _laserPrefab;
+    [SerializeField] private GameObject _indicatorPrefab;
+    private bool _isShootingLaser;
+    private int _amountMoved;
 
     protected void Update()
     {
         //base.FixedUpdate();
 
-        if (!_allowedToMove)
+        if (_amountMoved > 1 && !_usedAbility && _allowedToMove)
         {
-            int[] spawnPosses = new int[11] { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
+            _usedAbility = true;
+            // _allowedToMove = false;
+            StartCoroutine(Laser());
+        }
+
+        if (_allowedToMove)
+        {
+            int[] spawnPosses = _fieldSpacesX;
             int random = Random.Range(0, spawnPosses.Length);
             int spawnPos = spawnPosses[random];
 
             StartCoroutine(MoveHorizontal(spawnPos));
+            _amountMoved++;
         }
     }
 
     protected override void Shoot()
     {
-        GameObject bullet = _gameManager.EnemyBulletsPool.GetPooledObject();
-        if (bullet != null)
+        if (!_isShootingLaser)
         {
-            bullet.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.2f, transform.rotation);
-            bullet.SetActive(true);
+            GameObject bullet = _gameManager.EnemyBulletsPool.GetPooledObject();
+            if (bullet != null)
+            {
+                bullet.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.2f, transform.rotation);
+                bullet.SetActive(true);
+            }
         }
-        // StartCoroutine(ObjectPool.DisableAfterSec(bullet, 0.3f));
+    }
+
+    private IEnumerator Laser()
+    {
+        _isShootingLaser = true;
+        _canFire = false;
+        _allowedToMove = false;
+
+        GameObject indicator = Instantiate(_indicatorPrefab, transform);
+        indicator.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.2f, transform.rotation);
+
+        // showing indicator
+        yield return new WaitForSeconds(1.5f);
+
+        Destroy(indicator);
+        yield return null;
+
+        GameObject laser = Instantiate(_laserPrefab, transform);
+        laser.GetComponent<Laser>().damage = 3;
+        // set the local pos
+        laser.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.2f, transform.rotation);
+
+        // shoot for a second
+        yield return new WaitForSeconds(1f);
+
+        Destroy(laser);
+
+        yield return new WaitForSeconds(0.5f);
+
+
+        _isShootingLaser = false;
+        _canFire = true;
+        _allowedToMove = true;
     }
 }

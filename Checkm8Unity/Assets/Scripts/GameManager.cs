@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> _uiHealth;
 
     
-    private int[] _spawnPosX = new int[11] { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
+    public int[] SpawnPosesX = new int[11] { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
     private bool _bossBattle;
     private Camera _camera;
 
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
             }
 
             // get random spawnpoint x position of possible spawnpoints
-            spawnPos.x = _spawnPosX[Random.Range(0, _spawnPosX.Length)];
+            spawnPos.x = SpawnPosesX[Random.Range(0, SpawnPosesX.Length)];
 
             // spawn random enemy
             int enemyIndex = Random.Range(0, _enemyPrefabs.Count-1);

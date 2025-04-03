@@ -103,7 +103,7 @@ MonoBehaviour:
   _waitTime: 0.5
   _rotateSpeed: 1
   _chargeSpeed: 10
-  _indicatorPrefab: {fileID: 444148711612167808, guid: a51aa3cde0ea24a4f859ae50a02b62db, type: 3}
+  _indicatorPrefab: {fileID: 444148711612167808, guid: 2e188feec95cdc249836df1a2bcd5780, type: 3}
 --- !u!23 &-5921565646537124766
 MeshRenderer:
   m_ObjectHideFlags: 0

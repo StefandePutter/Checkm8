@@ -12,6 +12,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] protected float _shootSpeed;
     [SerializeField] protected float _score;
     [SerializeField] private float _waitTime = 0.5f;
+    protected int[] _fieldSpacesX;
     protected LayerMask _layerMask;
 
 
@@ -25,6 +26,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     protected virtual void Start()
     {
         _gameManager = GameManager.s_Instance;
+        _fieldSpacesX = _gameManager.SpawnPosesX;
         _rb = GetComponent<Rigidbody>();
         _layerMask = LayerMask.GetMask("Enemy", "Environment");
 
@@ -40,13 +42,14 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
         // only starts firing when on screen
         // _canFire = true;
-        StartCoroutine(WaitForSeconds());
+        StartCoroutine(EnableAfterSeconds(1));
     }
 
-    private IEnumerator WaitForSeconds()
+    private IEnumerator EnableAfterSeconds(float waitTime)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(waitTime);
         _canFire = true;
+        _allowedToMove = true;
     }
 
     private void OnBecameInvisible()
@@ -67,23 +70,29 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         }
     }
 
-    public virtual void TakeDamage(float amount = 1)
+    public void TakeDamage(float amount = 1)
     {
         _health -= amount;
         // Debug.Log(name + " took " + amount + " damage" + _health + " health");
 
         if (_health <= 0)
         {
-            _gameManager.AddPlayerTime(_score);
-            _gameManager.MovePlaces.Remove(_id);
-
-            Destroy(gameObject);
+            Die();
+            
         }
+    }
+
+    protected virtual void Die()
+    {
+        _gameManager.AddPlayerTime(_score);
+        _gameManager.MovePlaces.Remove(_id);
+
+        Destroy(gameObject);
     }
 
     protected IEnumerator MoveAmountDown(int amount)
     {
-        _allowedToMove = true;
+        _allowedToMove = false;
         amount *= 2;
 
         float zPos = transform.position.z - amount;
@@ -99,7 +108,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
                 //Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
 
                 //Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
-                _allowedToMove = false;
+                _allowedToMove = true;
                 yield break;
             }
             else
@@ -127,12 +136,12 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
         yield return new WaitForSeconds(_waitTime);
 
-        _allowedToMove = false;
+        _allowedToMove = true;
     }
 
     protected IEnumerator MoveAmountDiagonal(int xPos)
     {
-        _allowedToMove = true;
+        _allowedToMove = false;
 
         float zPos = xPos - transform.position.x;
         int multiplier = 1;
@@ -155,7 +164,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
                 //Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
 
-                _allowedToMove = false;
+                _allowedToMove = true;
                 yield break;
             } else
             {
@@ -182,12 +191,12 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
         yield return new WaitForSeconds(_waitTime);
 
-        _allowedToMove = false;
+        _allowedToMove = true;
     }
 
     protected IEnumerator MoveHorizontal(int xPos)
     {
-        _allowedToMove = true;
+        _allowedToMove = false;
 
         float zPos = xPos - transform.position.x;
         int multiplier = 1;
@@ -208,7 +217,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
                 //Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
 
-                _allowedToMove = false;
+                _allowedToMove = true;
                 yield break;
             }
             else
@@ -236,7 +245,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
         yield return new WaitForSeconds(_waitTime);
 
-        _allowedToMove = false;
+        _allowedToMove = true;
     }
 
     private bool CheckTargetPosition(Vector3 target)
@@ -251,7 +260,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         {
             // piece is already moving to this square
             // Debug.Log("tried going to the same square");
-            _allowedToMove = false;
+            _allowedToMove = true;
             return false;
         }
     }

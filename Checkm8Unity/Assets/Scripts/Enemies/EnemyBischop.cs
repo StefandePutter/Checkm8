@@ -19,9 +19,9 @@ public class EnemyBischop : EnemyBase
             }
         }
 
-        if (!_allowedToMove)
+        if (_allowedToMove)
         {
-            int[] spawnPosses = new int[11] { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
+            int[] spawnPosses = _fieldSpacesX; // new int[11] { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
             int random = Random.Range(0, spawnPosses.Length);
             int spawnPos = spawnPosses[random];
 
@@ -55,10 +55,5 @@ public class EnemyBischop : EnemyBase
             rotation *= -1;
         }
         //StartCoroutine(ObjectPool.DisableAfterSec(bullet, 0.3f));
-    }
-
-    public override void TakeDamage(float amount)
-    {
-        base.TakeDamage(amount);
     }
 }
