@@ -23,6 +23,8 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
     static protected float s_currentRookCooldown;
     static protected float s_currentQueenCooldown;
 
+    private float _damageDelay = 0.5f;
+    private float _damageCooldown;
     private Vector3 _targetPos;
 
     protected virtual void Start()
@@ -41,6 +43,11 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
             Shoot();
         }
         _timeToFire -= Time.deltaTime;
+
+        if (_damageCooldown > 0)
+        {
+            _damageCooldown -= Time.deltaTime;
+        }
         
         _rb.AddForce(new Vector3(_inputManager.MoveValue.x * _moveSpeed, 0, _inputManager.MoveValue.y * _moveSpeed));
 
@@ -93,6 +100,13 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
     public void TakeDamage(float amount=1)
     {
         // Debug.Log(name + " took " + amount +" damage");
+
+        if (_damageCooldown > 0)
+        {
+            return;
+        }
+
+        _damageCooldown = _damageDelay;
 
         _gameManager.Damage();
     }

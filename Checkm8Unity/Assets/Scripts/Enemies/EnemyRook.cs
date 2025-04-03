@@ -58,11 +58,9 @@ public class EnemyRook : EnemyBase
         yield return new WaitForSeconds(0.4f);
         indicator.SetActive(true);
         yield return new WaitForSeconds(0.3f);
-        indicator.SetActive(false);
-        yield return new WaitForSeconds(0.2f);
-
+        // indicator.SetActive(false);
         Destroy(indicator);
-        yield return null;
+        yield return new WaitForSeconds(0.2f);
 
         GameObject laser = Instantiate(_laserPrefab, transform);
         laser.GetComponent<Laser>().damage = 3;
@@ -75,7 +73,6 @@ public class EnemyRook : EnemyBase
         Destroy(laser);
 
         yield return new WaitForSeconds(0.5f);
-
 
         _isShootingLaser = false;
         _canFire = true;

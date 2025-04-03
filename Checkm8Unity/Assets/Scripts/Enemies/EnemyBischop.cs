@@ -8,8 +8,6 @@ public class EnemyBischop : EnemyBase
 
     protected void Update()
     {
-        //base.FixedUpdate();
-
         if (!_usedAbility)
         {
             if (_timesMoved > 0 && _allowedToMove)
@@ -21,10 +19,9 @@ public class EnemyBischop : EnemyBase
 
         if (_allowedToMove)
         {
-            int[] spawnPosses = _fieldSpacesX; // new int[11] { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
+            int[] spawnPosses = _fieldSpacesX; // new int[7] { -6, -4, -2, 0, 2, 4, 6 };
             int random = Random.Range(0, spawnPosses.Length);
             int spawnPos = spawnPosses[random];
-
 
             StartCoroutine(MoveAmountDiagonal(spawnPos));
             _timesMoved++;
@@ -54,6 +51,5 @@ public class EnemyBischop : EnemyBase
             }
             rotation *= -1;
         }
-        //StartCoroutine(ObjectPool.DisableAfterSec(bullet, 0.3f));
     }
 }

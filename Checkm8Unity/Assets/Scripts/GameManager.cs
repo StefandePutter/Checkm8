@@ -16,18 +16,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _queenPrefab;
     [SerializeField] private List<GameObject> _enemyPrefabs;
     [SerializeField] private float _spawnTimer;
-    private float _spawnTime;
     [SerializeField] private TextMeshProUGUI _timePlayerUi;
     [SerializeField] private TextMeshProUGUI _timeEnemyUi;
-    private float _timePlayer;
-    private float _timeEnemy;
     [SerializeField] private List<GameObject> _uiHealth;
 
-    
-    public int[] SpawnPosesX = new int[11] { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
+    private float _spawnTime;
+    private float _timePlayer;
+    private float _timeEnemy;
     private bool _bossBattle;
     private Camera _camera;
+    private bool _spawningEnemies;
 
+    public int[] SpawnPosesX = new int[7];
     public Dictionary<int,Vector3> MovePlaces = new Dictionary<int, Vector3>(); // enemy id, target Pos
     public Image UiHorse;
     public Image UiBischop;
@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         s_Instance = this;
+        int[] value = new int[7] { -6, -4, -2, 0, 2, 4, 6 };
+        SpawnPosesX = value;
+        _spawningEnemies = true;
     }
 
     void Start()
@@ -55,22 +58,57 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (_spawnTime <= 0)
+        if (_spawnTime <= 0 && _spawningEnemies)
         {
-            // spawnpoint dependent on cameraPos we floor it to make them spawn exactly on tiles
-            Vector3 spawnPos = new Vector3();
-            spawnPos.z = Mathf.Floor(_camera.transform.position.z) + 23;
-            if (spawnPos.z % 2 != 0)
+
+            //for (int i = 0; i < 1; i++)
+            //{
+                
+            //}
+            bool spawned = false;
+            while (!spawned)
             {
-                spawnPos.z++;
+                Vector3 spawnPos = new Vector3();
+                spawnPos.z = Mathf.Floor(_camera.transform.position.z) + 23;
+                if (spawnPos.z % 2 != 0)
+                {
+                    spawnPos.z++;
+                }
+
+                // get random spawnpoint x position of possible spawnpoints
+                spawnPos.x = SpawnPosesX[Random.Range(0, SpawnPosesX.Length)];
+
+                RaycastHit hit;
+                if (Physics.Raycast(spawnPos, Vector3.up, out hit, 2f, LayerMask.GetMask("Enemy", "Environment"), QueryTriggerInteraction.Ignore))
+                {
+
+                }
+                else
+                {
+                    // spawn random enemy
+                    int enemyIndex = Random.Range(0, _enemyPrefabs.Count - 1);
+                    GameObject enemy = Instantiate(_enemyPrefabs[enemyIndex], spawnPos, transform.rotation);
+                    spawned = true;
+                }
             }
 
-            // get random spawnpoint x position of possible spawnpoints
-            spawnPos.x = SpawnPosesX[Random.Range(0, SpawnPosesX.Length)];
-
-            // spawn random enemy
-            int enemyIndex = Random.Range(0, _enemyPrefabs.Count-1);
-            GameObject enemy = Instantiate(_enemyPrefabs[enemyIndex], spawnPos, transform.rotation); 
+            //for (int i = 0; i < 2; i++)
+            //{
+            //    // spawnpoint dependent on cameraPos we floor it to make them spawn exactly on tiles
+            //    Vector3 spawnPos = new Vector3();
+            //    spawnPos.z = Mathf.Floor(_camera.transform.position.z) + 23;
+            //    if (spawnPos.z % 2 != 0)
+            //    {
+            //        spawnPos.z++;
+            //    }
+            //
+            //    // get random spawnpoint x position of possible spawnpoints
+            //    spawnPos.x = SpawnPosesX[Random.Range(0, SpawnPosesX.Length)];
+            //
+            //    // spawn random enemy
+            //    int enemyIndex = Random.Range(0, _enemyPrefabs.Count - 1);
+            //    // GameObject enemy = Instantiate(_enemyPrefabs[enemyIndex], spawnPos, transform.rotation);
+            //}
 
             _spawnTime = _spawnTimer;
         }

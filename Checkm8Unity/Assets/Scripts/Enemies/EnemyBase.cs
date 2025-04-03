@@ -28,7 +28,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         _gameManager = GameManager.s_Instance;
         _fieldSpacesX = _gameManager.SpawnPosesX;
         _rb = GetComponent<Rigidbody>();
-        _layerMask = LayerMask.GetMask("Enemy", "Environment");
+        _layerMask = LayerMask.GetMask("Enemy", "EnemyHorse","Environment");
 
         // giving them id for GameManager dictionary then increase the id
         _id = s_id;

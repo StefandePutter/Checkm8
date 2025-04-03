@@ -8,13 +8,11 @@ public class Laser : MonoBehaviour
     {
         if (other.TryGetComponent<IDamageable>(out IDamageable component))
         {
-            component.TakeDamage(2*Time.deltaTime);
+            component.TakeDamage(damage * Time.deltaTime);
         }
-        Debug.Log("hit " + other.name);
-
+        
         if (other.CompareTag("Bullet"))
         {
-            Debug.Log("hit bullet");
             other.attachedRigidbody.gameObject.SetActive(false);
         }
     }
@@ -23,7 +21,7 @@ public class Laser : MonoBehaviour
     {
         if (other.TryGetComponent<IDamageable>(out IDamageable component))
         {
-            component.TakeDamage(2 * Time.deltaTime);
+            component.TakeDamage(damage * Time.deltaTime);
         }
     }
 
