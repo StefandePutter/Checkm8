@@ -5,6 +5,7 @@ public class PlayerHorse : PlayerBase
 {
     [SerializeField] private GameObject _ghostPrefab;
     [SerializeField] private GameObject _arrowsPrefab;
+    [SerializeField] private GameObject _shockwavePrefab;
     [SerializeField] private float _jumpSpeed;
 
     private GameObject _ghost;
@@ -87,12 +88,15 @@ public class PlayerHorse : PlayerBase
             yield return null;
         }
 
+        // then down
         target = new Vector3(transform.position.x, transform.position.y - 4, transform.position.z);
         while (transform.position.y != target.y)
         {
             transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * _jumpSpeed*3);
             yield return null;
         }
+
+        Instantiate(_shockwavePrefab, transform.position + Vector3.up * 0.1f, transform.rotation);
 
         // enable collider and movement/abilities again
         _inputManager.LockedMovement = false;

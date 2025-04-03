@@ -83,6 +83,7 @@ public class EnemyHorse : EnemyBase
             yield return null;
         }
 
+        arrows.SetActive(false);
         _rotateToPlayer = false;
         Vector3 direction = (transform.position - _target.position).normalized;
         direction.y = 0;

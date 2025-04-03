@@ -26,9 +26,6 @@ public class PlayerRook : PlayerBase
         _shootingLaser = true;
 
         StartCoroutine(Laser());
-
-        //laser.transform.localPosition = );
-        // Pawn();
     }
 
     private IEnumerator Laser()
@@ -37,9 +34,8 @@ public class PlayerRook : PlayerBase
         _inputManager.LockedAbilities = true;
 
         GameObject laser = Instantiate(_laserPrefab, transform);
-        laser.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.2f, transform.rotation);
-
-        
+        // set the local pos
+        laser.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.5f, transform.rotation);
 
         yield return new WaitForSeconds(1f);
         _inputManager.LockedMovement = false;

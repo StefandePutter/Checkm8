@@ -23,6 +23,8 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
     static protected float s_currentRookCooldown;
     static protected float s_currentQueenCooldown;
 
+    private Vector3 _targetPos;
+
     protected virtual void Start()
     {
         _playerCollider = GetComponent<Collider>();
@@ -43,9 +45,9 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         _rb.AddForce(new Vector3(_inputManager.MoveValue.x * _moveSpeed, 0, _inputManager.MoveValue.y * _moveSpeed));
 
         _gameManager.UiHorse.fillAmount = s_currentHorseCooldown / _horseCooldown;
-        _gameManager.UiBischop.fillAmount = 1- s_currentBischopCooldown / _bischopCooldown;
-        _gameManager.UiTower.fillAmount = 1 - s_currentRookCooldown / _rookCooldown;
-        _gameManager.UiQueen.fillAmount = 1- s_currentQueenCooldown / _queenCooldown;
+        _gameManager.UiBischop.fillAmount = s_currentBischopCooldown / _bischopCooldown;
+        _gameManager.UiTower.fillAmount = s_currentRookCooldown / _rookCooldown;
+        _gameManager.UiQueen.fillAmount = s_currentQueenCooldown / _queenCooldown;
 
         s_currentHorseCooldown -= Time.deltaTime;
         s_currentBischopCooldown -= Time.deltaTime;
@@ -66,10 +68,6 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         }
         
         _gameManager.BecomeHorse();
-        // _currentHorseCooldown = _horseCooldown;
-        // PlayerBase._currentBischopCooldown = _BischopCooldown;
-        // PlayerBase._currentTowerCooldown = _TowerCooldown;
-        // PlayerBase._currentQueenCooldown = _QueenCooldown;
     }
 
     public virtual void Bischop()
