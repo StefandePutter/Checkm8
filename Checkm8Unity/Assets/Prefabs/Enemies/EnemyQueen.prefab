@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6201666423858477333}
   - component: {fileID: 2242948357101588456}
   - component: {fileID: -8125250757378975539}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: EnemyQueen
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ce1ed6e9a3ae244a2bb2d5c5a42c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 20
+  _health: 1
   _moveSpeed: 3
   _shootSpeed: 0.5
   _score: 2
@@ -214,6 +214,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8460830717458168429, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -7644916190052886540, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: -6949861636902305424, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -226,6 +234,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: ee4ad8afa1ef5df4bb0100c5464546cf, type: 2}
+    - target: {fileID: -2304317105654778888, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 336979720269518184, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -234,22 +246,54 @@ PrefabInstance:
       propertyPath: m_Name
       value: Queen_Outlined01
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1129496810705857465, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: ee4ad8afa1ef5df4bb0100c5464546cf, type: 2}
+    - target: {fileID: 1662479230375280213, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906156016075916671, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002146505028463488, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3858069594166047088, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 1a7f6295253083c4fb7b6df00ab1e80c, type: 2}
+    - target: {fileID: 4631292330747573965, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 7329502834131374103, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 1a7f6295253083c4fb7b6df00ab1e80c, type: 2}
+    - target: {fileID: 8130030893647087961, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8700725330082129686, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8776723657015845716, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: ee4ad8afa1ef5df4bb0100c5464546cf, type: 2}
+    - target: {fileID: 9217895995923088951, guid: 08ea7a6f1fd8c8043ae1598b33123dc7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -84,7 +84,7 @@ Material:
     m_Floats:
     - USE_ADDITIONAL_LIGHTS: 1
     - _AlphaClip: 0
-    - _AmbientStrength: 0.01
+    - _AmbientStrength: 0.001
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -95,20 +95,20 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _FalloffAmount: 0.01
+    - _FalloffAmount: 0.001
     - _FresnelPower: 30
-    - _FresnelSize: 0.08
+    - _FresnelSize: 0.5
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _LightingCutoff: 0.01
+    - _LightingCutoff: 0.2
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 1000
+    - _Smoothness: 20
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

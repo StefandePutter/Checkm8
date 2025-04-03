@@ -18,6 +18,12 @@ public class PlayerQueen : PlayerBase
         }
     }
 
+    public override void Queen()
+    {
+        s_currentQueenCooldown = _queenCooldown;
+        Pawn();
+    }
+
     public override void Horse()
     {
         s_currentQueenCooldown = _queenCooldown;
