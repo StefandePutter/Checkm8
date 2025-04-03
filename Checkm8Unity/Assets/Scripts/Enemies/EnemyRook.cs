@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Threading;
 using UnityEngine;
 
 public class EnemyRook : EnemyBase
@@ -54,7 +53,13 @@ public class EnemyRook : EnemyBase
         indicator.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.2f, transform.rotation);
 
         // showing indicator
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
+        indicator.SetActive(false);
+        yield return new WaitForSeconds(0.4f);
+        indicator.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+        indicator.SetActive(false);
+        yield return new WaitForSeconds(0.2f);
 
         Destroy(indicator);
         yield return null;

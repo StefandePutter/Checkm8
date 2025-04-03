@@ -97,5 +97,13 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         _gameManager.Damage();
     }
 
+    public static void Reset()
+    {
+        s_currentHorseCooldown = 0;
+        s_currentBischopCooldown = 0;
+        s_currentRookCooldown = 0;
+        s_currentQueenCooldown = 0;
+    }
+
     protected abstract void Shoot();
 }

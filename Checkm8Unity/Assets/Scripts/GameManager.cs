@@ -110,6 +110,8 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        PlayerBase.Reset();
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
