@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     private Camera _camera;
     private bool _spawningEnemies;
 
-    public int[] SpawnPosesX = new int[7];
+    [HideInInspector] public int[] SpawnPosesX = new int[7];
     public Transform CameraTransform;
     public Dictionary<int,Vector3> MovePlaces = new Dictionary<int, Vector3>(); // enemy id, target Pos
     public Image UiHorse;
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
                 spawnPos.x = SpawnPosesX[Random.Range(0, SpawnPosesX.Length)];
 
                 RaycastHit hit;
-                if (Physics.Raycast(spawnPos, Vector3.up, out hit, 2f, LayerMask.GetMask("Enemy", "Environment"), QueryTriggerInteraction.Ignore))
+                if (Physics.Raycast(spawnPos - Vector3.up, Vector3.up, out hit, 3f, LayerMask.GetMask("Enemy", "Environment"), QueryTriggerInteraction.Ignore))
                 {
 
                 }

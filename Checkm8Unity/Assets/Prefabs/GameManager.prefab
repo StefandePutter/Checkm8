@@ -51,11 +51,14 @@ MonoBehaviour:
   _horsePrefab: {fileID: 7150853793901024080, guid: e051dde2ef76e7b4c9da21c7d4190d9b, type: 3}
   _bischopPrefab: {fileID: 5348881590576550676, guid: ea5350998c53d324887ca30977109f8e, type: 3}
   _rookPrefab: {fileID: 5348881590576550676, guid: 81e47c9a796e20b46b1d6c0cf20bf716, type: 3}
+  _queenPrefab: {fileID: 5348881590576550676, guid: 6dc80d7eac66b7549b777a4678c622af, type: 3}
   _enemyPrefabs:
   - {fileID: 7917067562791591246, guid: 61e105d79d2b66c43abf1c5eb66a2eea, type: 3}
   - {fileID: 7917067562791591246, guid: f1e71867853120c45aa0a3623be43b37, type: 3}
+  - {fileID: 7917067562791591246, guid: 7cb3619ca4beebe41ad8c61995435cd9, type: 3}
   - {fileID: 7917067562791591246, guid: 78f97ca2e9427e146aa11f2461333176, type: 3}
-  _spawnTimer: 2
+  - {fileID: 7917067562791591246, guid: 587d09802c7b02041a8fc160e3f6ce7a, type: 3}
+  _spawnTimer: 1.5
   _timePlayerUi: {fileID: 0}
   _timeEnemyUi: {fileID: 0}
   _uiHealth:
@@ -67,6 +70,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  SpawnPosesX: 00000000000000000000000000000000000000000000000000000000
+  CameraTransform: {fileID: 0}
   UiHorse: {fileID: 0}
   UiBischop: {fileID: 0}
   UiTower: {fileID: 0}
