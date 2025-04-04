@@ -51,6 +51,8 @@ public class EnemyHorse : EnemyBase
             yield return null;
         }
         GameObject arrows = Instantiate(_indicatorPrefab, transform);
+        
+        arrows.transform.SetPositionAndRotation(transform.position + Vector3.up*0.1f, transform.rotation);
 
         float newScale;
         float timer = 0.0f;
