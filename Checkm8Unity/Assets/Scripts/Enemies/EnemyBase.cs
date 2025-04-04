@@ -42,17 +42,10 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         _rb.AddForce(Vector3.back * _moveSpeed);
     }
 
-    private void OnBecameVisible()
-    {
-        // only starts firing when on screen
-        // _canFire = true;
-        // StartCoroutine(EnableAfterSeconds(2));
-    }
-
     private IEnumerator EnableEnemy()
     {
         // yield return new WaitForSeconds(waitTime);
-        Instantiate(_highlightPrefab, transform.position,transform.rotation);
+        Instantiate(_highlightPrefab, transform.position + Vector3.up * 0.1f,transform.rotation);
         yield return new WaitForSeconds(0.3f);
         _canFire = true;
         _allowedToMove = true;
@@ -124,16 +117,16 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             RaycastHit hit;
             if (Physics.Raycast(target - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, _layerMask, QueryTriggerInteraction.Ignore))
             {
-                Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
+                // Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
 
-                Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
+                // Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
                 
                 _allowedToMove = true;
                 yield break;
             }
             else
             {
-                Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * 2, Color.green);
+                // Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * 2, Color.green);
 
                 if (!CheckTargetPosition(target))
                 {
@@ -180,15 +173,15 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             RaycastHit hit; 
             if (Physics.Raycast(target - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, _layerMask, QueryTriggerInteraction.Ignore))
             {
-                Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
+                // Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
 
-                Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
+                // Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
 
                 _allowedToMove = true;
                 yield break;
             } else
             {
-                Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * 2, Color.green);
+                // Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * 2, Color.green);
 
                 if (!CheckTargetPosition(target))
                 {
@@ -233,16 +226,16 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             RaycastHit hit;
             if (Physics.Raycast(target - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, _layerMask, QueryTriggerInteraction.Ignore))
             {
-                Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
+                // Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
 
-                Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
+                //Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
 
                 _allowedToMove = true;
                 yield break;
             }
             else
             {
-                Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * 2, Color.green);
+                // Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * 2, Color.green);
 
                 if (!CheckTargetPosition(target))
                 {
@@ -278,8 +271,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         }
         else
         {
-            // piece is already moving to this square
-            // Debug.Log("tried going to the same square");
+            // another piece is already moving to this square
             _allowedToMove = true;
             return false;
         }

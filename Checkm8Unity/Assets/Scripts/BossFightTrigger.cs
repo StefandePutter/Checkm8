@@ -15,6 +15,14 @@ public class BossFightTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.CompareTag("Player"));
+        //Debug.Log(other.CompareTag("Player"));
+        if (!_isTriggered)
+        {
+            if (other.CompareTag("Player"))
+            {
+                _gameManager.ChangeSpawnEnemies(false);
+                _isTriggered = true;
+            }
+        }
     }
 }

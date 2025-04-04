@@ -3948,6 +3948,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 570044510314386450, guid: 5e863f74cf60d434a90c7c243584e563, type: 3}
+      propertyPath: objectToPool
+      value: 
+      objectReference: {fileID: 7286309895646677864, guid: fcc8f56e60e0eb14496114544a308aca, type: 3}
     - target: {fileID: 3141480057100311131, guid: 5e863f74cf60d434a90c7c243584e563, type: 3}
       propertyPath: UiHorse
       value: 
