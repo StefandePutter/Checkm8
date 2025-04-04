@@ -93,7 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledObjects: []
   objectToPool: {fileID: 7286309895646677864, guid: 6ee51b53db22ca64fa4f39e82ed2b6f4, type: 3}
-  amountToPool: 5
+  amountToPool: 10
 --- !u!114 &570044510314386450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledObjects: []
   objectToPool: {fileID: 7286309895646677864, guid: ecc626c4b7bf75a43a4ee56b307e6517, type: 3}
-  amountToPool: 20
+  amountToPool: 40
 --- !u!114 &4508792025588026920
 MonoBehaviour:
   m_ObjectHideFlags: 0
