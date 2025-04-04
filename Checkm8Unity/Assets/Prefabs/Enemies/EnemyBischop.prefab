@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 1
+  _highlightPrefab: {fileID: 8261708515924071979, guid: 1fb65b0434246914aa18114ff6d5d183, type: 3}
   _moveSpeed: 3
   _shootSpeed: 0.5
   _score: 2

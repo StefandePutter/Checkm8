@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     private bool _spawningEnemies;
 
     public int[] SpawnPosesX = new int[7];
+    public Transform CameraTransform;
     public Dictionary<int,Vector3> MovePlaces = new Dictionary<int, Vector3>(); // enemy id, target Pos
     public Image UiHorse;
     public Image UiBischop;
