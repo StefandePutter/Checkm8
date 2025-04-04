@@ -4,9 +4,11 @@ using UnityEngine;
 public abstract class EnemyBase : MonoBehaviour, IDamageable
 {
     private int _id;
-    [SerializeField] private float _health = 1;
     private static int s_id=0;
     private bool _enabled;
+    [SerializeField] private float _health = 1;
+    [SerializeField] private AudioSource _hitSound;
+    [SerializeField] private GameObject _deathSoundPrefab;
 
     protected GameManager _gameManager;
     [SerializeField] private GameObject _highlightPrefab;
@@ -85,6 +87,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
         _health -= amount;
         // Debug.Log(name + " took " + amount + " damage" + _health + " health");
+        _hitSound.Play();
 
         if (_health <= 0)
         {
@@ -95,6 +98,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     protected virtual void Die()
     {
+        Instantiate(_deathSoundPrefab,transform.position,transform.rotation);
+
         _gameManager.AddPlayerTime(_score);
         _gameManager.MovePlaces.Remove(_id);
 
@@ -114,17 +119,18 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             
 
             RaycastHit hit;
-            if (Physics.Raycast(target, transform.TransformDirection(Vector3.up), out hit, 2, _layerMask, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(target - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, _layerMask, QueryTriggerInteraction.Ignore))
             {
-                //Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
+                Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
 
-                //Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
+                Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
+                
                 _allowedToMove = true;
                 yield break;
             }
             else
             {
-                // Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * 2, Color.green);
+                Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * 2, Color.green);
 
                 if (!CheckTargetPosition(target))
                 {
@@ -169,17 +175,17 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             target = new Vector3(transform.position.x+(2*multiplier), transform.position.y, transform.position.z - 2);
 
             RaycastHit hit; 
-            if (Physics.Raycast(target, transform.TransformDirection(Vector3.up), out hit, 2, _layerMask, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(target - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, _layerMask, QueryTriggerInteraction.Ignore))
             {
-                //Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
+                Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
 
-                //Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
+                Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
 
                 _allowedToMove = true;
                 yield break;
             } else
             {
-                //Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * 2, Color.green);
+                Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * 2, Color.green);
 
                 if (!CheckTargetPosition(target))
                 {
@@ -222,18 +228,18 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             target = new Vector3(transform.position.x + (2 * multiplier), transform.position.y, transform.position.z);
 
             RaycastHit hit;
-            if (Physics.Raycast(target, transform.TransformDirection(Vector3.up), out hit, 2, _layerMask, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(target - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, _layerMask, QueryTriggerInteraction.Ignore))
             {
-                //Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
+                Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
 
-                //Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
+                Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
 
                 _allowedToMove = true;
                 yield break;
             }
             else
             {
-                //Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * 2, Color.green);
+                Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * 2, Color.green);
 
                 if (!CheckTargetPosition(target))
                 {
