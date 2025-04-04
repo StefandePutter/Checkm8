@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Checkm8Unity/Assets/own prefabs/fountain big shmup.prefab.meta
-guid: 2e188feec95cdc249836df1a2bcd5780
-========
-guid: a51aa3cde0ea24a4f859ae50a02b62db
->>>>>>>> 16fd069a4b5c3e49e43ea792c57fae42ce15e380:Checkm8Unity/Assets/Prefabs/Enemies/IndicatorEnemyHorse.prefab.meta
+guid: 568428f0969b18642900fd56d5bca54e
 PrefabImporter:
   externalObjects: {}
   userData: 
