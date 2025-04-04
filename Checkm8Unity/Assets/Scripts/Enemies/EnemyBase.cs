@@ -68,12 +68,15 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     protected virtual void FixedUpdate()
     {
-        if (Vector3.Distance(transform.position, _gameManager.CameraTransform.position) < 16 && !_enabled)
-        {       
-            StartCoroutine(EnableEnemy());
-            _enabled = true;
+        // enable enemy when on screen
+        if (!_enabled)
+        {
+            if (Vector3.Distance(transform.position, _gameManager.CameraTransform.position) < 16 && !_enabled)
+            {
+                StartCoroutine(EnableEnemy());
+                _enabled = true;
+            }
         }
-
 
         // calls shoot function that will be made in child files
         if (_timeToFire <= Time.time && _canFire)
