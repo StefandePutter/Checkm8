@@ -49,9 +49,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: b17a0bea0b49c5842a9bdb04ac82b3a2, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b17a0bea0b49c5842a9bdb04ac82b3a2, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: eeb234def8e5f604595c46097f055c65, type: 2}
+    - target: {fileID: -7511558181221131132, guid: b17a0bea0b49c5842a9bdb04ac82b3a2, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 73657d325374d614d95202a15948acb7, type: 2}
     - target: {fileID: 919132149155446097, guid: b17a0bea0b49c5842a9bdb04ac82b3a2, type: 3}
       propertyPath: m_Name
       value: rock 7 lp shmup
