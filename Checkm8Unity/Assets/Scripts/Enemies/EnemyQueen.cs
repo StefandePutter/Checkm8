@@ -17,4 +17,22 @@ public class EnemyQueen : EnemyBase
             rotation += 45;
         }
     }
+
+    protected override void FixedUpdate()
+    {
+        // calls shoot function that will be made in child files
+        if (_timeToFire <= Time.time && _canFire)
+        {
+            Shoot();
+            _timeToFire = Time.time + _shootSpeed;
+        }
+    }
+
+    protected override void Die()
+    {
+        // start cam again
+        Camera.main.GetComponent<CameraMovement>().ResetTarget();
+
+        base.Die();
+    }
 }

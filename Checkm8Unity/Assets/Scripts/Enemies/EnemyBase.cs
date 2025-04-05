@@ -42,13 +42,17 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         _rb.AddForce(Vector3.back * _moveSpeed);
     }
 
-    private IEnumerator EnableEnemy()
+    public IEnumerator EnableEnemy()
     {
         // yield return new WaitForSeconds(waitTime);
-        Instantiate(_highlightPrefab, transform.position + Vector3.up * 0.1f,transform.rotation);
-        yield return new WaitForSeconds(0.3f);
-        _canFire = true;
-        _allowedToMove = true;
+        if (!_enabled)
+        {
+            _enabled = true;
+            Instantiate(_highlightPrefab, transform.position + Vector3.up * 0.1f, transform.rotation);
+            yield return new WaitForSeconds(0.3f);
+            _canFire = true;
+            _allowedToMove = true;
+        }
     }
 
     private void OnBecameInvisible()
@@ -67,7 +71,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             if (Vector3.Distance(transform.position, _gameManager.CameraTransform.position) < 16 && !_enabled)
             {
                 StartCoroutine(EnableEnemy());
-                _enabled = true;
+                //_enabled = true;
             }
         }
 
