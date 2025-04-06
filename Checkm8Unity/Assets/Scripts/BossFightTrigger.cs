@@ -23,7 +23,6 @@ public class BossFightTrigger : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
-                Debug.Log("Triggered");
 
                 _gameManager.ChangeSpawnEnemies(false);
 
@@ -41,8 +40,6 @@ public class BossFightTrigger : MonoBehaviour
         if (_isTriggered && _camera.transform.position == _camPosBossArea)
         {
             StartCoroutine(_boss.EnableEnemy());
-
-            //Destroy(gameObject);
         }
     }
 }

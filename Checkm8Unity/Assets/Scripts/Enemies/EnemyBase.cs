@@ -112,14 +112,17 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         amount *= 2;
 
         float zPos = transform.position.z - amount;
+
+        // check if going up or down
+        int directionZ = 2;
+        if (amount < 0)
+        {
+            directionZ *= -1;
+        }
+
         while (transform.position.z != zPos)
         {
-            int idk = 2;
-            if (amount < 0)
-            {
-                idk*=-1;
-            }
-            Vector3 target = new Vector3(transform.position.x, transform.position.y, transform.position.z - idk);
+            Vector3 target = new Vector3(transform.position.x, transform.position.y, transform.position.z - directionZ);
 
             
 
@@ -162,7 +165,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         _allowedToMove = true;
     }
 
-    protected IEnumerator MoveAmountDiagonal(int xPos)
+    protected IEnumerator MoveAmountDiagonal(int xPos, bool goingUp = false)
     {
         _allowedToMove = false;
 
@@ -174,11 +177,18 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             zPos *= -1;
         }
 
+        // check if going up or down
+        int directionZ = 2;
+        if (goingUp)
+        {
+            directionZ *= -1;
+        }
+
         //Vector3 target = new Vector3(xPos, transform.position.y, transform.position.z - zPos);
         Vector3 target;
         while (transform.position.x != xPos)
         {
-            target = new Vector3(transform.position.x+(2*multiplier), transform.position.y, transform.position.z - 2);
+            target = new Vector3(transform.position.x+(2*multiplier), transform.position.y, transform.position.z - directionZ);
 
             RaycastHit hit; 
             if (Physics.Raycast(target - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, _layerMask, QueryTriggerInteraction.Ignore))

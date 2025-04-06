@@ -23,31 +23,74 @@ public class EnemyQueen : EnemyBase
         if (_allowedToMove)
         {
             int randomInt = Random.Range(0,3);
-            // Debug.Log(randomInt);
-            if (transform.position.z == 304)
-            {
-                randomInt = Random.Range(0,2);
-            }
-            else if (transform.position.z == 294)
-            {
-                randomInt = 2;
-            }
-            randomInt = 1;
+            int min = -(int)(304 - transform.position.z) / 2;
+            int max = (int)(transform.position.z - 294) / 2;
+            int random;
+            int spawnPos;
+
+            randomInt = 0;
             switch (randomInt)
             {
                 case 0:
-                    StartCoroutine(MoveAmountDiagonal((int)transform.position.z - 1));
+                    bool picking = true;
+                    spawnPos = 0;
+                    bool up = false;
+                    int i = 0;
+                    while (picking)
+                    {
+                        random = Random.Range(0, _fieldSpacesX.Length);
+                        spawnPos = _fieldSpacesX[random];
+                        float target = (transform.position.x - spawnPos) /2;
+                        if (Random.Range(1,2) == 0)
+                        {
+                            up = true;
+
+                            if (target < 0)
+                                target *= -1;
+                            
+                            if (target <= -min)
+                            {
+                                Debug.Log("up: " + transform.position.x + ". " + spawnPos + ", " + min + ", " + max + ", " + target);
+                                picking = false;
+                            }
+
+                            if (i == 20)
+                            {
+                                Debug.Log("failed: " + transform.position.x + ". " + spawnPos + ", " + min + ", " + max + ", " + (transform.position.x - spawnPos));
+
+                                picking = false;
+                            }
+                            i++;
+                        }
+                        else
+                        {
+
+
+                            if (target <= max)
+                            {
+                                Debug.Log("down: " + spawnPos + ", " + min + ", " + max + ", " + (transform.position.x - spawnPos));
+                                picking = false;
+                            }
+
+                            if (i == 20)
+                            {
+                                Debug.Log("failed: " + transform.position.x + ". " + spawnPos + ", " + min + ", " + max + ", " + (transform.position.x - spawnPos));
+
+                                picking = false;
+                            }
+                            i++;
+                        }
+                    }
+
+                    StartCoroutine(MoveAmountDiagonal(spawnPos, up));
                     break;
                 case 1:
-                    int random = Random.Range(0, _fieldSpacesX.Length);
-                    int spawnPos = _fieldSpacesX[random];
-
+                    random = Random.Range(0, _fieldSpacesX.Length);
+                    spawnPos = _fieldSpacesX[random];
                     StartCoroutine(MoveHorizontal(spawnPos));
                     break;
                 case 2:
-                    int min = -(int)(304 - transform.position.z) / 2;
-                    int max = (int)(294 - transform.position.z / 2);
-                    StartCoroutine(MoveAmountDown(Random.Range(min, max)));
+                    StartCoroutine(MoveAmountDown(Random.Range(min, max+1)));
                     break;
             }
             // StartCoroutine(MoveAmountDown(1));
