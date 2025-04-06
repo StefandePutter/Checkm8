@@ -18,6 +18,42 @@ public class EnemyQueen : EnemyBase
         }
     }
 
+    private void Update()
+    {
+        if (_allowedToMove)
+        {
+            int randomInt = Random.Range(0,3);
+            // Debug.Log(randomInt);
+            if (transform.position.z == 304)
+            {
+                randomInt = Random.Range(0,2);
+            }
+            else if (transform.position.z == 294)
+            {
+                randomInt = 2;
+            }
+            randomInt = 1;
+            switch (randomInt)
+            {
+                case 0:
+                    StartCoroutine(MoveAmountDiagonal((int)transform.position.z - 1));
+                    break;
+                case 1:
+                    int random = Random.Range(0, _fieldSpacesX.Length);
+                    int spawnPos = _fieldSpacesX[random];
+
+                    StartCoroutine(MoveHorizontal(spawnPos));
+                    break;
+                case 2:
+                    int min = -(int)(304 - transform.position.z) / 2;
+                    int max = (int)(294 - transform.position.z / 2);
+                    StartCoroutine(MoveAmountDown(Random.Range(min, max)));
+                    break;
+            }
+            // StartCoroutine(MoveAmountDown(1));
+        }
+    }
+
     protected override void FixedUpdate()
     {
         // calls shoot function that will be made in child files

@@ -65,11 +65,15 @@ public class HomingProjectiles : MonoBehaviour
 
     GameObject FindClosestByTag(string tag)
     {
+        // find all gameobjects i know its slow but i didnt know another way
         GameObject[] gos;
         gos = GameObject.FindGameObjectsWithTag(tag);
+        
         GameObject closest = null;
         float distance = Mathf.Infinity;
         Vector3 position = transform.position;
+
+        // start with inf distance and check if something is closer everytime and then return that
         foreach (GameObject go in gos)
         {
             Vector3 diff = go.transform.position - position;

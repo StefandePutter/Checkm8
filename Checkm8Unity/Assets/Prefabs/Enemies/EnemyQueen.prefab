@@ -97,14 +97,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ce1ed6e9a3ae244a2bb2d5c5a42c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 1
+  _health: 10
   _hitSound: {fileID: -2371152367994916448}
-  _deathSoundPrefab: {fileID: 0}
+  _deathSoundPrefab: {fileID: 6297115302870609768, guid: 5a1f34084cad3a341abe6d97f5638fee, type: 3}
   _highlightPrefab: {fileID: 8261708515924071979, guid: 1fb65b0434246914aa18114ff6d5d183, type: 3}
-  _moveSpeed: 5
+  _moveSpeed: 4
   _shootSpeed: 0.5
-  _score: 2
-  _waitTime: 0.5
+  _score: 10
+  _waitTime: 1
 --- !u!23 &-8125250757378975539
 MeshRenderer:
   m_ObjectHideFlags: 0

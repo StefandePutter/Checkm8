@@ -3,6 +3,7 @@ using UnityEngine;
 public class BossFightTrigger : MonoBehaviour
 {
     [SerializeField] private Vector3 _camPosBossArea;
+    [SerializeField] private Vector3 _spawnBossPos;
     [SerializeField] private EnemyBase _boss;
     private bool _isTriggered;
     private GameManager _gameManager;
@@ -26,6 +27,8 @@ public class BossFightTrigger : MonoBehaviour
 
                 _gameManager.ChangeSpawnEnemies(false);
 
+                _boss = Instantiate(_boss, _spawnBossPos, _gameManager.transform.rotation);
+
                 _camera.SetTarget(_camPosBossArea);
 
                 _isTriggered = true;
@@ -37,10 +40,9 @@ public class BossFightTrigger : MonoBehaviour
     {
         if (_isTriggered && _camera.transform.position == _camPosBossArea)
         {
-            Debug.Log("Activate");
             StartCoroutine(_boss.EnableEnemy());
 
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }

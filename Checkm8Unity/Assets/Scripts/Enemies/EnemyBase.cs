@@ -114,7 +114,12 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         float zPos = transform.position.z - amount;
         while (transform.position.z != zPos)
         {
-            Vector3 target = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
+            int idk = 2;
+            if (amount < 0)
+            {
+                idk*=-1;
+            }
+            Vector3 target = new Vector3(transform.position.x, transform.position.y, transform.position.z - idk);
 
             
 
@@ -151,6 +156,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             yield return null;
         }
 
+        // punishment time
         yield return new WaitForSeconds(_waitTime);
 
         _allowedToMove = true;
@@ -206,6 +212,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             yield return null;
         }
 
+        // punishment time
         yield return new WaitForSeconds(_waitTime);
 
         _allowedToMove = true;
@@ -260,6 +267,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             yield return null;
         }
 
+        // punishment time
         yield return new WaitForSeconds(_waitTime);
 
         _allowedToMove = true;

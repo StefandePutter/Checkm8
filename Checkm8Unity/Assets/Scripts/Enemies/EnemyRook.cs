@@ -21,9 +21,9 @@ public class EnemyRook : EnemyBase
 
         if (_allowedToMove)
         {
-            int[] spawnPosses = _fieldSpacesX;
-            int random = Random.Range(0, spawnPosses.Length);
-            int spawnPos = spawnPosses[random];
+            //int[] spawnPosses = _fieldSpacesX;
+            int random = Random.Range(0, _fieldSpacesX.Length);
+            int spawnPos = _fieldSpacesX[random];
 
             StartCoroutine(MoveHorizontal(spawnPos));
             _amountMoved++;
