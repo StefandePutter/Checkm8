@@ -85,7 +85,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         }
     }
 
-    public void TakeDamage(float amount = 1)
+    public virtual void TakeDamage(float amount = 1)
     {
         _health -= amount;
         // Debug.Log(name + " took " + amount + " damage" + _health + " health");

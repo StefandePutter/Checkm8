@@ -22,7 +22,10 @@ public class GameManager : MonoBehaviour
 
     private float _spawnTime;
     private float _timePlayer;
-    private float _timeEnemy;
+    [HideInInspector] public float TimeEnemy
+    {
+        get; private set;
+    }
     private bool _bossBattle;
     private Camera _camera;
     private bool _spawningEnemies;
@@ -54,7 +57,7 @@ public class GameManager : MonoBehaviour
         InputManager = GetComponent<PlayerInputManager>();
 
         _timePlayer = 300f;
-        _timeEnemy = 300f;
+        TimeEnemy = 300f;
     }
 
     void Update()
@@ -97,12 +100,14 @@ public class GameManager : MonoBehaviour
 
         // display time
         _timePlayerUi.text = Mathf.Floor(_timePlayer / 60).ToString("00") + ":" + (_timePlayer%60).ToString("00");
-        _timeEnemyUi.text = Mathf.Floor(_timeEnemy / 60).ToString("00") + ":" + (_timeEnemy%60).ToString("00");
+
+        _timeEnemyUi.text = Mathf.Floor(TimeEnemy / 60).ToString("00") + ":" + (TimeEnemy % 60).ToString("00");
 
         _timePlayer -= Time.deltaTime;
-        if (_bossBattle)
+
+        if (TimeEnemy <= 0)
         {
-            _timeEnemy -= Time.deltaTime;
+            GameOver();
         }
 
         if (_timePlayer <= 0)
@@ -128,7 +133,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void GameOver()
+    public void ToggleBossBattle()
+    {
+        _bossBattle = !_bossBattle;
+    }
+
+    public void GameOver()
     {
         PlayerBase.Reset();
         
@@ -166,6 +176,11 @@ public class GameManager : MonoBehaviour
     public void AddPlayerTime(float time)
     {
         _timePlayer += time;
+    }
+
+    public void RemoveEnemyTime(float time)
+    {
+        TimeEnemy -= time;
     }
 
     public void ChangeSpawnEnemies(bool value)

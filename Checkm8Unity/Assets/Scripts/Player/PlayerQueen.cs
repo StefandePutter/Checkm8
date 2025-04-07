@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerQueen : PlayerBase
 {
-    [SerializeField] LayerMask _nukeLayerMask;
+    // [SerializeField] LayerMask _nukeLayerMask;
 
     protected override void Shoot()
     {
@@ -33,7 +33,7 @@ public class PlayerQueen : PlayerBase
 
         Vector3 startPos = transform.position + Vector3.up * 0.2f;
 
-        _nukeLayerMask += LayerMask.GetMask("ProjectilePlayer", "ProjectileEnemy");
+        LayerMask _nukeLayerMask = LayerMask.GetMask("Enemy", "ProjectileEnemy", "EnemyHorse");
 
         int hits = Physics.OverlapSphereNonAlloc(startPos, 25, Hits, _nukeLayerMask);
 
