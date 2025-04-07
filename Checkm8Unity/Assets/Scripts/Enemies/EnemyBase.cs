@@ -6,12 +6,12 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     private int _id;
     private static int s_id=0;
     private bool _enabled;
-    [SerializeField] private float _health = 1;
     [SerializeField] private AudioSource _hitSound;
     [SerializeField] private GameObject _deathSoundPrefab;
 
     protected GameManager _gameManager;
     [SerializeField] private GameObject _highlightPrefab;
+    [SerializeField] protected float _health = 1;
     [SerializeField] protected float _moveSpeed;
     [SerializeField] protected float _shootSpeed;
     [SerializeField] protected float _score;

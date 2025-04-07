@@ -97,6 +97,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 250
   _shootSpeed: 0.5
+  _nukeLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1001 &6509898147702576782
 PrefabInstance:
   m_ObjectHideFlags: 0
