@@ -13,7 +13,7 @@ public class TransparentOnPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("Boss"))
         {
             GetComponent<MeshRenderer>().material = _transparantMaterial;
         }
@@ -21,7 +21,7 @@ public class TransparentOnPlayer : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("Boss"))
         {
             GetComponent<MeshRenderer>().material = _material;
         }

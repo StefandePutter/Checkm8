@@ -42,20 +42,17 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         _rb.AddForce(Vector3.back * _moveSpeed);
     }
 
-    private void OnBecameVisible()
-    {
-        // only starts firing when on screen
-        // _canFire = true;
-        // StartCoroutine(EnableAfterSeconds(2));
-    }
-
-    private IEnumerator EnableEnemy()
+    public IEnumerator EnableEnemy()
     {
         // yield return new WaitForSeconds(waitTime);
-        Instantiate(_highlightPrefab, transform.position,transform.rotation);
-        yield return new WaitForSeconds(0.3f);
-        _canFire = true;
-        _allowedToMove = true;
+        if (!_enabled)
+        {
+            _enabled = true;
+            Instantiate(_highlightPrefab, transform.position + Vector3.up * 0.1f, transform.rotation);
+            yield return new WaitForSeconds(0.3f);
+            _canFire = true;
+            _allowedToMove = true;
+        }
     }
 
     private void OnBecameInvisible()
@@ -74,7 +71,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             if (Vector3.Distance(transform.position, _gameManager.CameraTransform.position) < 16 && !_enabled)
             {
                 StartCoroutine(EnableEnemy());
-                _enabled = true;
+                //_enabled = true;
             }
         }
 
@@ -115,25 +112,33 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         amount *= 2;
 
         float zPos = transform.position.z - amount;
+
+        // check if going up or down
+        int directionZ = 2;
+        if (amount < 0)
+        {
+            directionZ *= -1;
+        }
+
         while (transform.position.z != zPos)
         {
-            Vector3 target = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
+            Vector3 target = new Vector3(transform.position.x, transform.position.y, transform.position.z - directionZ);
 
             
 
             RaycastHit hit;
             if (Physics.Raycast(target - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, _layerMask, QueryTriggerInteraction.Ignore))
             {
-                Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
+                // Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
 
-                Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
+                // Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
                 
                 _allowedToMove = true;
                 yield break;
             }
             else
             {
-                Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * 2, Color.green);
+                // Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * 2, Color.green);
 
                 if (!CheckTargetPosition(target))
                 {
@@ -154,12 +159,13 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             yield return null;
         }
 
+        // punishment time
         yield return new WaitForSeconds(_waitTime);
 
         _allowedToMove = true;
     }
 
-    protected IEnumerator MoveAmountDiagonal(int xPos)
+    protected IEnumerator MoveAmountDiagonal(int xPos, bool goingUp = false)
     {
         _allowedToMove = false;
 
@@ -171,24 +177,31 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             zPos *= -1;
         }
 
+        // check if going up or down
+        int directionZ = 2;
+        if (goingUp)
+        {
+            directionZ *= -1;
+        }
+
         //Vector3 target = new Vector3(xPos, transform.position.y, transform.position.z - zPos);
         Vector3 target;
         while (transform.position.x != xPos)
         {
-            target = new Vector3(transform.position.x+(2*multiplier), transform.position.y, transform.position.z - 2);
+            target = new Vector3(transform.position.x+(2*multiplier), transform.position.y, transform.position.z - directionZ);
 
             RaycastHit hit; 
             if (Physics.Raycast(target - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, _layerMask, QueryTriggerInteraction.Ignore))
             {
-                Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
+                // Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
 
-                Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
+                // Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
 
                 _allowedToMove = true;
                 yield break;
             } else
             {
-                Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * 2, Color.green);
+                // Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * 2, Color.green);
 
                 if (!CheckTargetPosition(target))
                 {
@@ -209,6 +222,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             yield return null;
         }
 
+        // punishment time
         yield return new WaitForSeconds(_waitTime);
 
         _allowedToMove = true;
@@ -233,16 +247,16 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             RaycastHit hit;
             if (Physics.Raycast(target - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, _layerMask, QueryTriggerInteraction.Ignore))
             {
-                Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
+                // Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
 
-                Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
+                //Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
 
                 _allowedToMove = true;
                 yield break;
             }
             else
             {
-                Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * 2, Color.green);
+                // Debug.DrawRay(target, transform.TransformDirection(Vector3.up) * 2, Color.green);
 
                 if (!CheckTargetPosition(target))
                 {
@@ -263,6 +277,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             yield return null;
         }
 
+        // punishment time
         yield return new WaitForSeconds(_waitTime);
 
         _allowedToMove = true;
@@ -278,8 +293,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         }
         else
         {
-            // piece is already moving to this square
-            // Debug.Log("tried going to the same square");
+            // another piece is already moving to this square
             _allowedToMove = true;
             return false;
         }

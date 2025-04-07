@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager s_Instance;
-    static public GameObject s_Player;
+    public static GameObject s_Player;
 
     [SerializeField] private GameObject _pawnPrefab;
     [SerializeField] private GameObject _horsePrefab;
@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour
     {
         if (_spawnTime <= 0 && _spawningEnemies)
         {
-
             //for (int i = 0; i < 1; i++)
             //{
                 
@@ -92,24 +91,6 @@ public class GameManager : MonoBehaviour
                     spawned = true;
                 }
             }
-
-            //for (int i = 0; i < 2; i++)
-            //{
-            //    // spawnpoint dependent on cameraPos we floor it to make them spawn exactly on tiles
-            //    Vector3 spawnPos = new Vector3();
-            //    spawnPos.z = Mathf.Floor(_camera.transform.position.z) + 23;
-            //    if (spawnPos.z % 2 != 0)
-            //    {
-            //        spawnPos.z++;
-            //    }
-            //
-            //    // get random spawnpoint x position of possible spawnpoints
-            //    spawnPos.x = SpawnPosesX[Random.Range(0, SpawnPosesX.Length)];
-            //
-            //    // spawn random enemy
-            //    int enemyIndex = Random.Range(0, _enemyPrefabs.Count - 1);
-            //    // GameObject enemy = Instantiate(_enemyPrefabs[enemyIndex], spawnPos, transform.rotation);
-            //}
 
             _spawnTime = _spawnTimer;
         }
@@ -187,6 +168,10 @@ public class GameManager : MonoBehaviour
         _timePlayer += time;
     }
 
+    public void ChangeSpawnEnemies(bool value)
+    {
+        _spawningEnemies = value;
+    }
     private void ChangePlayer(GameObject prefab)
     {
         // get transform values can't just copy transform it will be a pointer
