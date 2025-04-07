@@ -33,9 +33,9 @@ public class PlayerQueen : PlayerBase
 
         Vector3 startPos = transform.position + Vector3.up * 0.2f;
 
-        int hits = Physics.OverlapSphereNonAlloc(startPos, 25, Hits, _nukeLayerMask);
-
         _nukeLayerMask += LayerMask.GetMask("ProjectilePlayer", "ProjectileEnemy");
+
+        int hits = Physics.OverlapSphereNonAlloc(startPos, 25, Hits, _nukeLayerMask);
 
         for (int i = 0; i < hits; i++)
         {
