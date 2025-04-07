@@ -3,6 +3,8 @@ using UnityEngine;
 
 public abstract class EnemyBase : MonoBehaviour, IDamageable
 {
+    public bool ManuallyActivate;
+
     private int _id;
     private static int s_id=0;
     private bool _enabled;
@@ -48,7 +50,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         if (!_enabled)
         {
             _enabled = true;
-            Instantiate(_highlightPrefab, transform.position + Vector3.up * 0.1f, transform.rotation);
+            Instantiate(_highlightPrefab, transform.position + Vector3.up * 0.01f, transform.rotation);
             yield return new WaitForSeconds(0.3f);
             _canFire = true;
             _allowedToMove = true;
@@ -66,7 +68,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     protected virtual void FixedUpdate()
     {
         // enable enemy when on screen
-        if (!_enabled)
+        if (!_enabled && !ManuallyActivate)
         {
             if (Vector3.Distance(transform.position, _gameManager.CameraTransform.position) < 16 && !_enabled)
             {

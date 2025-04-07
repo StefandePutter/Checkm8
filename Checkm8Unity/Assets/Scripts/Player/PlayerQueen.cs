@@ -39,12 +39,6 @@ public class PlayerQueen : PlayerBase
 
         for (int i = 0; i < hits; i++)
         {
-            //if (Hits[i].TryGetComponent)
-            float distance = Vector3.Distance(startPos, Hits[i].transform.position);
-
-            _nukeLayerMask += LayerMask.GetMask("Environment");
-
-            Debug.Log($"Player Would hit {Hits[i].name} for {1}");
             if (Hits[i].CompareTag("Bullet"))
             {
                 Hits[i].attachedRigidbody.gameObject.SetActive(false);
