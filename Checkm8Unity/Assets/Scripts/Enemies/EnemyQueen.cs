@@ -41,16 +41,15 @@ public class EnemyQueen : EnemyBase
                         random = Random.Range(0, _fieldSpacesX.Length);
                         spawnPos = _fieldSpacesX[random];
                         float target = (transform.position.x - spawnPos) /2;
-                        if (Random.Range(1,2) == 0)
+                        if (target < 0)
+                            target *= -1;
+                        if (Random.Range(0,1) == 0)
                         {
                             up = true;
-
-                            if (target < 0)
-                                target *= -1;
                             
                             if (target <= -min)
                             {
-                                Debug.Log("up: " + transform.position.x + ". " + spawnPos + ", " + min + ", " + max + ", " + target);
+                                Debug.Log("up: " + transform.position.x + ". " + spawnPos + ", " + -min + ", " + max + ", " + target);
                                 picking = false;
                             }
 
@@ -64,8 +63,6 @@ public class EnemyQueen : EnemyBase
                         }
                         else
                         {
-
-
                             if (target <= max)
                             {
                                 Debug.Log("down: " + spawnPos + ", " + min + ", " + max + ", " + (transform.position.x - spawnPos));
