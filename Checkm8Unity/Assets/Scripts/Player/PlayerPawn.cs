@@ -2,12 +2,6 @@ using UnityEngine;
 
 public class PlayerPawn : PlayerBase
 {
-    protected override void Start()
-    {
-        base.Start();
-        _gameManager.UiCharIcon.fillAmount = 0;
-    }
-
     protected override void Shoot()
     {
         GameObject bullet = _gameManager.PlayerBulletsPool.GetPooledObject();

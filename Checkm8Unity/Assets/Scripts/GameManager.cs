@@ -145,12 +145,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ResetScene()
-    {
-        Time.timeScale = 1f;
-        GameDone = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
 
     public void ToggleBossBattle(float time = 0f)
     {
@@ -159,6 +153,12 @@ public class GameManager : MonoBehaviour
         {
             TimeEnemy = time;
         }
+    }
+    public void ResetScene()
+    {
+        Time.timeScale = 1;
+        GameDone = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void GameOver()

@@ -39,6 +39,8 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         _raycastLayerMask = LayerMask.GetMask("Enemy", "EnemyHorse", "Environment");
 
         _inputManager = _gameManager.InputManager;
+
+        _gameManager.UiCharIcon.fillAmount = 0;
     }
 
     protected virtual void FixedUpdate()

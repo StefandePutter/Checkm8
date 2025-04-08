@@ -4,6 +4,31 @@ using UnityEngine;
 public class PlayerQueen : PlayerBase
 {
     // [SerializeField] LayerMask _nukeLayerMask;
+    [SerializeField] private float _switchTime = 10f;
+    private float _maxSwitchTime;
+    private bool _usingAbility;
+    private bool _usedAbility;
+
+    protected override void Start()
+    {
+        base.Start();
+        _maxSwitchTime = _switchTime;
+    }
+
+    private void Update()
+    {
+        // if (_usedAbility && _homingBullets == 0)
+        if (!_usingAbility && _switchTime <= 0)
+        {
+            s_currentQueenCooldown = _queenCooldown;
+            Pawn();
+        }
+
+        _switchTime = Mathf.Max(0, _switchTime);
+        _gameManager.UiCharIcon.fillAmount = 1 - _switchTime / _maxSwitchTime;
+
+        _switchTime -= Time.deltaTime;
+    }
 
     protected override void Shoot()
     {
@@ -35,7 +60,12 @@ public class PlayerQueen : PlayerBase
 
     public override void Queen()
     {
-        Nuke();
+        if (!_usedAbility)
+        {
+            _usedAbility = true;
+
+            Nuke();
+        }
     }
 
     private void Nuke()
@@ -59,10 +89,6 @@ public class PlayerQueen : PlayerBase
                 component.TakeDamage(4);
             }
         }
-
-        s_currentQueenCooldown = _queenCooldown;
-
-        Pawn();
     }
 
     public override void Horse()

@@ -6,6 +6,31 @@ public class PlayerRook : PlayerBase
     private bool _isShootingLaser;
 
     [SerializeField] private GameObject _laserPrefab;
+    [SerializeField] private float _switchTime = 10f;
+    private float _maxSwitchTime;
+    private bool _usingAbility;
+    private bool _usedAbility;
+
+    protected override void Start()
+    {
+        base.Start();
+        _maxSwitchTime = _switchTime;
+    }
+
+    private void Update()
+    {
+        // if (_usedAbility && _homingBullets == 0)
+        if (!_isShootingLaser && _switchTime <= 0)
+        {
+            s_currentRookCooldown = _rookCooldown;
+            Pawn();
+        }
+
+        _switchTime = Mathf.Max(0, _switchTime);
+        _gameManager.UiCharIcon.fillAmount = 1 - _switchTime / _maxSwitchTime;
+
+        _switchTime -= Time.deltaTime;
+    }
 
     protected override void Shoot()
     {
@@ -27,9 +52,14 @@ public class PlayerRook : PlayerBase
 
     public override void Rook()
     {
-        _isShootingLaser = true;
+        if (!_usedAbility)
+        {
+            _usedAbility = true;
 
-        StartCoroutine(Laser());
+            _isShootingLaser = true;
+
+            StartCoroutine(Laser());
+        }
     }
 
     public override void Queen()
@@ -51,13 +81,12 @@ public class PlayerRook : PlayerBase
         laser.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.2f, transform.rotation);
 
         yield return new WaitForSeconds(1f);
+        Destroy(laser);
+
+        _isShootingLaser = false;
         _inputManager.LockedMovement = false;
         _inputManager.LockedAbilities = false;
         _allowedMovement = true;
-
-        s_currentRookCooldown = _rookCooldown;
-
-        Pawn();
     }
 
     public override void Horse()

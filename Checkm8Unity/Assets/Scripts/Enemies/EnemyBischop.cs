@@ -45,7 +45,7 @@ public class EnemyBischop : EnemyBase
             }
             else
             {
-                GameObject bullet = Instantiate(_homingPrefab, transform.position, transform.rotation);
+                GameObject bullet = Instantiate(_homingPrefab, transform.position + Vector3.up * 0.2f, transform.rotation);
                 bullet.transform.Rotate(Vector3.up * rotation);
                 _homingBullets--;
             }

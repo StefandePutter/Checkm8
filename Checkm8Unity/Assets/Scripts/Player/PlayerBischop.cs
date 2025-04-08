@@ -16,8 +16,8 @@ public class PlayerBischop : PlayerBase
 
     private void Update()
     {
-        // if (_homingBullets == 0 && _switchTime <= 0)
-        if (_usedAbility && _homingBullets == 0)
+        // if (_usedAbility && _homingBullets == 0)
+        if (_homingBullets == 0 && _switchTime <= 0)
         {
             s_currentBischopCooldown = _bischopCooldown;
             Pawn();
@@ -48,7 +48,7 @@ public class PlayerBischop : PlayerBase
             }
             else
             {
-                GameObject bullet = Instantiate(_homingPrefab, transform.position, transform.rotation);
+                GameObject bullet = Instantiate(_homingPrefab, transform.position + Vector3.up * 0.2f, transform.rotation);
                 bullet.transform.Rotate(Vector3.up * rotation);
                 bullet.GetComponent<HomingProjectiles>().SetTarget(FindClosestByTag("Enemy"));
                 _homingBullets--;
