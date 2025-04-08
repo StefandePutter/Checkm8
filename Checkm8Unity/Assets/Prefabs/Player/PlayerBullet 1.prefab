@@ -292,6 +292,10 @@ PrefabInstance:
       value: Bullet
       objectReference: {fileID: 0}
     - target: {fileID: 4900672225292733952, guid: 896bd9601fe3e434883a9709b8de60f2, type: 3}
+      propertyPath: LightsModule.light
+      value: 
+      objectReference: {fileID: 2761774046624104441, guid: 7a349099acbf5e14894d85f3c73110d6, type: 3}
+    - target: {fileID: 4900672225292733952, guid: 896bd9601fe3e434883a9709b8de60f2, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0.78039217
       objectReference: {fileID: 0}
