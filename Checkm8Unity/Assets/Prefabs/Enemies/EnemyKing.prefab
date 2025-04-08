@@ -133,6 +133,7 @@ MonoBehaviour:
   - {fileID: 862197230900697669, guid: 7cb3619ca4beebe41ad8c61995435cd9, type: 3}
   - {fileID: -6763067762090344854, guid: f1e71867853120c45aa0a3623be43b37, type: 3}
   - {fileID: 3007155994357818796, guid: 78f97ca2e9427e146aa11f2461333176, type: 3}
+  - {fileID: 2242948357101588456, guid: 587d09802c7b02041a8fc160e3f6ce7a, type: 3}
   _raiseSpeed: 3
 --- !u!23 &-8125250757378975539
 MeshRenderer:

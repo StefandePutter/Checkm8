@@ -53,13 +53,32 @@ public class PlayerHorse : PlayerBase
 
     public IEnumerator Jump()
     {
+        Vector3 jumpPos = _ghost.transform.position;
+
+        LayerMask layerMask = LayerMask.GetMask("Environment");
+        bool notAllowedToJump = true;
+        while (notAllowedToJump)
+        {
+            jumpPos = _ghost.transform.position;
+
+            RaycastHit hit;
+            if (!Physics.Raycast(jumpPos - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, layerMask, QueryTriggerInteraction.Ignore))
+            {
+                Debug.Log("yes");
+                notAllowedToJump = false;
+            }
+
+
+            yield return null;
+        }
+
         // disable collider and movement/abilities
         _playerCollider.enabled = false;
         _inputManager.LockedMovement = true;
         _inputManager.LockedAbilities = true;
+        _allowedMovement = false;
 
         // get pos to jump and disable ui
-        Vector3 jumpPos = _ghost.transform.position;
         Destroy(_ghost);
         Destroy(_UiArrows);
 
@@ -102,6 +121,9 @@ public class PlayerHorse : PlayerBase
         _inputManager.LockedMovement = false;
         _inputManager.LockedAbilities = false;
         _playerCollider.enabled = true;
+
+        s_moveTarget = transform.position;
+        _allowedMovement = false;
 
         // change back into a pawn
         s_currentHorseCooldown = _horseCooldown;

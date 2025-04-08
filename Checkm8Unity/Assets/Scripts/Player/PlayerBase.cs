@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(Rigidbody))]
 public abstract class PlayerBase : MonoBehaviour, IDamageable
@@ -7,6 +7,8 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
     protected GameManager _gameManager;
     [SerializeField] protected float _moveSpeed;
     [SerializeField] protected float _shootSpeed;
+
+    static protected Vector3 s_moveTarget = Vector3.zero;
 
     protected float _horseCooldown = 5f;
     protected float _bischopCooldown = 7.5f;
@@ -26,12 +28,17 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
     private float _damageDelay = 0.5f;
     private float _damageCooldown;
     private Vector3 _targetPos;
+    protected bool _allowedMovement = true;
+    private LayerMask _raycastLayerMask;
 
     protected virtual void Start()
     {
         _playerCollider = GetComponent<Collider>();
         _gameManager = GameManager.s_Instance;
         _rb = GetComponent<Rigidbody>();
+        
+        _raycastLayerMask = LayerMask.GetMask("Enemy", "EnemyHorse", "Environment");
+
         _inputManager = _gameManager.InputManager;
     }
 
@@ -48,8 +55,24 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         {
             _damageCooldown -= Time.deltaTime;
         }
+
+        if (_inputManager.MoveValue != Vector2.zero && s_moveTarget == transform.position)
+        {
+            Vector3 target = s_moveTarget + new Vector3(_inputManager.MoveValue.x, 0, _inputManager.MoveValue.y) * 2;
+
+            RaycastHit hit;
+            if (!Physics.Raycast(target - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, _raycastLayerMask, QueryTriggerInteraction.Ignore))
+            {
+                s_moveTarget = target;
+
+            }
+        }
         
-        _rb.AddForce(new Vector3(_inputManager.MoveValue.x * _moveSpeed, 0, _inputManager.MoveValue.y * _moveSpeed));
+        if (_allowedMovement)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, s_moveTarget, Time.deltaTime * _moveSpeed);
+        }
+
 
         _gameManager.UiHorse.fillAmount = s_currentHorseCooldown / _horseCooldown;
         _gameManager.UiBischop.fillAmount = s_currentBischopCooldown / _bischopCooldown;
@@ -113,6 +136,8 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
 
     public static void Reset()
     {
+        s_moveTarget = Vector3.zero;
+
         s_currentHorseCooldown = 0;
         s_currentBischopCooldown = 0;
         s_currentRookCooldown = 0;

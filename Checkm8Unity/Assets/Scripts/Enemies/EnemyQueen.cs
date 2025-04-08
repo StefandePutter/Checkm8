@@ -5,13 +5,25 @@ public class EnemyQueen : EnemyBase
 {
     [SerializeField] LayerMask _nukeLayerMask;
     [SerializeField] GameObject _nukeIndicatorPrefab;
-    private float _maxHealth;
+    [SerializeField] private float _maxHealth = 300f;
+    [HideInInspector] public bool IsBoss = true;
+    private float _startPosZ;
 
     protected override void Start()
     {
         base.Start();
 
-        _maxHealth = _health;
+        if (IsBoss)
+        {
+            _gameManager.ToggleBossBattle(_maxHealth);
+        }
+        else
+        {
+            _maxHealth = _health;
+        }
+
+
+        _startPosZ = transform.position.z;
     }
 
     protected override void Shoot()
@@ -30,20 +42,52 @@ public class EnemyQueen : EnemyBase
         }
     }
 
+    public override void TakeDamage(float amount = 1)
+    {
+        if (IsBoss)
+        {
+            amount *= 10;
+
+            _gameManager.RemoveEnemyTime(amount);
+
+            if (_gameManager.TimeEnemy <= 0)
+            {
+                _gameManager.ToggleBossBattle();
+                Die();
+            }
+        }
+        else
+        {
+            base.TakeDamage(amount);
+        }
+    }
+
     private void Update()
     {
-        if (_health <= _maxHealth / 3 && !_usedAbility && _allowedToMove)
+        if (_gameManager.TimeEnemy <= 0)
+        {
+            _gameManager.ToggleBossBattle();
+            Die();
+        }
+
+        // do ability when close to death
+        float health = (IsBoss) ? _gameManager.TimeEnemy : _health;
+        if (health <= _maxHealth / 3 && !_usedAbility && _allowedToMove)
         {
             Debug.Log("nuke");
             StartCoroutine(StartNuke());
             _usedAbility = true;
         }
 
+        // when allowed to move
         if (_allowedToMove)
         {
+            // set min and max board pos it may go
+            int min = -(int)((_startPosZ + 4) - transform.position.z) / 2;
+            int max = (int)(transform.position.z - (_startPosZ - 6)) / 2;
+            
+            // choose random move option
             int randomInt = Random.Range(0,3);
-            int min = -(int)(304 - transform.position.z) / 2;
-            int max = (int)(transform.position.z - 294) / 2;
             int random;
             int spawnPos;
 
@@ -58,9 +102,12 @@ public class EnemyQueen : EnemyBase
                     {
                         random = Random.Range(0, _fieldSpacesX.Length);
                         spawnPos = _fieldSpacesX[random];
+
                         float target = (transform.position.x - spawnPos) /2;
                         if (target < 0)
                             target *= -1;
+
+                        // randomly pick up or down
                         if (Random.Range(0,2) == 0)
                         {
                             up = true;
@@ -119,7 +166,6 @@ public class EnemyQueen : EnemyBase
         _canFire = false;
         GameObject indicator = Instantiate(_nukeIndicatorPrefab, transform.position+Vector3.up*0.2f, transform.rotation);
         yield return new WaitForSeconds(1f);
-        // indicator.SetActive(false);
         Destroy(indicator);
         Nuke();
         _allowedToMove = true;
@@ -143,20 +189,13 @@ public class EnemyQueen : EnemyBase
         }
     }
 
-    protected override void FixedUpdate()
-    {
-        // calls shoot function that will be made in child files
-        if (_timeToFire <= Time.time && _canFire)
-        {
-            Shoot();
-            _timeToFire = Time.time + _shootSpeed;
-        }
-    }
-
     protected override void Die()
     {
         // start cam again
-        Camera.main.GetComponent<CameraMovement>().ResetTarget();
+        if (IsBoss)
+        {
+            Camera.main.GetComponent<CameraMovement>().ResetTarget();
+        }
 
         base.Die();
     }

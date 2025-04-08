@@ -58,7 +58,7 @@ MonoBehaviour:
   - {fileID: 7917067562791591246, guid: 7cb3619ca4beebe41ad8c61995435cd9, type: 3}
   - {fileID: 7917067562791591246, guid: 78f97ca2e9427e146aa11f2461333176, type: 3}
   - {fileID: 7917067562791591246, guid: 587d09802c7b02041a8fc160e3f6ce7a, type: 3}
-  _spawnTimer: 1.5
+  _spawnTimer: 900
   _timePlayerUi: {fileID: 0}
   _timeEnemyUi: {fileID: 0}
   _uiHealth:
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pooledObjects: []
-  objectToPool: {fileID: 7286309895646677864, guid: 6ee51b53db22ca64fa4f39e82ed2b6f4, type: 3}
+  objectToPool: {fileID: 7286309895646677864, guid: 4c58ffd754799a345a30e96a934a386c, type: 3}
   amountToPool: 10
 --- !u!114 &570044510314386450
 MonoBehaviour:
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pooledObjects: []
-  objectToPool: {fileID: 7286309895646677864, guid: ecc626c4b7bf75a43a4ee56b307e6517, type: 3}
+  objectToPool: {fileID: 7286309895646677864, guid: fcc8f56e60e0eb14496114544a308aca, type: 3}
   amountToPool: 40
 --- !u!114 &4508792025588026920
 MonoBehaviour:

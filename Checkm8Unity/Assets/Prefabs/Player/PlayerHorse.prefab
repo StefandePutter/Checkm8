@@ -74,11 +74,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f78213c4864ed9b4bb94c1b13a8ad208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 250
+  _moveSpeed: 10
   _shootSpeed: 0.8
   _ghostPrefab: {fileID: 1862318369445783747, guid: 96bdb6253c692b441a21f32ebef2b0db, type: 3}
   _arrowsPrefab: {fileID: 6665984543835060109, guid: fe179d8274854b846ab405780177e7b6, type: 3}
-  _shockwavePrefab: {fileID: 7857174112909424963, guid: afebea283984a8d4bb09386c416b4684, type: 3}
+  _shockwavePrefab: {fileID: 7857174112909424963, guid: 266b8c925976ae242bdc503840342461, type: 3}
   _jumpSpeed: 10
 --- !u!65 &4986715139365849289
 BoxCollider:

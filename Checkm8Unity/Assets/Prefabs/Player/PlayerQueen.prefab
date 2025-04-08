@@ -95,11 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b2d3465959db64ea750384747637e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 250
+  _moveSpeed: 10
   _shootSpeed: 0.5
-  _nukeLayerMask:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!1001 &6509898147702576782
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -52,8 +53,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _camera = Camera.main;
-        s_Player = Instantiate(_pawnPrefab);
-        s_Player.transform.SetParent(_camera.transform);
+        //s_Player = Instantiate(_pawnPrefab);
+
+        StartCoroutine(SpawnPlayer());
+
+        //s_Player.transform.SetParent(_camera.transform);
         InputManager = GetComponent<PlayerInputManager>();
 
         _timePlayer = 300f;
@@ -64,10 +68,6 @@ public class GameManager : MonoBehaviour
     {
         if (_spawnTime <= 0 && _spawningEnemies)
         {
-            //for (int i = 0; i < 1; i++)
-            //{
-                
-            //}
             bool spawned = false;
             while (!spawned)
             {
@@ -82,11 +82,7 @@ public class GameManager : MonoBehaviour
                 spawnPos.x = SpawnPosesX[Random.Range(0, SpawnPosesX.Length)];
 
                 RaycastHit hit;
-                if (Physics.Raycast(spawnPos - Vector3.up, Vector3.up, out hit, 3f, LayerMask.GetMask("Enemy", "Environment"), QueryTriggerInteraction.Ignore))
-                {
-
-                }
-                else
+                if (!Physics.Raycast(spawnPos - Vector3.up, Vector3.up, out hit, 3f, LayerMask.GetMask("Enemy", "Environment"), QueryTriggerInteraction.Ignore))
                 {
                     // spawn random enemy
                     int enemyIndex = Random.Range(0, _enemyPrefabs.Count - 1);
@@ -101,13 +97,16 @@ public class GameManager : MonoBehaviour
         // display time
         _timePlayerUi.text = Mathf.Floor(_timePlayer / 60).ToString("00") + ":" + (_timePlayer%60).ToString("00");
 
+        TimeEnemy = Mathf.Max(0, TimeEnemy);
         _timeEnemyUi.text = Mathf.Floor(TimeEnemy / 60).ToString("00") + ":" + (TimeEnemy % 60).ToString("00");
 
-        _timePlayer -= Time.deltaTime;
-
-        if (TimeEnemy <= 0)
+        if (_bossBattle)
         {
-            GameOver();
+            TimeEnemy -= Time.deltaTime;
+        }
+        else
+        {
+            _timePlayer -= Time.deltaTime;
         }
 
         if (_timePlayer <= 0)
@@ -133,9 +132,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ToggleBossBattle()
+    public void ToggleBossBattle(float time = 0f)
     {
         _bossBattle = !_bossBattle;
+        if (_bossBattle)
+        {
+            TimeEnemy = time;
+        }
     }
 
     public void GameOver()
@@ -148,7 +151,7 @@ public class GameManager : MonoBehaviour
     public void BecomePawn()
     {
         ChangePlayer(_pawnPrefab);
-        s_Player.transform.SetParent(_camera.transform);
+        //s_Player.transform.SetParent(_camera.transform);
     }
 
     public void BecomeHorse()
@@ -158,19 +161,19 @@ public class GameManager : MonoBehaviour
     public void BecomeBischop()
     {
         ChangePlayer(_bischopPrefab);
-        s_Player.transform.SetParent(_camera.transform);
+        //s_Player.transform.SetParent(_camera.transform);
     }
 
     public void BecomeRook()
     {
         ChangePlayer(_rookPrefab);
-        s_Player.transform.SetParent(_camera.transform);
+        //s_Player.transform.SetParent(_camera.transform);
     }
 
     public void BecomeQueen()
     {
         ChangePlayer(_queenPrefab);
-        s_Player.transform.SetParent(_camera.transform);
+        //s_Player.transform.SetParent(_camera.transform);
     }
 
     public void AddPlayerTime(float time)
@@ -187,6 +190,31 @@ public class GameManager : MonoBehaviour
     {
         _spawningEnemies = value;
     }
+
+    private IEnumerator SpawnPlayer()
+    {
+        Vector3 spawnPos = new Vector3();
+        bool spawned = false;
+        while (!spawned)
+        {
+            spawnPos.z = Mathf.Floor(CameraTransform.position.z);
+            Debug.Log(spawnPos);
+            if (spawnPos.z % 2 != 0)
+            {
+                spawnPos.z++;
+            }
+
+            RaycastHit hit;
+            if (!Physics.Raycast(spawnPos - Vector3.up, Vector3.up, out hit, 3f, LayerMask.GetMask("Enemy", "Environment"), QueryTriggerInteraction.Ignore))
+            {
+                s_Player = Instantiate(_pawnPrefab, spawnPos, Quaternion.identity);
+                spawned = true;
+            }
+            yield return null;
+        }
+        
+    }
+
     private void ChangePlayer(GameObject prefab)
     {
         // get transform values can't just copy transform it will be a pointer

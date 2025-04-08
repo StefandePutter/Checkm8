@@ -31,6 +31,7 @@ public class PlayerRook : PlayerBase
     {
         _inputManager.LockedMovement = true;
         _inputManager.LockedAbilities = true;
+        _allowedMovement = false;
 
         GameObject laser = Instantiate(_laserPrefab, transform);
         laser.GetComponent<Laser>().damage = 3;
@@ -40,6 +41,7 @@ public class PlayerRook : PlayerBase
         yield return new WaitForSeconds(1f);
         _inputManager.LockedMovement = false;
         _inputManager.LockedAbilities = false;
+        _allowedMovement = true;
 
         s_currentRookCooldown = _rookCooldown;
 
