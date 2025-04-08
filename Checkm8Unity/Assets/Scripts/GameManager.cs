@@ -20,9 +20,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _timePlayerUi;
     [SerializeField] private TextMeshProUGUI _timeEnemyUi;
     [SerializeField] private List<GameObject> _uiHealth;
+    [SerializeField] private GameObject _gameOverUi;
+    [SerializeField] private GameObject _gameWonUi;
 
     private float _spawnTime;
     private float _timePlayer;
+
+    [HideInInspector] public bool GameDone
+    {
+        get; set;
+    }
+
     [HideInInspector] public float TimeEnemy
     {
         get; private set;
@@ -53,11 +61,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _camera = Camera.main;
-        //s_Player = Instantiate(_pawnPrefab);
 
         StartCoroutine(SpawnPlayer());
 
-        //s_Player.transform.SetParent(_camera.transform);
         InputManager = GetComponent<PlayerInputManager>();
 
         _timePlayer = 300f;
@@ -66,6 +72,12 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (s_Player.transform.position.z < CameraTransform.position.z-3)
+        {
+            StartCoroutine(SpawnPlayer());
+            Damage();
+        }
+
         if (_spawnTime <= 0 && _spawningEnemies)
         {
             bool spawned = false;
@@ -132,6 +144,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ResetScene()
+    {
+        Time.timeScale = 1f;
+        GameDone = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public void ToggleBossBattle(float time = 0f)
     {
         _bossBattle = !_bossBattle;
@@ -144,8 +163,20 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         PlayerBase.Reset();
-        
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        GameDone = true;
+        _gameOverUi.SetActive(true);
+        Time.timeScale = 0;
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void GameWon()
+    {
+        PlayerBase.Reset();
+
+        GameDone = true;
+        _gameOverUi.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void BecomePawn()
@@ -198,7 +229,6 @@ public class GameManager : MonoBehaviour
         while (!spawned)
         {
             spawnPos.z = Mathf.Floor(CameraTransform.position.z);
-            Debug.Log(spawnPos);
             if (spawnPos.z % 2 != 0)
             {
                 spawnPos.z++;
@@ -207,7 +237,13 @@ public class GameManager : MonoBehaviour
             RaycastHit hit;
             if (!Physics.Raycast(spawnPos - Vector3.up, Vector3.up, out hit, 3f, LayerMask.GetMask("Enemy", "Environment"), QueryTriggerInteraction.Ignore))
             {
+                if (s_Player != null)
+                {
+                    Destroy(s_Player);
+                }
+
                 s_Player = Instantiate(_pawnPrefab, spawnPos, Quaternion.identity);
+                s_Player.GetComponent<PlayerBase>().SetTarget(spawnPos);
                 spawned = true;
             }
             yield return null;

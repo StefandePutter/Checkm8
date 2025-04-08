@@ -48,6 +48,8 @@ public class PlayerQueen : PlayerBase
                 component.TakeDamage(4);
             }
         }
+
+        Pawn();
     }
 
     public override void Horse()

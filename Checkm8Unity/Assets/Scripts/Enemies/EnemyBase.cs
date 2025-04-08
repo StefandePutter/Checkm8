@@ -34,7 +34,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         _gameManager = GameManager.s_Instance;
         _fieldSpacesX = _gameManager.SpawnPosesX;
         _rb = GetComponent<Rigidbody>();
-        _layerMask = LayerMask.GetMask("Enemy", "EnemyHorse","Environment");
+        _layerMask = LayerMask.GetMask("Enemy", "EnemyHorse","Environment", "Player");
 
         // giving them id for GameManager dictionary then increase the id
         _id = s_id;
@@ -132,7 +132,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             if (Physics.Raycast(target - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, _layerMask, QueryTriggerInteraction.Ignore))
             {
                 // Debug.DrawRay(target - Vector3.up, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
-
                 // Debug.Log(hit.collider.gameObject.name + " got Hit by " + gameObject.name);
                 
                 _allowedToMove = true;
@@ -153,10 +152,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
                     yield return null;
                 }
 
-                _gameManager.MovePlaces[_id] = Vector3.up;
+                // _gameManager.MovePlaces[_id] = Vector3.up;
             }
-
-            // transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * _moveSpeed);
             
             yield return null;
         }
