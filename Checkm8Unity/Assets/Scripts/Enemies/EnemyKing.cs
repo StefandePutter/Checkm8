@@ -57,7 +57,7 @@ public class EnemyKing : EnemyBase
         if (_gameManager.TimeEnemy <= 0)
         {
             _gameManager.ToggleBossBattle();
-            _gameManager.GameOver();
+            _gameManager.GameWon();
 
             Die();
         }
