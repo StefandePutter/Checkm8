@@ -59,15 +59,16 @@ public class PlayerHorse : PlayerBase
         bool notAllowedToJump = true;
         while (notAllowedToJump)
         {
-            jumpPos = _ghost.transform.position;
-
-            RaycastHit hit;
-            if (!Physics.Raycast(jumpPos - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, layerMask, QueryTriggerInteraction.Ignore))
+            if (_canFindMove)
             {
-                Debug.Log("yes");
-                notAllowedToJump = false;
-            }
+                jumpPos = _ghost.transform.position;
 
+                RaycastHit hit;
+                if (!Physics.Raycast(jumpPos - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, layerMask, QueryTriggerInteraction.Ignore))
+                {
+                    notAllowedToJump = false;
+                }
+            }
 
             yield return null;
         }

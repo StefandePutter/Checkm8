@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerInputManager : MonoBehaviour
 {
     
     private Controller _controller;
+    private GameManager _gameManager;
 
     public bool LockedAbilities;
     public bool LockedMovement;
@@ -57,6 +59,11 @@ public class PlayerInputManager : MonoBehaviour
         _controller.Player.Queen.performed += Queen;
     }
 
+    private void Start()
+    {
+        _gameManager = GetComponent<GameManager>();
+    }
+
     private void OnDisable()
     {
         _controller.Player.Move.Disable();
@@ -92,6 +99,11 @@ public class PlayerInputManager : MonoBehaviour
     {
         if (LockedAbilities)
         {
+            return;
+        }
+        if (_gameManager.GameDone)
+        {
+            _gameManager.ResetScene();
             return;
         }
         if (GameManager.s_Player.TryGetComponent<PlayerHorse>(out PlayerHorse script))

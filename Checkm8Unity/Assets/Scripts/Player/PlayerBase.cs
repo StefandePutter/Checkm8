@@ -30,6 +30,7 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
     private Vector3 _targetPos;
     protected bool _allowedMovement = true;
     private LayerMask _raycastLayerMask;
+    protected bool _canFindMove = true;
 
     protected virtual void Start()
     {
@@ -56,21 +57,35 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
             _damageCooldown -= Time.deltaTime;
         }
 
-        if (_inputManager.MoveValue != Vector2.zero && s_moveTarget == transform.position)
+        if (_inputManager.MoveValue != Vector2.zero && _canFindMove)
         {
             Vector3 target = s_moveTarget + new Vector3(_inputManager.MoveValue.x, 0, _inputManager.MoveValue.y) * 2;
+
+            if (target.z <= _gameManager.CameraTransform.position.z && _inputManager.MoveValue.y == -1)
+            {
+                return;
+            }
+
+            if (target.z >= _gameManager.CameraTransform.position.z + 14 && _inputManager.MoveValue.y == 1)
+            {
+                return;
+            }
 
             RaycastHit hit;
             if (!Physics.Raycast(target - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, _raycastLayerMask, QueryTriggerInteraction.Ignore))
             {
                 s_moveTarget = target;
-
+                _canFindMove = false;
             }
         }
         
         if (_allowedMovement)
         {
             transform.position = Vector3.MoveTowards(transform.position, s_moveTarget, Time.deltaTime * _moveSpeed);
+            if (s_moveTarget == transform.position)
+            {
+                _canFindMove = true;
+            }
         }
 
 
@@ -132,6 +147,11 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         _damageCooldown = _damageDelay;
 
         _gameManager.Damage();
+    }
+
+    public void SetTarget(Vector3 target)
+    {
+        s_moveTarget = target;
     }
 
     public static void Reset()
