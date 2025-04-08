@@ -3,16 +3,30 @@ using UnityEngine;
 public class PlayerBischop : PlayerBase
 {
     [SerializeField] private GameObject _homingPrefab;
+    [SerializeField] private float _switchTime=10f;
+    private float _maxSwitchTime;
     private int _homingBullets;
     private bool _usedAbility;
 
+    protected override void Start()
+    {
+        base.Start();
+        _maxSwitchTime = _switchTime;
+    }
+
     private void Update()
     {
-        if (_usedAbility && _homingBullets==0)
+        // if (_homingBullets == 0 && _switchTime <= 0)
+        if (_usedAbility && _homingBullets == 0)
         {
             s_currentBischopCooldown = _bischopCooldown;
             Pawn();
         }
+
+        _switchTime = Mathf.Max(0,_switchTime);
+        _gameManager.UiCharIcon.fillAmount = 1 - _switchTime / _maxSwitchTime;
+
+        _switchTime -= Time.deltaTime;
     }
 
     protected override void Shoot()
@@ -39,28 +53,13 @@ public class PlayerBischop : PlayerBase
                 bullet.GetComponent<HomingProjectiles>().SetTarget(FindClosestByTag("Enemy"));
                 _homingBullets--;
             }
-            //GameObject bullet = _gameManager.PlayerBulletsPool.GetPooledObject();
-            //if (bullet != null)
-            //{
-            //    bullet.transform.position = transform.position;
-            //    bullet.transform.rotation = transform.rotation;
-            //    bullet.transform.Rotate(Vector3.up * rotation);
-            //    bullet.SetActive(true);
-            //}
+
             rotation *= -1;
         }
     }
 
     public override void Bischop()
     {
-        //int rotation = 45;
-        //for (int i = 0; i < 2; i++)
-        //{
-        //    GameObject bullet = Instantiate(_homingPrefab, transform.position, transform.rotation);
-        //    bullet.transform.Rotate(Vector3.up * rotation);
-        //    bullet.GetComponent<HomingProjectiles>().SetTarget(FindClosestByTag("Enemy"));
-        //    rotation *= -1;
-        //}
 
         if (!_usedAbility)
         {
@@ -72,6 +71,18 @@ public class PlayerBischop : PlayerBase
 
 
         //Pawn();
+    }
+
+    public override void Rook()
+    {
+        s_currentBischopCooldown = _bischopCooldown;
+        base.Rook();
+    }
+
+    public override void Queen()
+    {
+        s_currentBischopCooldown = _bischopCooldown;
+        base.Queen();
     }
 
     GameObject FindClosestByTag(string tag)

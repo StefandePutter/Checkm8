@@ -21,9 +21,20 @@ public class PlayerQueen : PlayerBase
         }
     }
 
+    public override void Bischop()
+    {
+        s_currentBischopCooldown = _bischopCooldown;
+        base.Bischop();
+    }
+
+    public override void Rook()
+    {
+        s_currentBischopCooldown = _bischopCooldown;
+        base.Rook();
+    }
+
     public override void Queen()
     {
-        s_currentQueenCooldown = _queenCooldown;
         Nuke();
     }
 
@@ -48,6 +59,8 @@ public class PlayerQueen : PlayerBase
                 component.TakeDamage(4);
             }
         }
+
+        s_currentQueenCooldown = _queenCooldown;
 
         Pawn();
     }

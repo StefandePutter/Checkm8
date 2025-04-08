@@ -57,6 +57,7 @@ public class EnemyKing : EnemyBase
         if (_gameManager.TimeEnemy <= 0)
         {
             _gameManager.ToggleBossBattle();
+            _gameManager.GameWon();
         }
 
         // spawn queen when at 1/3 hp

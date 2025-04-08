@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(Rigidbody))]
 public abstract class PlayerBase : MonoBehaviour, IDamageable
@@ -27,7 +26,6 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
 
     private float _damageDelay = 0.5f;
     private float _damageCooldown;
-    private Vector3 _targetPos;
     protected bool _allowedMovement = true;
     private LayerMask _raycastLayerMask;
     protected bool _canFindMove = true;
@@ -61,7 +59,7 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         {
             Vector3 target = s_moveTarget + new Vector3(_inputManager.MoveValue.x, 0, _inputManager.MoveValue.y) * 2;
 
-            if (target.z <= _gameManager.CameraTransform.position.z && _inputManager.MoveValue.y == -1)
+            if (target.z <= _gameManager.CameraTransform.position.z-1.165 && _inputManager.MoveValue.y == -1)
             {
                 return;
             }
@@ -87,7 +85,6 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
                 _canFindMove = true;
             }
         }
-
 
         _gameManager.UiHorse.fillAmount = s_currentHorseCooldown / _horseCooldown;
         _gameManager.UiBischop.fillAmount = s_currentBischopCooldown / _bischopCooldown;
@@ -117,22 +114,35 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
 
     public virtual void Bischop()
     {
+        Debug.Log("player bischop");
+        if (s_currentBischopCooldown > 0)
+        {
+            return;
+        }
 
+        _gameManager.BecomeBischop();
     }
 
     public virtual void Rook()
     {
+        Debug.Log("player Rook");
+        if (s_currentRookCooldown > 0)
+        {
+            return;
+        }
 
+        _gameManager.BecomeRook();
     }
 
     public virtual void Queen()
     {
+        Debug.Log("player Queen");
+        if (s_currentQueenCooldown > 0)
+        {
+            return;
+        }
 
-    }
-
-    public virtual void Ability()
-    {
-        // does nothing
+        _gameManager.BecomeQueen();
     }
 
     public void TakeDamage(float amount=1)

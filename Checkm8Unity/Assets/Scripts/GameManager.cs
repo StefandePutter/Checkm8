@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int[] SpawnPosesX = new int[7];
     public Transform CameraTransform;
     public Dictionary<int,Vector3> MovePlaces = new Dictionary<int, Vector3>(); // enemy id, target Pos
+    public Image UiCharIcon;
     public Image UiHorse;
     public Image UiBischop;
     public Image UiTower;
@@ -175,7 +176,7 @@ public class GameManager : MonoBehaviour
         PlayerBase.Reset();
 
         GameDone = true;
-        _gameOverUi.SetActive(true);
+        _gameWonUi.SetActive(true);
         Time.timeScale = 0;
     }
 

@@ -71,15 +71,6 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Ability"",
-                    ""type"": ""Button"",
-                    ""id"": ""9317514d-bfa4-4270-b130-1a3374387a4f"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -179,17 +170,6 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Queen"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0fc2a18b-f0e0-44f3-90a4-bbe6bca2a2cd"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Ability"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -782,7 +762,6 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         m_Player_Bischop = m_Player.FindAction("Bischop", throwIfNotFound: true);
         m_Player_Rook = m_Player.FindAction("Rook", throwIfNotFound: true);
         m_Player_Queen = m_Player.FindAction("Queen", throwIfNotFound: true);
-        m_Player_Ability = m_Player.FindAction("Ability", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -867,7 +846,6 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Bischop;
     private readonly InputAction m_Player_Rook;
     private readonly InputAction m_Player_Queen;
-    private readonly InputAction m_Player_Ability;
     public struct PlayerActions
     {
         private @Controller m_Wrapper;
@@ -877,7 +855,6 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         public InputAction @Bischop => m_Wrapper.m_Player_Bischop;
         public InputAction @Rook => m_Wrapper.m_Player_Rook;
         public InputAction @Queen => m_Wrapper.m_Player_Queen;
-        public InputAction @Ability => m_Wrapper.m_Player_Ability;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -902,9 +879,6 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Queen.started += instance.OnQueen;
             @Queen.performed += instance.OnQueen;
             @Queen.canceled += instance.OnQueen;
-            @Ability.started += instance.OnAbility;
-            @Ability.performed += instance.OnAbility;
-            @Ability.canceled += instance.OnAbility;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -924,9 +898,6 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Queen.started -= instance.OnQueen;
             @Queen.performed -= instance.OnQueen;
             @Queen.canceled -= instance.OnQueen;
-            @Ability.started -= instance.OnAbility;
-            @Ability.performed -= instance.OnAbility;
-            @Ability.canceled -= instance.OnAbility;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1114,7 +1085,6 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         void OnBischop(InputAction.CallbackContext context);
         void OnRook(InputAction.CallbackContext context);
         void OnQueen(InputAction.CallbackContext context);
-        void OnAbility(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

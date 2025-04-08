@@ -52,6 +52,7 @@ public class EnemyQueen : EnemyBase
 
             if (_gameManager.TimeEnemy <= 0)
             {
+                _gameManager.ChangeSpawnEnemies(true);
                 _gameManager.ToggleBossBattle();
                 Die();
             }
@@ -64,8 +65,9 @@ public class EnemyQueen : EnemyBase
 
     private void Update()
     {
-        if (_gameManager.TimeEnemy <= 0)
+        if (_gameManager.TimeEnemy <= 0 && IsBoss)
         {
+            _gameManager.ChangeSpawnEnemies(true);
             _gameManager.ToggleBossBattle();
             Die();
         }

@@ -36,10 +36,6 @@ public class PlayerInputManager : MonoBehaviour
         _controller.Player.Move.performed += Move;
         _controller.Player.Move.canceled += Move; // so it goes to 0
 
-        // ability
-        _controller.Player.Ability.Enable();
-        _controller.Player.Ability.performed += Ability;
-
         // horse jump
         _controller.Player.Horse.Enable();
         _controller.Player.Horse.started += ShowJumpIndicator; // show indicator
@@ -67,7 +63,6 @@ public class PlayerInputManager : MonoBehaviour
     private void OnDisable()
     {
         _controller.Player.Move.Disable();
-        _controller.Player.Ability.Disable();
         _controller.Player.Horse.Disable();
         _controller.Player.Bischop.Disable();
         _controller.Player.Rook.Disable();
@@ -110,15 +105,6 @@ public class PlayerInputManager : MonoBehaviour
         {
             StartCoroutine(script.Jump());
         }
-    }
-
-    void Ability(InputAction.CallbackContext input)
-    {
-        if (LockedAbilities)
-        {
-            return;
-        }
-        GameManager.s_Player.GetComponent<PlayerBase>().Ability();
     }
 
     void Bischop(InputAction.CallbackContext input)

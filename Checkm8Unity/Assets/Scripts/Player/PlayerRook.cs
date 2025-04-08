@@ -19,6 +19,11 @@ public class PlayerRook : PlayerBase
             }
         }
     }
+    public override void Bischop()
+    {
+        s_currentRookCooldown = _rookCooldown;
+        base.Bischop();
+    }
 
     public override void Rook()
     {
@@ -26,6 +31,13 @@ public class PlayerRook : PlayerBase
 
         StartCoroutine(Laser());
     }
+
+    public override void Queen()
+    {
+        s_currentRookCooldown = _rookCooldown;
+        base.Queen();
+    }
+    
 
     private IEnumerator Laser()
     {
