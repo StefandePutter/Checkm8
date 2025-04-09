@@ -27,6 +27,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AmbientStrength: 0.001
+    - _QueueControl: 0
     - _Smoothness: 60
     m_Colors:
     - _DiffuseColor: {r: 0.19245279, g: 0.19245279, b: 0.19245279, a: 1}
