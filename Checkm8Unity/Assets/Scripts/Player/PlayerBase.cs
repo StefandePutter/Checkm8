@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public abstract class PlayerBase : MonoBehaviour, IDamageable
@@ -18,6 +19,9 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
     protected PlayerInputManager _inputManager;
     protected float _timeToFire;
     protected Rigidbody _rb;
+
+    [SerializeField] private Sprite _iconSprite;
+    protected Image _iconImage;
 
     static protected float s_currentHorseCooldown;
     static protected float s_currentBischopCooldown;
@@ -45,6 +49,9 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         _inputManager.LockedMovement = false;
         _inputManager.LockedAbilities = false;
         _allowedMovement = true;
+
+        _iconImage = _gameManager.UiCharIconSprite;
+        _iconImage.sprite = _iconSprite;
     }
 
     protected virtual void FixedUpdate()

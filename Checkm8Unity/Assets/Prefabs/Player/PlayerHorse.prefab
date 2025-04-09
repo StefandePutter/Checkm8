@@ -76,6 +76,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 10
   _shootSpeed: 0.8
+  _iconSprite: {fileID: 21300000, guid: 63dfd8209f3d81b4ab54a7a41441a134, type: 3}
   _ghostPrefab: {fileID: 1862318369445783747, guid: 96bdb6253c692b441a21f32ebef2b0db, type: 3}
   _arrowsPrefab: {fileID: 6665984543835060109, guid: fe179d8274854b846ab405780177e7b6, type: 3}
   _shockwavePrefab: {fileID: 7857174112909424963, guid: 266b8c925976ae242bdc503840342461, type: 3}

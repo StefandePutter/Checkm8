@@ -97,7 +97,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 10
   _shootSpeed: 0.5
+  _iconSprite: {fileID: 21300000, guid: 4763f982ae7568f4394a3f1fefd6ce11, type: 3}
   _homingPrefab: {fileID: 7286309895646677864, guid: 11ca531bbad9f12498bf10a0c3eeece1, type: 3}
+  _switchTime: 10
 --- !u!1001 &467543638510678559
 PrefabInstance:
   m_ObjectHideFlags: 0

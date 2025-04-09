@@ -39,11 +39,13 @@ public class GameManager : MonoBehaviour
     private bool _bossBattle;
     private Camera _camera;
     private bool _spawningEnemies;
+    private bool _spawningPlayer;
 
     [HideInInspector] public int[] SpawnPosesX = new int[7];
     public Transform CameraTransform;
     public Dictionary<int,Vector3> MovePlaces = new Dictionary<int, Vector3>(); // enemy id, target Pos
     [SerializeField] private RectTransform _uiClockSwitch;
+    public Image UiCharIconSprite;
     public Image UiCharIcon;
     public Image UiHorse;
     public Image UiHorseAbility;
@@ -79,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (s_Player.transform.position.z < CameraTransform.position.z-3)
+        if (s_Player.transform.position.z < CameraTransform.position.z-3 && !_spawningPlayer)
         {
             StartCoroutine(SpawnPlayer());
             Damage();
@@ -244,6 +246,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SpawnPlayer()
     {
+        _spawningPlayer = true;
         Vector3 spawnPos = new Vector3();
         bool spawned = false;
         while (!spawned)
@@ -275,7 +278,7 @@ public class GameManager : MonoBehaviour
             }
             yield return null;
         }
-        
+        _spawningPlayer = false;
     }
 
     private void ChangePlayer(GameObject prefab)

@@ -14,6 +14,7 @@ public class PlayerQueen : PlayerBase
         base.Start();
         _maxSwitchTime = _switchTime;
         _gameManager.UiQueenAbility.gameObject.SetActive(true);
+
     }
 
     private void Update()
