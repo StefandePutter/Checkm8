@@ -43,11 +43,16 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int[] SpawnPosesX = new int[7];
     public Transform CameraTransform;
     public Dictionary<int,Vector3> MovePlaces = new Dictionary<int, Vector3>(); // enemy id, target Pos
+    [SerializeField] private RectTransform _uiClockSwitch;
     public Image UiCharIcon;
     public Image UiHorse;
+    public Image UiHorseAbility;
     public Image UiBischop;
+    public Image UiBischopAbility;
     public Image UiTower;
+    public Image UiTowerAbility;
     public Image UiQueen;
+    public Image UiQueenAbility;
     public ObjectPool PlayerBulletsPool;
     public ObjectPool EnemyBulletsPool;
     [HideInInspector] public PlayerInputManager InputManager;
@@ -158,10 +163,15 @@ public class GameManager : MonoBehaviour
     public void ToggleBossBattle(float time = 0f)
     {
         _bossBattle = !_bossBattle;
+        float zAxis = -6.9f;
         if (_bossBattle)
         {
+            zAxis *= -1;
             TimeEnemy = time;
         }
+        _uiClockSwitch.rotation = Quaternion.Euler(0, 0, zAxis);
+
+        //_uiClockSwitch.Rotate(0,0,-_uiClockSwitch.rotation.z);
     }
     public void ResetScene()
     {
@@ -254,6 +264,13 @@ public class GameManager : MonoBehaviour
 
                 s_Player = Instantiate(_pawnPrefab, spawnPos, Quaternion.identity);
                 s_Player.GetComponent<PlayerBase>().SetTarget(spawnPos);
+
+                UiHorseAbility.gameObject.SetActive(false);
+                UiBischopAbility.gameObject.SetActive(false);
+                UiTowerAbility.gameObject.SetActive(false);
+                UiQueenAbility.gameObject.SetActive(false);
+
+
                 spawned = true;
             }
             yield return null;
