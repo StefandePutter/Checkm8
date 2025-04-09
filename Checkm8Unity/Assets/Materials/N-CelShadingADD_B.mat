@@ -97,7 +97,7 @@ Material:
     - _EnvironmentReflections: 1
     - _FalloffAmount: 0.001
     - _FresnelPower: 30
-    - _FresnelSize: 0.3
+    - _FresnelSize: 0.2
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -108,7 +108,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 100
+    - _Smoothness: 150
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

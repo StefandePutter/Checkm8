@@ -51,15 +51,15 @@ PrefabInstance:
     - target: {fileID: -8335683750835705212, guid: 8f151ea4e4fd75d4995042a07d6877df, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 73657d325374d614d95202a15948acb7, type: 2}
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
     - target: {fileID: -1039049357854921933, guid: 8f151ea4e4fd75d4995042a07d6877df, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 73657d325374d614d95202a15948acb7, type: 2}
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
     - target: {fileID: 845826043243115683, guid: 8f151ea4e4fd75d4995042a07d6877df, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 73657d325374d614d95202a15948acb7, type: 2}
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
     - target: {fileID: 919132149155446097, guid: 8f151ea4e4fd75d4995042a07d6877df, type: 3}
       propertyPath: m_Name
       value: zweihander

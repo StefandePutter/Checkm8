@@ -97,10 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aa1dbbd5e6179a49a50492ddd33f36b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 1
+  ManuallyActivate: 0
   _hitSound: {fileID: 5068749635271187523}
   _deathSoundPrefab: {fileID: 6297115302870609768, guid: 5a1f34084cad3a341abe6d97f5638fee, type: 3}
   _highlightPrefab: {fileID: 8261708515924071979, guid: 1fb65b0434246914aa18114ff6d5d183, type: 3}
+  _health: 1
   _moveSpeed: 5
   _shootSpeed: 0.5
   _score: 2
@@ -312,7 +313,7 @@ PrefabInstance:
     - target: {fileID: -1461304994638716399, guid: 4ceb4066f72ca4847aebee886d9ceca8, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: ee4ad8afa1ef5df4bb0100c5464546cf, type: 2}
+      objectReference: {fileID: 2100000, guid: 1f5332b04d7ed284096aa0ddc28a5b5e, type: 2}
     - target: {fileID: -882215011002488846, guid: 4ceb4066f72ca4847aebee886d9ceca8, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -320,7 +321,7 @@ PrefabInstance:
     - target: {fileID: -804731622281664130, guid: 4ceb4066f72ca4847aebee886d9ceca8, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: ee4ad8afa1ef5df4bb0100c5464546cf, type: 2}
+      objectReference: {fileID: 2100000, guid: 1f5332b04d7ed284096aa0ddc28a5b5e, type: 2}
     - target: {fileID: 919132149155446097, guid: 4ceb4066f72ca4847aebee886d9ceca8, type: 3}
       propertyPath: m_Name
       value: Rook_Outlined01

@@ -51,15 +51,15 @@ PrefabInstance:
     - target: {fileID: -4683669308469848369, guid: 5e6bb45afdfcdb043b905c1fd6e2b284, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 73657d325374d614d95202a15948acb7, type: 2}
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
     - target: {fileID: -1461304994638716399, guid: 5e6bb45afdfcdb043b905c1fd6e2b284, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 73657d325374d614d95202a15948acb7, type: 2}
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
     - target: {fileID: -678588488315902003, guid: 5e6bb45afdfcdb043b905c1fd6e2b284, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 73657d325374d614d95202a15948acb7, type: 2}
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
     - target: {fileID: 919132149155446097, guid: 5e6bb45afdfcdb043b905c1fd6e2b284, type: 3}
       propertyPath: m_Name
       value: pillar

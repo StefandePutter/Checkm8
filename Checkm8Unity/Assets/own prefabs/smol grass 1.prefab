@@ -48,10 +48,70 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8540371549569036578, guid: 31ad8acc7975b2a49b7e76903b1d17bb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
+    - target: {fileID: -5654521629145238265, guid: 31ad8acc7975b2a49b7e76903b1d17bb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
+    - target: {fileID: -5109797270013771594, guid: 31ad8acc7975b2a49b7e76903b1d17bb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
+    - target: {fileID: -2954812302860484724, guid: 31ad8acc7975b2a49b7e76903b1d17bb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
+    - target: {fileID: -2863801544665445918, guid: 31ad8acc7975b2a49b7e76903b1d17bb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
+    - target: {fileID: -2523085669005214217, guid: 31ad8acc7975b2a49b7e76903b1d17bb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
+    - target: {fileID: -2023154016672321075, guid: 31ad8acc7975b2a49b7e76903b1d17bb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
+    - target: {fileID: -1644284713058358167, guid: 31ad8acc7975b2a49b7e76903b1d17bb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
+    - target: {fileID: -917284927746585508, guid: 31ad8acc7975b2a49b7e76903b1d17bb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
+    - target: {fileID: 628981870591654558, guid: 31ad8acc7975b2a49b7e76903b1d17bb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
     - target: {fileID: 919132149155446097, guid: 31ad8acc7975b2a49b7e76903b1d17bb, type: 3}
       propertyPath: m_Name
       value: smol grass 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3893440532458104511, guid: 31ad8acc7975b2a49b7e76903b1d17bb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
+    - target: {fileID: 4190905101581642113, guid: 31ad8acc7975b2a49b7e76903b1d17bb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
+    - target: {fileID: 5314137039610649230, guid: 31ad8acc7975b2a49b7e76903b1d17bb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
+    - target: {fileID: 6473263479740952405, guid: 31ad8acc7975b2a49b7e76903b1d17bb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
+    - target: {fileID: 8696721526236914948, guid: 31ad8acc7975b2a49b7e76903b1d17bb, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6909a86d2d3ba479bdeb4dc5ae23cf, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
