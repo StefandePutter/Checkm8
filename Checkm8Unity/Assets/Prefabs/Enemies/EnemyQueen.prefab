@@ -109,8 +109,9 @@ MonoBehaviour:
   _nukeLayerMask:
     serializedVersion: 2
     m_Bits: 8
-  _nukeIndicatorPrefab: {fileID: 2813460931120642479, guid: d90cd5150cf1ac94f954f8649838ebb3, type: 3}
+  _nukeIndicatorPrefab: {fileID: 1834090007659261396, guid: 07f247402abf2c04ba16d7788d8a8d36, type: 3}
   _maxHealth: 300
+  _saveSpots: {fileID: 611750553672247765, guid: 77b5f8f1828374c42843d1a7bbd626e1, type: 3}
   IsBoss: 1
 --- !u!23 &-8125250757378975539
 MeshRenderer:

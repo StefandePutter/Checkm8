@@ -6,6 +6,7 @@ public class EnemyQueen : EnemyBase
     [SerializeField] LayerMask _nukeLayerMask;
     [SerializeField] GameObject _nukeIndicatorPrefab;
     [SerializeField] private float _maxHealth = 300f;
+    [SerializeField] private GameObject _saveSpots;
     [HideInInspector] public bool IsBoss = true;
     private float _startPosZ;
 
@@ -79,7 +80,7 @@ public class EnemyQueen : EnemyBase
 
         // do ability when close to death
         float health = (IsBoss) ? _gameManager.TimeEnemy : _health;
-        if (health <= _maxHealth / 3 && !_usedAbility && _allowedToMove)
+        if (health <= _maxHealth / 4 * 3 && !_usedAbility && _allowedToMove)
         {
             Debug.Log("nuke");
             StartCoroutine(StartNuke());
@@ -171,10 +172,30 @@ public class EnemyQueen : EnemyBase
     {
         _allowedToMove = false;
         _canFire = false;
-        GameObject indicator = Instantiate(_nukeIndicatorPrefab, transform.position+Vector3.up*0.2f, transform.rotation);
-        yield return new WaitForSeconds(1f);
-        Destroy(indicator);
+
+        int vertical = (int)(302 - transform.position.z);
+        int horizontal = (int)(0 - transform.position.x);
+
+        Debug.Log(vertical + " " + horizontal);
+        // vertical
+        while (transform.position.z != 302)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 0, 302), Time.deltaTime * _moveSpeed);
+            yield return null;
+        }
+        // horizontal
+        while (transform.position.x != 0)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0,0,transform.position.z), Time.deltaTime * _moveSpeed);
+            yield return null;
+        }
+
+        GameObject indicator = Instantiate(_nukeIndicatorPrefab, transform.position + Vector3.up * 0.2f, transform.rotation);
+        GameObject particle = Instantiate(_nukeIndicatorPrefab, transform.position+Vector3.up*0.2f, transform.rotation);
+        yield return new WaitForSeconds(7.5f);
+        //Destroy(indicator);
         Nuke();
+        Destroy(indicator);
         _allowedToMove = true;
         _canFire = true;
     }
@@ -183,15 +204,17 @@ public class EnemyQueen : EnemyBase
     {
         Collider[] Hits = new Collider[25];
 
-        int hits = Physics.OverlapSphereNonAlloc(transform.position, 25, Hits, _nukeLayerMask);
+        int hits = Physics.OverlapSphereNonAlloc(transform.position, 11f, Hits, _nukeLayerMask);
+        
 
         _nukeLayerMask += LayerMask.GetMask("ProjectilePlayer", "ProjectileEnemy");
 
         for (int i = 0; i < hits; i++)
         {
-            //if (Hits[i].TryGetComponent)
-            float distance = Vector3.Distance(transform.position, Hits[i].transform.position);
-
+            if (Hits[i].TryGetComponent<IDamageable>(out IDamageable component))
+            {
+                component.TakeDamage();
+            }
             Debug.Log($"Queen would hit {Hits[i].name} for {1}");
         }
     }
