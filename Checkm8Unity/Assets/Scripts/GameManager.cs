@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _gameOverUi;
     [SerializeField] private GameObject _gameWonUi;
 
+    private int _spawnableEnemies = 0;
     private float _spawnTime;
     private float _timePlayer;
 
@@ -98,7 +99,7 @@ public class GameManager : MonoBehaviour
                 if (!Physics.Raycast(spawnPos - Vector3.up, Vector3.up, out hit, 3f, LayerMask.GetMask("Enemy", "Environment"), QueryTriggerInteraction.Ignore))
                 {
                     // spawn random enemy
-                    int enemyIndex = Random.Range(0, _enemyPrefabs.Count - 1);
+                    int enemyIndex = Random.Range(0, _spawnableEnemies);
                     GameObject enemy = Instantiate(_enemyPrefabs[enemyIndex], spawnPos, transform.rotation);
                     spawned = true;
                 }
@@ -129,6 +130,14 @@ public class GameManager : MonoBehaviour
         }
 
         _spawnTime -= Time.deltaTime;
+    }
+
+    public void AddEnemy()
+    {
+        if (_spawnableEnemies < _enemyPrefabs.Count)
+        {
+            _spawnableEnemies++;
+        }
     }
 
     public void Damage()
