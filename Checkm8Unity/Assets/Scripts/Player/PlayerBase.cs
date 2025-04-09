@@ -41,6 +41,10 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         _inputManager = _gameManager.InputManager;
 
         _gameManager.UiCharIcon.fillAmount = 0;
+
+        _inputManager.LockedMovement = false;
+        _inputManager.LockedAbilities = false;
+        _allowedMovement = true;
     }
 
     protected virtual void FixedUpdate()

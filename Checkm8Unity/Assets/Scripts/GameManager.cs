@@ -45,9 +45,13 @@ public class GameManager : MonoBehaviour
     public Dictionary<int,Vector3> MovePlaces = new Dictionary<int, Vector3>(); // enemy id, target Pos
     public Image UiCharIcon;
     public Image UiHorse;
+    public Image UiHorseAbility;
     public Image UiBischop;
+    public Image UiBischopAbility;
     public Image UiTower;
+    public Image UiTowerAbility;
     public Image UiQueen;
+    public Image UiQueenAbility;
     public ObjectPool PlayerBulletsPool;
     public ObjectPool EnemyBulletsPool;
     [HideInInspector] public PlayerInputManager InputManager;
@@ -254,6 +258,13 @@ public class GameManager : MonoBehaviour
 
                 s_Player = Instantiate(_pawnPrefab, spawnPos, Quaternion.identity);
                 s_Player.GetComponent<PlayerBase>().SetTarget(spawnPos);
+
+                UiHorseAbility.gameObject.SetActive(false);
+                UiBischopAbility.gameObject.SetActive(false);
+                UiTowerAbility.gameObject.SetActive(false);
+                UiQueenAbility.gameObject.SetActive(false);
+
+
                 spawned = true;
             }
             yield return null;

@@ -13,6 +13,7 @@ public class PlayerQueen : PlayerBase
     {
         base.Start();
         _maxSwitchTime = _switchTime;
+        _gameManager.UiQueenAbility.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -20,6 +21,7 @@ public class PlayerQueen : PlayerBase
         // if (_usedAbility && _homingBullets == 0)
         if (!_usingAbility && _switchTime <= 0)
         {
+            _gameManager.UiQueenAbility.gameObject.SetActive(false);
             s_currentQueenCooldown = _queenCooldown;
             Pawn();
         }
@@ -48,13 +50,26 @@ public class PlayerQueen : PlayerBase
 
     public override void Bischop()
     {
+        if (s_currentBischopCooldown > 0)
+        {
+            return;
+        }
+
         s_currentBischopCooldown = _bischopCooldown;
+        _gameManager.UiQueenAbility.gameObject.SetActive(false);
         base.Bischop();
     }
 
     public override void Rook()
     {
+        if (s_currentRookCooldown > 0)
+        {
+            return;
+        }
+
         s_currentBischopCooldown = _bischopCooldown;
+        _gameManager.UiQueenAbility.gameObject.SetActive(false);
+
         base.Rook();
     }
 
@@ -89,11 +104,19 @@ public class PlayerQueen : PlayerBase
                 component.TakeDamage(4);
             }
         }
+
+        _gameManager.UiQueenAbility.gameObject.SetActive(false);
     }
 
     public override void Horse()
     {
+        if (s_currentHorseCooldown > 0)
+        {
+            return;
+        }
+
         s_currentQueenCooldown = _queenCooldown;
+        _gameManager.UiQueenAbility.gameObject.SetActive(false);
         base.Horse();
     }
 }
