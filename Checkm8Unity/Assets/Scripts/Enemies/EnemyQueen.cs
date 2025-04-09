@@ -173,10 +173,6 @@ public class EnemyQueen : EnemyBase
         _allowedToMove = false;
         _canFire = false;
 
-        int vertical = (int)(302 - transform.position.z);
-        int horizontal = (int)(0 - transform.position.x);
-
-        Debug.Log(vertical + " " + horizontal);
         // vertical
         while (transform.position.z != 302)
         {
@@ -190,11 +186,11 @@ public class EnemyQueen : EnemyBase
             yield return null;
         }
 
-        GameObject indicator = Instantiate(_nukeIndicatorPrefab, transform.position + Vector3.up * 0.2f, transform.rotation);
+        GameObject indicator = Instantiate(_saveSpots, transform.position, Quaternion.identity);
         GameObject particle = Instantiate(_nukeIndicatorPrefab, transform.position+Vector3.up*0.2f, transform.rotation);
         yield return new WaitForSeconds(7.5f);
-        //Destroy(indicator);
         Nuke();
+        // Destroy(particle);
         Destroy(indicator);
         _allowedToMove = true;
         _canFire = true;

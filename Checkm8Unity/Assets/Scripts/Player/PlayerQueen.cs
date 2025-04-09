@@ -5,6 +5,7 @@ public class PlayerQueen : PlayerBase
 {
     // [SerializeField] LayerMask _nukeLayerMask;
     [SerializeField] private float _switchTime = 10f;
+    [SerializeField] private GameObject _nukeParticlePrefab;
     private float _maxSwitchTime;
     private bool _usingAbility;
     private bool _usedAbility;
@@ -35,17 +36,20 @@ public class PlayerQueen : PlayerBase
 
     protected override void Shoot()
     {
-        int rotation = 0;
-        for (int i = 0; i < 8; i++)
+        if (!_usingAbility)
         {
-            GameObject bullet = _gameManager.PlayerBulletsPool.GetPooledObject();
-            if (bullet != null)
+            int rotation = 0;
+            for (int i = 0; i < 8; i++)
             {
-                bullet.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.2f, transform.rotation);
-                bullet.transform.Rotate(Vector3.up * rotation);
-                bullet.SetActive(true);
-            }   
-            rotation += 45;
+                GameObject bullet = _gameManager.PlayerBulletsPool.GetPooledObject();
+                if (bullet != null)
+                {
+                    bullet.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.2f, transform.rotation);
+                    bullet.transform.Rotate(Vector3.up * rotation);
+                    bullet.SetActive(true);
+                }
+                rotation += 45;
+            }
         }
     }
 
@@ -80,8 +84,20 @@ public class PlayerQueen : PlayerBase
         {
             _usedAbility = true;
 
-            Nuke();
+            StartCoroutine(StartNuke());
         }
+    }
+
+    private IEnumerator StartNuke()
+    {
+        _usingAbility = true;
+
+        GameObject particle = Instantiate(_nukeParticlePrefab, transform);
+        yield return new WaitForSeconds(7.5f);
+        Nuke();
+        // Destroy(particle);
+
+        _usingAbility = false;
     }
 
     private void Nuke()
