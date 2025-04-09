@@ -70,7 +70,7 @@ public class EnemyKing : EnemyBase
         }
 
         // if no current wave
-        if (_wave.Count == 0)
+        if (_wave.Count == 0 && _canFire)
         {
             if (_randomWave)
             {

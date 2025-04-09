@@ -13,17 +13,22 @@ public class EnemyQueen : EnemyBase
     {
         base.Start();
 
-        if (IsBoss)
-        {
-            _gameManager.ToggleBossBattle(_maxHealth);
-        }
-        else
+        if (!IsBoss)
         {
             _maxHealth = _health;
         }
 
 
         _startPosZ = transform.position.z;
+    }
+
+    public override IEnumerator EnableEnemy()
+    {
+        if (IsBoss)
+        {
+            _gameManager.ToggleBossBattle(_maxHealth);
+        }
+        return base.EnableEnemy();
     }
 
     protected override void Shoot()

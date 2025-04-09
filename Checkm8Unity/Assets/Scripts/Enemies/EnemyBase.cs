@@ -44,7 +44,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         _rb.AddForce(Vector3.back * _moveSpeed);
     }
 
-    public IEnumerator EnableEnemy()
+    public virtual IEnumerator EnableEnemy()
     {
         // yield return new WaitForSeconds(waitTime);
         if (!_enabled)

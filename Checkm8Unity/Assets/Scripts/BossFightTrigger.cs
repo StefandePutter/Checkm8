@@ -6,6 +6,7 @@ public class BossFightTrigger : MonoBehaviour
     [SerializeField] private Vector3 _spawnBossPos;
     [SerializeField] private EnemyBase _boss;
     private bool _isTriggered;
+    private bool _isDone;
     private GameManager _gameManager;
     private CameraMovement _camera;
 
@@ -37,8 +38,9 @@ public class BossFightTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (_isTriggered && _camera.transform.position == _camPosBossArea)
+        if (_isTriggered && _camera.transform.position == _camPosBossArea && !_isDone)
         {
+            _isDone = true;
             StartCoroutine(_boss.EnableEnemy());
         }
     }

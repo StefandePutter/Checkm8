@@ -56,7 +56,7 @@ public class PlayerQueen : PlayerBase
             return;
         }
 
-        s_currentBischopCooldown = _bischopCooldown;
+        s_currentQueenCooldown = _queenCooldown;
         _gameManager.UiQueenAbility.gameObject.SetActive(false);
         base.Bischop();
     }
@@ -68,7 +68,7 @@ public class PlayerQueen : PlayerBase
             return;
         }
 
-        s_currentBischopCooldown = _bischopCooldown;
+        s_currentQueenCooldown = _queenCooldown;
         _gameManager.UiQueenAbility.gameObject.SetActive(false);
 
         base.Rook();
