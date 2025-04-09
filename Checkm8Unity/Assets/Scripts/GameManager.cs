@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int[] SpawnPosesX = new int[7];
     public Transform CameraTransform;
     public Dictionary<int,Vector3> MovePlaces = new Dictionary<int, Vector3>(); // enemy id, target Pos
+    [SerializeField] private RectTransform _uiClockSwitch;
     public Image UiCharIcon;
     public Image UiHorse;
     public Image UiHorseAbility;
@@ -162,10 +163,15 @@ public class GameManager : MonoBehaviour
     public void ToggleBossBattle(float time = 0f)
     {
         _bossBattle = !_bossBattle;
+        float zAxis = -6.9f;
         if (_bossBattle)
         {
+            zAxis *= -1;
             TimeEnemy = time;
         }
+        _uiClockSwitch.rotation = Quaternion.Euler(0, 0, zAxis);
+
+        //_uiClockSwitch.Rotate(0,0,-_uiClockSwitch.rotation.z);
     }
     public void ResetScene()
     {
