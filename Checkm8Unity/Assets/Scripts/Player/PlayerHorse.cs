@@ -19,6 +19,8 @@ public class PlayerHorse : PlayerBase
         _UiArrows = Instantiate(_arrowsPrefab, transform);
         _ghost = Instantiate(_ghostPrefab, transform);
 
+        _gameManager.UiHorseAbility.gameObject.SetActive(true);
+
         float xPos = -2;
         //_UiArrows.transform.position = new Vector3(transform.position.x+1,transform.position.y,transform.position.z);
         if (_inputManager.LastMovedRight)
@@ -27,6 +29,7 @@ public class PlayerHorse : PlayerBase
             xPos *= -1;
         }
         _ghost.transform.localPosition = new Vector3(xPos, 0, 4);
+
     }
 
     protected override void FixedUpdate()
@@ -128,6 +131,9 @@ public class PlayerHorse : PlayerBase
 
         // change back into a pawn
         s_currentHorseCooldown = _horseCooldown;
+
+        _gameManager.UiHorseAbility.gameObject.SetActive(false);
+
         Pawn();
     }
 

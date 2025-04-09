@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using UnityEngine;
 
@@ -15,6 +16,8 @@ public class PlayerRook : PlayerBase
     {
         base.Start();
         _maxSwitchTime = _switchTime;
+
+        _gameManager.UiTowerAbility.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -22,6 +25,7 @@ public class PlayerRook : PlayerBase
         // if (_usedAbility && _homingBullets == 0)
         if (!_isShootingLaser && _switchTime <= 0)
         {
+            _gameManager.UiQueenAbility.gameObject.SetActive(false);
             s_currentRookCooldown = _rookCooldown;
             Pawn();
         }
@@ -46,6 +50,13 @@ public class PlayerRook : PlayerBase
     }
     public override void Bischop()
     {
+        if (s_currentBischopCooldown > 0)
+        {
+            return;
+        }
+
+        _gameManager.UiTowerAbility.gameObject.SetActive(false);
+
         s_currentRookCooldown = _rookCooldown;
         base.Bischop();
     }
@@ -59,12 +70,22 @@ public class PlayerRook : PlayerBase
             _isShootingLaser = true;
 
             StartCoroutine(Laser());
+
+            _gameManager.UiTowerAbility.gameObject.SetActive(false);
         }
     }
 
     public override void Queen()
     {
+        if (s_currentQueenCooldown > 0)
+        {
+            return;
+        }
+
+        _gameManager.UiTowerAbility.gameObject.SetActive(false);
+
         s_currentRookCooldown = _rookCooldown;
+
         base.Queen();
     }
     
@@ -92,6 +113,9 @@ public class PlayerRook : PlayerBase
     public override void Horse()
     {
         s_currentRookCooldown = _rookCooldown;
+
+        _gameManager.UiTowerAbility.gameObject.SetActive(false);
+
         base.Horse();
     }
 }
