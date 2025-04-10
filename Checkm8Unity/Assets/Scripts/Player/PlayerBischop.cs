@@ -124,7 +124,7 @@ public class PlayerBischop : PlayerBase
         }
 
         s_currentBischopCooldown = _bischopCooldown;
-        _gameManager.UiBischopAbility.gameObject.SetActive(true);
+        _gameManager.UiBischopAbility.gameObject.SetActive(false);
         base.Horse();
     }
 }

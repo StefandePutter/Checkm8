@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _gameOverUi;
     [SerializeField] private GameObject _gameWonUi;
 
-    private int _spawnableEnemies = 0;
+    private int _spawnableEnemies = 1;
     private float _spawnTime;
     private float _timePlayer;
 
@@ -144,6 +144,7 @@ public class GameManager : MonoBehaviour
         if (_spawnableEnemies < _enemyPrefabs.Count)
         {
             _spawnableEnemies++;
+            Debug.Log("added enemy " + _spawnableEnemies);
         }
     }
 
