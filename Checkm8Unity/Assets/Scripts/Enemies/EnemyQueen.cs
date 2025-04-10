@@ -80,7 +80,7 @@ public class EnemyQueen : EnemyBase
 
         // do ability when close to death
         float health = (IsBoss) ? _gameManager.TimeEnemy : _health;
-        if (health <= _maxHealth / 4 * 3 && !_usedAbility && _allowedToMove)
+        if (health <= _maxHealth / 3 && !_usedAbility && _allowedToMove)
         {
             Debug.Log("nuke");
             StartCoroutine(StartNuke());

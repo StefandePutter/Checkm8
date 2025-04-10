@@ -20,6 +20,7 @@ public class EnemyKing : EnemyBase
     protected override void Start()
     {
         base.Start();
+
         // enemies: 0 = pawn, 1 = Horse, 2 = Bischop, 3 = Rook 
         _waves[0] = new int[3] { 0,0,0 };
         _waves[1] = new int[3] { 1,1,1 };
@@ -31,7 +32,6 @@ public class EnemyKing : EnemyBase
         _waves[7] = new int[4] { 1,3,1,3 };
         _waves[8] = new int[4] { 3,2,3,2 };
 
-        //_maxHealth = _gameManager.TimeEnemy;
         _gameManager.ToggleBossBattle(_maxHealthTime);
     }
 
