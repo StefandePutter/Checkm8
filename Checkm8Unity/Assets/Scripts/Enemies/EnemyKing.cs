@@ -35,6 +35,13 @@ public class EnemyKing : EnemyBase
         _gameManager.ToggleBossBattle(_maxHealthTime);
     }
 
+    public override IEnumerator EnableEnemy()
+    {
+        _gameManager._gameMusic.Pause();
+        _gameManager._Bossmusic.Play();
+        return base.EnableEnemy();
+    }
+
     public override void TakeDamage(float amount = 1)
     {
         amount *= 10;

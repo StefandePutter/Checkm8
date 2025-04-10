@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public static GameManager s_Instance;
     public static GameObject s_Player;
 
+    [SerializeField] public AudioSource _gameMusic;
+    [SerializeField] public AudioSource _Bossmusic;
     [SerializeField] private GameObject _pawnPrefab;
     [SerializeField] private GameObject _horsePrefab;
     [SerializeField] private GameObject _bischopPrefab;

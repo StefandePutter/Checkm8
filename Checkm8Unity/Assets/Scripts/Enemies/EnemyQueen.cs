@@ -28,6 +28,9 @@ public class EnemyQueen : EnemyBase
         if (IsBoss)
         {
             _gameManager.ToggleBossBattle(_maxHealth);
+            _gameManager._gameMusic.Pause();
+            _gameManager._Bossmusic.Play();
+            
         }
         return base.EnableEnemy();
     }
@@ -75,6 +78,7 @@ public class EnemyQueen : EnemyBase
         {
             _gameManager.ChangeSpawnEnemies(true);
             _gameManager.ToggleBossBattle();
+            _gameManager._gameMusic.UnPause();
             Die();
         }
 
@@ -223,6 +227,8 @@ public class EnemyQueen : EnemyBase
         // start cam again
         if (IsBoss)
         {
+            _gameManager._Bossmusic.Pause();
+            _gameManager._gameMusic.UnPause();
             Camera.main.GetComponent<CameraMovement>().ResetTarget();
         }
 
