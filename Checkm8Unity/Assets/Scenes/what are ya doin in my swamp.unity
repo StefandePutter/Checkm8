@@ -2251,6 +2251,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83d3294ad3d19754a98074f99367c43d, type: 3}
+--- !u!1001 &454571003
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 153516129841519069, guid: b2d02e207bb286c4693cf4da7529c275, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.851025
+      objectReference: {fileID: 0}
+    - target: {fileID: 153516129841519069, guid: b2d02e207bb286c4693cf4da7529c275, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0000019073486
+      objectReference: {fileID: 0}
+    - target: {fileID: 153516129841519069, guid: b2d02e207bb286c4693cf4da7529c275, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 56.520054
+      objectReference: {fileID: 0}
+    - target: {fileID: 153516129841519069, guid: b2d02e207bb286c4693cf4da7529c275, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 153516129841519069, guid: b2d02e207bb286c4693cf4da7529c275, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 153516129841519069, guid: b2d02e207bb286c4693cf4da7529c275, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153516129841519069, guid: b2d02e207bb286c4693cf4da7529c275, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153516129841519069, guid: b2d02e207bb286c4693cf4da7529c275, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 153516129841519069, guid: b2d02e207bb286c4693cf4da7529c275, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 153516129841519069, guid: b2d02e207bb286c4693cf4da7529c275, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142726995933887105, guid: b2d02e207bb286c4693cf4da7529c275, type: 3}
+      propertyPath: m_Name
+      value: nuke queen red (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b2d02e207bb286c4693cf4da7529c275, type: 3}
 --- !u!1001 &515417081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7556,6 +7613,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32a660c5e5d020c4eb4e9e4058e2fed4, type: 3}
+--- !u!1001 &4498597261527275304
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6295182736439129894, guid: e0389a7461f52a64798299ed03eb38f6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.423321
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295182736439129894, guid: e0389a7461f52a64798299ed03eb38f6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0000038146973
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295182736439129894, guid: e0389a7461f52a64798299ed03eb38f6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 65.63946
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295182736439129894, guid: e0389a7461f52a64798299ed03eb38f6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295182736439129894, guid: e0389a7461f52a64798299ed03eb38f6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295182736439129894, guid: e0389a7461f52a64798299ed03eb38f6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295182736439129894, guid: e0389a7461f52a64798299ed03eb38f6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295182736439129894, guid: e0389a7461f52a64798299ed03eb38f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295182736439129894, guid: e0389a7461f52a64798299ed03eb38f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295182736439129894, guid: e0389a7461f52a64798299ed03eb38f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782344417315148922, guid: e0389a7461f52a64798299ed03eb38f6, type: 3}
+      propertyPath: m_Name
+      value: nuke queen blue
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e0389a7461f52a64798299ed03eb38f6, type: 3}
 --- !u!1001 &5006663044509702630
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7732,3 +7846,5 @@ SceneRoots:
   - {fileID: 163842850}
   - {fileID: 1339807461}
   - {fileID: 267627014}
+  - {fileID: 4498597261527275304}
+  - {fileID: 454571003}
