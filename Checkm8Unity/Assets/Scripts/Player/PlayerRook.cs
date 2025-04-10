@@ -17,12 +17,13 @@ public class PlayerRook : PlayerBase
         base.Start();
         _maxSwitchTime = _switchTime;
 
+        // deactivate ability icon
         _gameManager.UiTowerAbility.gameObject.SetActive(true);
     }
 
     private void Update()
     {
-        // if (_usedAbility && _homingBullets == 0)
+        // switch back to pawn when timer is done and not shooting laser
         if (!_isShootingLaser && _switchTime <= 0)
         {
             _gameManager.UiQueenAbility.gameObject.SetActive(false);
@@ -40,6 +41,7 @@ public class PlayerRook : PlayerBase
     {
         if (!_isShootingLaser)
         {
+            // get bullet from pool
             GameObject bullet = _gameManager.PlayerBulletsPool.GetPooledObject();
             if (bullet != null)
             {
@@ -55,6 +57,7 @@ public class PlayerRook : PlayerBase
             return;
         }
 
+        // deactivate ability icon
         _gameManager.UiTowerAbility.gameObject.SetActive(false);
 
         s_currentRookCooldown = _rookCooldown;
@@ -63,14 +66,17 @@ public class PlayerRook : PlayerBase
 
     public override void Rook()
     {
+        // if not used ablity yet
         if (!_usedAbility)
         {
             _usedAbility = true;
 
             _isShootingLaser = true;
 
+            // shoot laser
             StartCoroutine(Laser());
 
+            // deactivate ability icon
             _gameManager.UiTowerAbility.gameObject.SetActive(false);
         }
     }
@@ -82,8 +88,10 @@ public class PlayerRook : PlayerBase
             return;
         }
 
+        // deactivate ability icon
         _gameManager.UiTowerAbility.gameObject.SetActive(false);
 
+        // set cooldown
         s_currentRookCooldown = _rookCooldown;
 
         base.Queen();

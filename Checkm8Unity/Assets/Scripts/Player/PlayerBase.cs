@@ -46,10 +46,12 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
 
         _gameManager.UiCharIcon.fillAmount = 0;
 
+        // unlock inputs
         _inputManager.LockedMovement = false;
         _inputManager.LockedAbilities = false;
         _allowedMovement = true;
 
+        // set current piece sprite
         _iconImage = _gameManager.UiCharIconSprite;
         _iconImage.sprite = _iconSprite;
     }
@@ -68,6 +70,7 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
             _damageCooldown -= Time.deltaTime;
         }
 
+        // when trying to move and allowed to move
         if (_inputManager.MoveValue != Vector2.zero && _canFindMove)
         {
             Vector3 target = s_moveTarget + new Vector3(_inputManager.MoveValue.x, 0, _inputManager.MoveValue.y) * 2;
@@ -90,6 +93,7 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
             }
         }
         
+        // when allowed to move move towards target
         if (_allowedMovement)
         {
             transform.position = Vector3.MoveTowards(transform.position, s_moveTarget, Time.deltaTime * _moveSpeed);
