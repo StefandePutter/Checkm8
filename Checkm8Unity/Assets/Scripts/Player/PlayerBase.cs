@@ -72,9 +72,8 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         }
 
         // auto move forward
-        if (transform.position.z <= _gameManager.CameraTransform.position.z-1.5f)
+        if (transform.position.z <= _gameManager.CameraTransform.position.z-1.5f && _canFindMove)
         {
-            Debug.Log("yes");
             Vector3 target = s_moveTarget + Vector3.forward*2;
 
             RaycastHit hit;

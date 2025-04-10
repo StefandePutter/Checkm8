@@ -50,7 +50,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         if (!_enabled)
         {
             _enabled = true;
-            Instantiate(_highlightPrefab, transform.position + Vector3.up * 0.01f, transform.rotation);
+            Instantiate(_highlightPrefab, transform.position + Vector3.up * 0.02f, transform.rotation);
             yield return new WaitForSeconds(0.3f);
             _canFire = true;
             _allowedToMove = true;

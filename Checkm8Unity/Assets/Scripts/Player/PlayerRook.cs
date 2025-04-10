@@ -17,7 +17,7 @@ public class PlayerRook : PlayerBase
         base.Start();
         _maxSwitchTime = _switchTime;
 
-        // deactivate ability icon
+        // show ability icon
         _gameManager.UiTowerAbility.gameObject.SetActive(true);
     }
 
@@ -27,7 +27,7 @@ public class PlayerRook : PlayerBase
         if (!_isShootingLaser && _switchTime <= 0)
         {
             // deactivate ability icon
-            _gameManager.UiQueenAbility.gameObject.SetActive(false);
+            _gameManager.UiTowerAbility.gameObject.SetActive(false);
             
             s_currentRookCooldown = _rookCooldown;
             

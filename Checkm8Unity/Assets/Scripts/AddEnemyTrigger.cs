@@ -19,6 +19,8 @@ public class AddEnemyTrigger : MonoBehaviour
 
                 _gameManager.AddEnemy();
 
+                Debug.Log("is triggered");
+
                 _isTriggered = true;
             }
         }

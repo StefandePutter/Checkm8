@@ -12,7 +12,7 @@ public class EnemyRook : EnemyBase
     {
         //base.FixedUpdate();
 
-        if (_amountMoved > 1 && !_usedAbility && _allowedToMove)
+        if (!_usedAbility && _allowedToMove)
         {
             _usedAbility = true;
             // _allowedToMove = false;

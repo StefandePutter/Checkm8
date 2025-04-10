@@ -78,8 +78,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.711879, y: 4.805839, z: 2.7557983}
-  m_Center: {x: 0.15792513, y: -0.45292163, z: -0.09378052}
+  m_Size: {x: 4.7, y: 4.805839, z: 2.7557983}
+  m_Center: {x: 0, y: -0.45292163, z: -0.09378052}
 --- !u!54 &6201666423858477333
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -135,6 +135,7 @@ MonoBehaviour:
   - {fileID: 3007155994357818796, guid: 78f97ca2e9427e146aa11f2461333176, type: 3}
   - {fileID: 2242948357101588456, guid: 587d09802c7b02041a8fc160e3f6ce7a, type: 3}
   _raiseSpeed: 3
+  _maxHealthTime: 300
 --- !u!23 &-8125250757378975539
 MeshRenderer:
   m_ObjectHideFlags: 0

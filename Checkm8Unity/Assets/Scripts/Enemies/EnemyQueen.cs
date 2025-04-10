@@ -80,11 +80,14 @@ public class EnemyQueen : EnemyBase
 
         // do ability when close to death
         float health = (IsBoss) ? _gameManager.TimeEnemy : _health;
-        if (health <= _maxHealth / 3 && !_usedAbility && _allowedToMove)
+        if (IsBoss)
         {
-            Debug.Log("nuke");
-            StartCoroutine(StartNuke());
-            _usedAbility = true;
+            if (health <= _maxHealth / 3 && !_usedAbility && _allowedToMove)
+            {
+                Debug.Log("nuke");
+                StartCoroutine(StartNuke());
+                _usedAbility = true;
+            }
         }
 
         // when allowed to move
@@ -186,7 +189,7 @@ public class EnemyQueen : EnemyBase
             yield return null;
         }
 
-        GameObject indicator = Instantiate(_saveSpots, transform.position, Quaternion.identity);
+        GameObject indicator = Instantiate(_saveSpots, transform.position + Vector3.up * 0.01f, Quaternion.identity);
         GameObject particle = Instantiate(_nukeIndicatorPrefab, transform.position+Vector3.up*0.2f, transform.rotation);
         yield return new WaitForSeconds(7.5f);
         Nuke();

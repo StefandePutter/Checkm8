@@ -103,7 +103,7 @@ MonoBehaviour:
   _highlightPrefab: {fileID: 8261708515924071979, guid: 1fb65b0434246914aa18114ff6d5d183, type: 3}
   _health: 10
   _moveSpeed: 4
-  _shootSpeed: 0.5
+  _shootSpeed: 0.9
   _score: 10
   _waitTime: 1
   _nukeLayerMask:
