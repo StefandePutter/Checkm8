@@ -26,8 +26,11 @@ public class PlayerRook : PlayerBase
         // switch back to pawn when timer is done and not shooting laser
         if (!_isShootingLaser && _switchTime <= 0)
         {
+            // deactivate ability icon
             _gameManager.UiQueenAbility.gameObject.SetActive(false);
+            
             s_currentRookCooldown = _rookCooldown;
+            
             Pawn();
         }
 

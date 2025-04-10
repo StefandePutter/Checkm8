@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(Rigidbody))]
 public abstract class PlayerBase : MonoBehaviour, IDamageable
@@ -70,8 +71,22 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
             _damageCooldown -= Time.deltaTime;
         }
 
+        // auto move forward
+        if (transform.position.z <= _gameManager.CameraTransform.position.z-1.5f)
+        {
+            Debug.Log("yes");
+            Vector3 target = s_moveTarget + Vector3.forward*2;
+
+            RaycastHit hit;
+            if (!Physics.Raycast(target - Vector3.up, transform.TransformDirection(Vector3.up), out hit, 3, _raycastLayerMask, QueryTriggerInteraction.Ignore))
+            {
+                s_moveTarget = target;
+                _canFindMove = false;
+            }
+        }
+
         // when trying to move and allowed to move
-        if (_inputManager.MoveValue != Vector2.zero && _canFindMove)
+        else if (_inputManager.MoveValue != Vector2.zero && _canFindMove)
         {
             Vector3 target = s_moveTarget + new Vector3(_inputManager.MoveValue.x, 0, _inputManager.MoveValue.y) * 2;
 
