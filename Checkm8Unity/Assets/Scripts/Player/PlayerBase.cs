@@ -66,6 +66,7 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         }
         _timeToFire -= Time.deltaTime;
 
+        // inv frames
         if (_damageCooldown > 0)
         {
             _damageCooldown -= Time.deltaTime;
