@@ -10,7 +10,6 @@ public class BossFightTrigger : MonoBehaviour
     private GameManager _gameManager;
     private CameraMovement _camera;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _gameManager = GameManager.s_Instance;
@@ -19,16 +18,17 @@ public class BossFightTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log(other.CompareTag("Player"));
         if (!_isTriggered)
         {
             if (other.CompareTag("Player"))
             {
-
+                // stop spawning enemies
                 _gameManager.ChangeSpawnEnemies(false);
 
+                // spawn boss
                 _boss = Instantiate(_boss, _spawnBossPos, _gameManager.transform.rotation);
 
+                // set camera to go to target
                 _camera.SetTarget(_camPosBossArea);
 
                 _isTriggered = true;
@@ -38,9 +38,13 @@ public class BossFightTrigger : MonoBehaviour
 
     private void Update()
     {
+        // when camera is at arena
         if (_isTriggered && _camera.transform.position == _camPosBossArea && !_isDone)
         {
+            // only trigger once
             _isDone = true;
+            
+            // enable boss
             StartCoroutine(_boss.EnableEnemy());
         }
     }

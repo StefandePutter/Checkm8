@@ -5,14 +5,15 @@ public class TransparentOnPlayer : MonoBehaviour
     [SerializeField] private Material _transparantMaterial;
     private Material _material;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // set current material
         _material = GetComponent<MeshRenderer>().material;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        // change material to transparent
         if (other.CompareTag("Player") || other.CompareTag("Boss"))
         {
             GetComponent<MeshRenderer>().material = _transparantMaterial;
@@ -21,6 +22,7 @@ public class TransparentOnPlayer : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        // change back material
         if (other.CompareTag("Player") || other.CompareTag("Boss"))
         {
             GetComponent<MeshRenderer>().material = _material;

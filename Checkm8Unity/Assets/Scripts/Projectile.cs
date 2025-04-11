@@ -12,29 +12,24 @@ public class Projectile : MonoBehaviour
 
     private void OnEnable()
     {
+        // give forward velocity
         _rb.angularVelocity = Vector3.zero;
         _rb.linearVelocity = Vector3.zero;
         _rb.AddRelativeForce(new Vector3(0, 0, _speed));
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    gameObject.SetActive(false);
-    //    if (other.TryGetComponent<IDamageable>(out IDamageable component))
-    //    {
-    //        component.TakeDamage(1);
-    //    }
-    //}
-
     private void OnCollisionEnter(Collision collision)
     {
+        // try damaging collision
         if (collision.collider.TryGetComponent<IDamageable>(out IDamageable component))
         {
             component.TakeDamage(1);
         }
+
         gameObject.SetActive(false);
     }
-
+    
+    // disable bullet of screen
     private void OnBecameInvisible()
     {
         

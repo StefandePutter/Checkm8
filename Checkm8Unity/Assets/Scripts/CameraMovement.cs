@@ -23,11 +23,13 @@ public class CameraMovement : MonoBehaviour
         }
     }
 
+    // set target
     public void SetTarget(Vector3 target)
     {
         _target = target;
     }
 
+    // reset target
     public void ResetTarget()
     {
         _target = Vector3.zero;

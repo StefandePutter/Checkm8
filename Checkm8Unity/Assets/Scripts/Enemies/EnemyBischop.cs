@@ -12,17 +12,20 @@ public class EnemyBischop : EnemyBase
         {
             if (_timesMoved > 0 && _allowedToMove)
             {
-                _homingBullets=2;
+                // Activate ability after the bishop has moved once
+                _homingBullets = 2;
                 _usedAbility = true;
             }
         }
 
+        // attempt to move if allowed
         if (_allowedToMove)
         {
             int[] spawnPosses = _fieldSpacesX; // new int[7] { -6, -4, -2, 0, 2, 4, 6 };
             int random = Random.Range(0, spawnPosses.Length);
             int spawnPos = spawnPosses[random];
 
+            // start movement to random X pos
             StartCoroutine(MoveAmountDiagonal(spawnPos));
             _timesMoved++;
         }
@@ -35,6 +38,7 @@ public class EnemyBischop : EnemyBase
         {
             if (_homingBullets == 0)
             {
+                // fire regular bullets
                 GameObject bullet = _gameManager.EnemyBulletsPool.GetPooledObject();
                 if (bullet != null)
                 {
@@ -45,10 +49,13 @@ public class EnemyBischop : EnemyBase
             }
             else
             {
+                // fire homing bullets instead
                 GameObject bullet = Instantiate(_homingPrefab, transform.position + Vector3.up * 0.2f, transform.rotation);
                 bullet.transform.Rotate(Vector3.up * rotation);
                 _homingBullets--;
             }
+
+            // flip rotation
             rotation *= -1;
         }
     }

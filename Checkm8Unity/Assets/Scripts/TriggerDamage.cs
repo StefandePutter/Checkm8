@@ -1,4 +1,3 @@
-using System.Drawing;
 using UnityEngine;
 
 public class TriggerDamage : MonoBehaviour
@@ -14,6 +13,7 @@ public class TriggerDamage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // try damaging collider
         if (other.TryGetComponent<IDamageable>(out IDamageable component))
         {
             component.TakeDamage(2);

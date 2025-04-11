@@ -11,6 +11,7 @@ public class ObjectPool : MonoBehaviour
 
     void Start()
     {
+        // make pool
         pooledObjects = new List<GameObject>();
         GameObject tmp;
         for (int i = 0; i < amountToPool; i++)
@@ -23,6 +24,7 @@ public class ObjectPool : MonoBehaviour
 
     public GameObject GetPooledObject()
     {
+        // check if empty obj
         for (int i = 0; i < amountToPool; i++)
         {
             if (!pooledObjects[i].activeInHierarchy)
@@ -38,6 +40,7 @@ public class ObjectPool : MonoBehaviour
         return tmp;
     }
 
+    // disable after sec for other scripts
     public static IEnumerator DisableAfterSec(GameObject go, float time)
     {
         yield return new WaitForSeconds(time);

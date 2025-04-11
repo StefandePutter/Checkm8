@@ -40,6 +40,7 @@ public class EnemyQueen : EnemyBase
         int rotation = 0;
         for (int i = 0; i < 8; i++)
         {
+            // take bullet from pool
             GameObject bullet = _gameManager.EnemyBulletsPool.GetPooledObject();
             if (bullet != null)
             {
@@ -47,12 +48,15 @@ public class EnemyQueen : EnemyBase
                 bullet.transform.Rotate(Vector3.up * rotation);
                 bullet.SetActive(true);
             }
+
+            // rotate
             rotation += 45;
         }
     }
 
     public override void TakeDamage(float amount = 1)
     {
+        // if its a boss work with chess clock
         if (IsBoss)
         {
             amount *= 10;
@@ -195,10 +199,12 @@ public class EnemyQueen : EnemyBase
 
         GameObject indicator = Instantiate(_saveSpots, transform.position + Vector3.up * 0.01f, Quaternion.identity);
         GameObject particle = Instantiate(_nukeIndicatorPrefab, transform.position+Vector3.up*0.2f, transform.rotation);
+        
         yield return new WaitForSeconds(7.5f);
+        
         Nuke();
-        // Destroy(particle);
         Destroy(indicator);
+        
         _allowedToMove = true;
         _canFire = true;
     }
@@ -207,11 +213,13 @@ public class EnemyQueen : EnemyBase
     {
         Collider[] Hits = new Collider[25];
 
+        // get all collisions in sphere
         int hits = Physics.OverlapSphereNonAlloc(transform.position, 11f, Hits, _nukeLayerMask);
         
 
         _nukeLayerMask += LayerMask.GetMask("ProjectilePlayer", "ProjectileEnemy");
 
+        // for all collisions try to dmg them
         for (int i = 0; i < hits; i++)
         {
             if (Hits[i].TryGetComponent<IDamageable>(out IDamageable component))
@@ -224,7 +232,7 @@ public class EnemyQueen : EnemyBase
 
     protected override void Die()
     {
-        // start cam again
+        // start cam again and do disable boss music
         if (IsBoss)
         {
             _gameManager._Bossmusic.Pause();

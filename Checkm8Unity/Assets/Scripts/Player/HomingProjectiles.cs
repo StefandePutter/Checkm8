@@ -9,7 +9,6 @@ public class HomingProjectiles : MonoBehaviour
     private Rigidbody _rb;
     private float _lifetime;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -17,7 +16,6 @@ public class HomingProjectiles : MonoBehaviour
         _target = FindClosestByTag("Enemy");
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (_lifetime < 0.1f)

@@ -12,12 +12,14 @@ public class PlayerBischop : PlayerBase
     {
         base.Start();
         _maxSwitchTime = _switchTime;
+
+        // show ability ui
         _gameManager.UiBischopAbility.gameObject.SetActive(true);
     }
 
     private void Update()
     {
-        // if (_usedAbility && _homingBullets == 0)
+        // switch out after time
         if (_homingBullets == 0 && _switchTime <= 0)
         {
             _gameManager.UiQueenAbility.gameObject.SetActive(false);
@@ -25,6 +27,7 @@ public class PlayerBischop : PlayerBase
             Pawn();
         }
 
+        // show time as Bischop left in ui
         _switchTime = Mathf.Max(0,_switchTime);
         _gameManager.UiCharIcon.fillAmount = 1 - _switchTime / _maxSwitchTime;
 
@@ -40,6 +43,7 @@ public class PlayerBischop : PlayerBase
         {
             if (_homingBullets == 0)
             {
+                // shoot normal bullets
                 GameObject bullet = _gameManager.PlayerBulletsPool.GetPooledObject();
                 if (bullet != null)
                 {
@@ -50,16 +54,19 @@ public class PlayerBischop : PlayerBase
             }
             else
             {
+                // shoot homing bullets
                 GameObject bullet = Instantiate(_homingPrefab, transform.position + Vector3.up * 0.2f, transform.rotation);
                 bullet.transform.Rotate(Vector3.up * rotation);
                 bullet.GetComponent<HomingProjectiles>().SetTarget(FindClosestByTag("Enemy"));
                 _homingBullets--;
             }
 
+            // flip rotation
             rotation *= -1;
         }
     }
 
+    // try using abilty
     public override void Bischop()
     {
         if (!_usedAbility)
@@ -72,6 +79,7 @@ public class PlayerBischop : PlayerBase
         }
     }
 
+    // try changing to Rook
     public override void Rook()
     {
         if (s_currentRookCooldown > 0)
@@ -84,6 +92,7 @@ public class PlayerBischop : PlayerBase
         base.Rook();
     }
 
+    // try changing to Queen
     public override void Queen()
     {
         if (s_currentQueenCooldown > 0)
@@ -96,6 +105,7 @@ public class PlayerBischop : PlayerBase
         base.Queen();
     }
 
+    // find closest target to bullet by tag
     GameObject FindClosestByTag(string tag)
     {
         GameObject[] gos;
@@ -116,6 +126,7 @@ public class PlayerBischop : PlayerBase
         return closest;
     }
 
+    // try changing to Horse
     public override void Horse()
     {
         if (s_currentHorseCooldown > 0)

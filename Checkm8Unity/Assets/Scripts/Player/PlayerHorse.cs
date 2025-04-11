@@ -16,13 +16,15 @@ public class PlayerHorse : PlayerBase
     {
         base.Start();
         _currentDirRight = _inputManager.LastMovedRight;
+        
+        // show indicator where to jump
         _UiArrows = Instantiate(_arrowsPrefab, transform);
         _ghost = Instantiate(_ghostPrefab, transform);
 
+        // show ability
         _gameManager.UiHorseAbility.gameObject.SetActive(true);
 
         float xPos = -2;
-        //_UiArrows.transform.position = new Vector3(transform.position.x+1,transform.position.y,transform.position.z);
         if (_inputManager.LastMovedRight)
         {
             _UiArrows.transform.Rotate(new Vector3(0, 0, 180));
@@ -132,16 +134,19 @@ public class PlayerHorse : PlayerBase
         // change back into a pawn
         s_currentHorseCooldown = _horseCooldown;
 
+        // hide Ablilty
         _gameManager.UiHorseAbility.gameObject.SetActive(false);
 
         Pawn();
     }
 
+    // try using horse
     public override void Horse()
     {
         return;
     }
 
+    // horse doesnt shoot
     protected override void Shoot()
     {
         return;

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PlayerQueen : PlayerBase
 {
-    // [SerializeField] LayerMask _nukeLayerMask;
     [SerializeField] private float _switchTime = 10f;
     [SerializeField] private GameObject _nukeParticlePrefab;
     private float _maxSwitchTime;
@@ -14,20 +13,23 @@ public class PlayerQueen : PlayerBase
     {
         base.Start();
         _maxSwitchTime = _switchTime;
+
+        // show ability
         _gameManager.UiQueenAbility.gameObject.SetActive(true);
 
     }
 
     private void Update()
     {
-        // if (_usedAbility && _homingBullets == 0)
         if (!_usingAbility && _switchTime <= 0)
         {
+            // switch back to pawn by timer
             _gameManager.UiQueenAbility.gameObject.SetActive(false);
             s_currentQueenCooldown = _queenCooldown;
             Pawn();
         }
-
+        
+        // show time left
         _switchTime = Mathf.Max(0, _switchTime);
         _gameManager.UiCharIcon.fillAmount = 1 - _switchTime / _maxSwitchTime;
 
@@ -41,6 +43,7 @@ public class PlayerQueen : PlayerBase
             int rotation = 0;
             for (int i = 0; i < 8; i++)
             {
+                // get bullet from pool
                 GameObject bullet = _gameManager.PlayerBulletsPool.GetPooledObject();
                 if (bullet != null)
                 {
@@ -48,11 +51,14 @@ public class PlayerQueen : PlayerBase
                     bullet.transform.Rotate(Vector3.up * rotation);
                     bullet.SetActive(true);
                 }
+
+                // rotate next bullet by 45
                 rotation += 45;
             }
         }
     }
 
+    // try to change into Bischop
     public override void Bischop()
     {
         if (s_currentBischopCooldown > 0)
@@ -65,6 +71,7 @@ public class PlayerQueen : PlayerBase
         base.Bischop();
     }
 
+    // try to change into Rook
     public override void Rook()
     {
         if (s_currentRookCooldown > 0)
@@ -78,6 +85,7 @@ public class PlayerQueen : PlayerBase
         base.Rook();
     }
 
+    // try to use Queen ability
     public override void Queen()
     {
         if (!_usedAbility)
@@ -108,8 +116,10 @@ public class PlayerQueen : PlayerBase
 
         LayerMask _nukeLayerMask = LayerMask.GetMask("Enemy", "ProjectileEnemy", "EnemyHorse");
 
+        // get all collision objects in sphere
         int hits = Physics.OverlapSphereNonAlloc(startPos, 25, Hits, _nukeLayerMask);
 
+        // try to damage or remove objectss
         for (int i = 0; i < hits; i++)
         {
             if (Hits[i].CompareTag("Bullet"))
@@ -122,9 +132,11 @@ public class PlayerQueen : PlayerBase
             }
         }
 
+        // disable ability ui
         _gameManager.UiQueenAbility.gameObject.SetActive(false);
     }
 
+    // try to change into Horse
     public override void Horse()
     {
         if (s_currentHorseCooldown > 0)

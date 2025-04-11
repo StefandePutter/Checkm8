@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 using UnityEngine;
 
+// not using
+
 namespace UnityTemplateProjects
 {
     public class SimpleCameraController : MonoBehaviour

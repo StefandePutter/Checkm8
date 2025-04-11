@@ -56,13 +56,12 @@ public class EnemyRook : EnemyBase
         yield return new WaitForSeconds(0.4f);
         indicator.SetActive(true);
         yield return new WaitForSeconds(0.3f);
-        // indicator.SetActive(false);
         Destroy(indicator);
         yield return new WaitForSeconds(0.2f);
 
+        // shoot laser
         GameObject laser = Instantiate(_laserPrefab, transform);
         laser.GetComponent<Laser>().damage = 3;
-        // set the local pos
         laser.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.2f, transform.rotation);
 
         // shoot for a second
@@ -70,6 +69,7 @@ public class EnemyRook : EnemyBase
 
         Destroy(laser);
 
+        // punish time
         yield return new WaitForSeconds(0.5f);
 
         _isShootingLaser = false;

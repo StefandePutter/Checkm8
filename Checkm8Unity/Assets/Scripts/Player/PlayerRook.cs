@@ -53,6 +53,8 @@ public class PlayerRook : PlayerBase
             }
         }
     }
+
+    // try changing into Bischop
     public override void Bischop()
     {
         if (s_currentBischopCooldown > 0)
@@ -67,9 +69,9 @@ public class PlayerRook : PlayerBase
         base.Bischop();
     }
 
+    // try using rook ability
     public override void Rook()
     {
-        // if not used ablity yet
         if (!_usedAbility)
         {
             _usedAbility = true;
@@ -103,24 +105,30 @@ public class PlayerRook : PlayerBase
 
     private IEnumerator Laser()
     {
+        // lock movement
         _inputManager.LockedMovement = true;
         _inputManager.LockedAbilities = true;
         _allowedMovement = false;
 
+        // shoot laser
         GameObject laser = Instantiate(_laserPrefab, transform);
         laser.GetComponent<Laser>().damage = 3;
-        // set the local pos
         laser.transform.SetPositionAndRotation(transform.position + Vector3.up * 0.2f, transform.rotation);
 
+        // for 1 sec
         yield return new WaitForSeconds(1f);
+        
+        // destroy laser
         Destroy(laser);
 
+        // move again
         _isShootingLaser = false;
         _inputManager.LockedMovement = false;
         _inputManager.LockedAbilities = false;
         _allowedMovement = true;
     }
 
+    // try changing into Horse
     public override void Horse()
     {
         s_currentRookCooldown = _rookCooldown;

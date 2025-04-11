@@ -118,6 +118,7 @@ public class EnemyKing : EnemyBase
         //});
     }
 
+    // spawn wave
     private void SpawnWave(int[] wave)
     {
         Vector3[] spawnPosses = new Vector3[wave.Length];
@@ -155,6 +156,7 @@ public class EnemyKing : EnemyBase
         }
     }
 
+    // Spawn queen on fixed pos
     private void SpawnQueen()
     {
         Vector3 spawnPos = new Vector3(0,-3,444);
@@ -165,6 +167,7 @@ public class EnemyKing : EnemyBase
         StartCoroutine(ActivateMionion(queen));
     }
 
+    // activate minion with animation
     private IEnumerator ActivateMionion(EnemyBase minion)
     {
         Transform minionTransform = minion.transform;

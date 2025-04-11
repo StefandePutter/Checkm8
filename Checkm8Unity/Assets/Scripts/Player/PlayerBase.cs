@@ -24,6 +24,7 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
     [SerializeField] private Sprite _iconSprite;
     protected Image _iconImage;
 
+    // static cooldowns sinds we will switch players
     static protected float s_currentHorseCooldown;
     static protected float s_currentBischopCooldown;
     static protected float s_currentRookCooldown;
@@ -118,22 +119,27 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
             }
         }
 
+
+        // show cooldowns
         _gameManager.UiHorse.fillAmount = s_currentHorseCooldown / _horseCooldown;
         _gameManager.UiBischop.fillAmount = s_currentBischopCooldown / _bischopCooldown;
         _gameManager.UiTower.fillAmount = s_currentRookCooldown / _rookCooldown;
         _gameManager.UiQueen.fillAmount = s_currentQueenCooldown / _queenCooldown;
 
+        // lower cooldowns
         s_currentHorseCooldown -= Time.deltaTime;
         s_currentBischopCooldown -= Time.deltaTime;
         s_currentRookCooldown -= Time.deltaTime;
         s_currentQueenCooldown -= Time.deltaTime;
     }
 
+    // become Pawn
     public virtual void Pawn()
     {
         _gameManager.BecomePawn();
     }
 
+    // try to change into Horse
     public virtual void Horse()
     {
         if (s_currentHorseCooldown > 0)
@@ -144,6 +150,7 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         _gameManager.BecomeHorse();
     }
 
+    // try to change into Bischop
     public virtual void Bischop()
     {
         Debug.Log("player bischop");
@@ -155,6 +162,7 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         _gameManager.BecomeBischop();
     }
 
+    // try to change into rook
     public virtual void Rook()
     {
         Debug.Log("player Rook");
@@ -166,6 +174,7 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         _gameManager.BecomeRook();
     }
 
+    // try to change into queen
     public virtual void Queen()
     {
         Debug.Log("player Queen");
@@ -177,10 +186,9 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         _gameManager.BecomeQueen();
     }
 
+    // take damage if not invurnable
     public void TakeDamage(float amount=1)
     {
-        // Debug.Log(name + " took " + amount +" damage");
-
         if (_damageCooldown > 0)
         {
             return;
@@ -191,11 +199,13 @@ public abstract class PlayerBase : MonoBehaviour, IDamageable
         _gameManager.Damage();
     }
 
+    // set new move target
     public void SetTarget(Vector3 target)
     {
         s_moveTarget = target;
     }
 
+    // reset all statics
     public static void Reset()
     {
         s_moveTarget = Vector3.zero;
