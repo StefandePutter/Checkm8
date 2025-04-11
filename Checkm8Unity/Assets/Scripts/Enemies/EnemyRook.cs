@@ -10,18 +10,16 @@ public class EnemyRook : EnemyBase
 
     protected void Update()
     {
-        //base.FixedUpdate();
-
         if (!_usedAbility && _allowedToMove)
         {
             _usedAbility = true;
-            // _allowedToMove = false;
+            
+            // shoot laser
             StartCoroutine(Laser());
         }
 
         if (_allowedToMove)
         {
-            //int[] spawnPosses = _fieldSpacesX;
             int random = Random.Range(0, _fieldSpacesX.Length);
             int spawnPos = _fieldSpacesX[random];
 

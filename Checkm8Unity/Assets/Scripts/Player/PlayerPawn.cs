@@ -4,6 +4,7 @@ public class PlayerPawn : PlayerBase
 {
     protected override void Shoot()
     {
+        // get bullet out of pool
         GameObject bullet = _gameManager.PlayerBulletsPool.GetPooledObject();
         if (bullet != null)
         {
@@ -11,6 +12,7 @@ public class PlayerPawn : PlayerBase
             bullet.SetActive(true);
         }
 
+        // disable bullet after time
         StartCoroutine(ObjectPool.DisableAfterSec(bullet, 0.5f));
     }
 }

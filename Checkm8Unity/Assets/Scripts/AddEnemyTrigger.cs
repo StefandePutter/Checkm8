@@ -16,11 +16,10 @@ public class AddEnemyTrigger : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
-
+                // add enemy to pool
                 _gameManager.AddEnemy();
-
-                Debug.Log("is triggered");
-
+                
+                // dont go again
                 _isTriggered = true;
             }
         }
